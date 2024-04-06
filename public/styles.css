@@ -33,7 +33,7 @@ header .header-hide {
 }
 .logo {
 	display: block;
-	background: url(/R.png) 0 0 no-repeat;
+	background: url('/images/R.png') 0 0 no-repeat;
 	background-size: cover;
 	width: 70px;
 	height: 100px;
@@ -55,25 +55,40 @@ header .header-hide {
     padding-top: 0.25em;
 }
 .project {
-	width: 100%;
-	height: 300px;
+	background-size: cover;
 }
-.project img {
-	width: 100%;
-	height: 100%;
-	filter: hue-rotate(129deg);
+.project .group {
+	width: calc(100% - 1em);
+    height: 100%;
+    background: rgba(0, 0, 0);
+    color: rgba(225, 225, 225, 0);
+    transition: .5s ease;
+    opacity: 0.5;
+	padding-left: 1em;
+}
+.project .group:hover {
+	opacity: 1;
+    color: rgba(225, 225, 225);
+}
+.group h2, 
+.group ul {
+	margin: 0;
 }
 .one {
     grid-column: 1 / span 3;
+	background: url('images/portfolio.png') 0 0 no-repeat;
 }
 .two {
     grid-column: 1 / span 2;
+	background: url('images/yong.png') 0 5% no-repeat;
 }
 .three {
     grid-column: 3 / span 1;
+	background: url('images/ally-check.png') center center no-repeat;
 }
 .four {
     grid-column: 1 / span 3;
+	background: url('images/vite-list.png') center center no-repeat;
 }
 .mobile-hidden {
 	display: none;
@@ -114,10 +129,6 @@ header .contact.first {
 	}
 	section {
 		margin: 0;
-	}
-	.project {
-		width: unset;
-		height: unset;
 	}
 	.logo {
 		grid-row: 5 / span 6;

@@ -1,6 +1,14 @@
 import Contact from './components/Contact.js';
+import Group from './components/Group.js'
 
 export default function GoalsPage() {
+	const portfolioSkills = [
+		'Node',
+		'React as a template engine',
+		'Webpack',
+		'Vanilla JS',
+		'CSS'
+	]
 	return (
 		<>
 			<head>
@@ -36,16 +44,16 @@ export default function GoalsPage() {
 				<main>
 					<section className='mobile-hidden logo'></section>
 					<section className='project one'>
-						<img src='/dummy.jpg' alt="dummy image" />
+						<Group title="Portfolio" skills={portfolioSkills} />
 					</section>
 					<section className='project two'>
-						<img src='/dummy.jpg' alt="dummy image" />
+						<Group title="DnD Character sheet" skills={portfolioSkills} />
 					</section>
 					<section className='project three'>
-						<img src='/dummy.jpg' alt="dummy image" />
+						<Group title="A11y Check Plugin" skills={portfolioSkills} />
 					</section>
 					<section className='project four'>
-					<img src='/dummy.jpg' alt="dummy image" />
+					<Group title="Vite-React-Redux List" skills={portfolioSkills} />
 					</section>
 				</main>
 				<footer>
