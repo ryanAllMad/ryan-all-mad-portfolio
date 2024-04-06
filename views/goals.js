@@ -26,6 +26,7 @@ export default function GoalsPage() {
 					rel='stylesheet'
 					href='/styles.css'
 				></link>
+				<script type='text/javascript' src='/js/index.js' async defer />
 			</head>
 			<body>
 				<header className='desktop-hidden'>

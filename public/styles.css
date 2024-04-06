@@ -3,7 +3,7 @@ body {
 	position: relative;
 	margin: 0;
 	font-family: "Readex Pro", Arial, Helvetica, sans-serif;
-
+	font-size: 18px;
 }
 footer {
 	display: none;
@@ -37,6 +37,22 @@ header .header-hide {
 	background-size: cover;
 	width: 70px;
 	height: 100px;
+}
+.show-skills {
+    top: 0;
+    left: 1em;
+    margin-top: 100px;
+    background: #fff;
+    width: calc(100% - 1em);
+    position: absolute;
+    z-index: 3;
+}
+.show-skills ul {
+	display: flex;
+    list-style-type: none;
+    flex-direction: column;
+    padding-left: 0;
+    padding-top: 0.25em;
 }
 .project {
 	width: 100%;
