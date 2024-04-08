@@ -1,9 +1,8 @@
 import express from 'express'
 import { renderToPipeableStream } from 'react-dom/server';
-//import { renderToString } from 'react-dom/server';
 import GoalsPage from './views/GoalsPage.js';
 
-
+//nvm use 21.7.2 
 const app = express();
 
 app.set('views', './views')
@@ -20,17 +19,5 @@ app.use('/', (request, response) => {
 	}
 	});
 });
-
-//app.use('/', (req, res) => {
-//	const html = renderToString(<GoalsPage />);
-//	res.send(html);
-//})
-//app.get('/', (req, res) => {
-//	res.render('index')
-//})
-//app.post('/', (req, res) => {
-//	res.render('index')
-//})
-
 
 app.listen(3000)

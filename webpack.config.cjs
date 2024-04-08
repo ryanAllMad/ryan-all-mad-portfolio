@@ -1,13 +1,16 @@
-const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
 	mode: 'production',
 	entry: {
-		index: [__dirname + '/views/index.js'],
-		main: [__dirname + '/controller/main.js']
+		index: [
+			__dirname + '/views/index.js',
+			__dirname + '/assets/styles.css'
+		]
 	},
 	output: {
-		path: __dirname + '/public/js',
+		path: __dirname + '/public',
 		filename: '[name].bundle.js',
 	},
 	module: {
@@ -22,6 +25,20 @@ module.exports = {
 					},
 				},
 			},
+			{
+				test: /\.css$/i,
+				use: [MiniCssExtractPlugin.loader, 'css-loader'],
+			},
 		],
-	}
+	},
+	optimization: {
+		minimizer: [
+			new CssMinimizerPlugin(),
+		]
+	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: '[name].bundle.css',
+		}),
+	],
 };

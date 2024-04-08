@@ -12,7 +12,7 @@
 	word-wrap: normal !important;
 }
 
-body {
+.wrapper {
 	display: block;
 	position: relative;
 	margin: 0;
@@ -47,7 +47,7 @@ header .header-hide {
 }
 .logo {
 	display: block;
-	background: url('/images/R.png') 0 0 no-repeat;
+	background: url('../public/images/R.png') 0 0 no-repeat;
 	background-size: cover;
 	width: 70px;
 	height: 100px;
@@ -92,14 +92,6 @@ header .header-hide {
 	margin: 0;
 }
 
-.group .btn {
-	opacity: 0;
-}
-.group:hover .btn,
-.group:focus .btn,
-.group:focus-within .btn {
-	opacity: 1;
-}
 .buttons {
     margin-top: 0.5em;
 }
@@ -132,25 +124,22 @@ header .header-hide {
 	margin-right: 0.5em;
     font-size: 0.75em;
 }
-.btn:not(.isEnabled) {
-	cursor: not-allowed;
-	opacity: 0;
-}
+
 .one {
     grid-column: 1 / span 3;
-	background: url('images/portfolio.png') 0 0 no-repeat;
+	background: url('../public/images/portfolio.png') 0 0 no-repeat;
 }
 .two {
     grid-column: 1 / span 2;
-	background: url('images/yong.png') 0 5% no-repeat;
+	background: url('../public/images/yong.png') 0 5% no-repeat;
 }
 .three {
     grid-column: 3 / span 1;
-	background: url('images/ally-check.png') center center no-repeat;
+	background: url('../public/images/ally-check.png') center center no-repeat;
 }
 .four {
     grid-column: 1 / span 3;
-	background: url('images/vite-list.png') center center no-repeat;
+	background: url('../public/images/vite-list.png') center center no-repeat;
 }
 .mobile-hidden {
 	display: none;
@@ -182,7 +171,7 @@ header .contact.first {
 
 
 @media screen and (min-width: 800px) {
-	body {
+	.wrapper {
 		display: grid;
 		grid-template-columns: repeat(11, 1fr);
 		grid-template-rows: repeat(12, 1fr);

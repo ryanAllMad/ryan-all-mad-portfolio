@@ -22,17 +22,11 @@ const Head = () => {
 				/>
 				<link
 					rel='stylesheet'
-					href="/styles.css"
+					href="/index.bundle.css"
 				></link>
 				<script
 					type='text/javascript'
-					src="/js/main.bundle.js"
-					async
-					defer
-				/>
-				<script
-					type='text/javascript'
-					src="/js/index.bundle.js"
+					src="/index.bundle.js"
 					async
 					defer
 				/>

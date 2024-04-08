@@ -1,9 +1,8 @@
 const ToProjectButtons = (props) => {
-	const { projectLink, githubLink, projectTitle, hasButtons } = props;
+	const { projectLink, githubLink, projectTitle } = props;
 	return (
 		<div className='buttons'>
-			{hasButtons && (
-			<><a
+			<a
 				role="button"
 				tabIndex={-1}
 				className='btn'
@@ -21,7 +20,6 @@ const ToProjectButtons = (props) => {
 			>
 				See the code {<span className='screen-reader-text'>for {projectTitle}</span>}
 			</a>
-			</>)}
 		</div>
 	);
 };
