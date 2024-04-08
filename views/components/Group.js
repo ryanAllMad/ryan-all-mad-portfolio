@@ -1,7 +1,7 @@
 const Group = (props) => {
-	const {title, skills} = props
+	const {id, title, skills, children} = props
 	return (
-		<div className='group'>
+		<div id={id} className='group'>
 			<h2>{title}</h2>
 			<p>Built with:</p>
 			<ul>
@@ -9,6 +9,7 @@ const Group = (props) => {
 					<li key={sk.toLowerCase()}>{sk}</li>
 				) )}
 			</ul>
+			{children}
 		</div>
 	);
 };

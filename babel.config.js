@@ -3,7 +3,7 @@ export default {
 		[
 			'@babel/preset-react',
 			{
-				runtime: 'automatic'
+				runtime: 'automatic',
 			}
 		]
 	]

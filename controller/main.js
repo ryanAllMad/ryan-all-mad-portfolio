@@ -1,4 +1,5 @@
 const logoHead = document.querySelector('header .logo');
+const group = document.querySelectorAll('.group')
 
 const renderAboutTNode = (element) => {
 	const elementClass = document.querySelector(element)
@@ -46,6 +47,40 @@ const hideOnScroll = (el) => {
 	}
 	elementClass.remove()
 }
-
-logoHead.addEventListener('click', (event) => renderAboutTNode('header .logo .show-skills'));
+const enableButtons = (e) => {
+	if (e.target.className !== 'group') {
+		return
+	}
+	const id = e.target.getAttribute('id')
+	console.log(id)
+	const button = document.querySelectorAll(`#${id} .btn`)
+	button.forEach((b) => {
+		const tabIndex = b.getAttribute('tabIndex')
+		if (tabIndex === '0') {
+			return
+		}
+		b.setAttribute('tabIndex', '0')
+		b.classList.add('isEnabled')
+	})
+}
+const disableButtons = (e) => {
+	if (e.target.className !== 'group') {
+		return
+	}
+	const id = e.target.getAttribute('id')
+	console.log(id)
+	const button = document.querySelectorAll(`#${id} .btn`)
+	button.forEach((b) => {
+		const tabIndex = b.getAttribute('tabIndex')
+			if(tabIndex !== '0') {
+				return
+			}
+			b.onclick(e => e.preventDefault())
+			b.setAttribute('tabIndex', '-1')
+			b.classList.remove('isEnabled')
+	})
+}
+logoHead.addEventListener('click', (event) => renderAboutTNode('header .logo .show-skills'))
 window.addEventListener('scroll', (event) => hideOnScroll('header .logo .show-skills'))
+//group.forEach((g) => g.addEventListener('mouseover', (e) => enableButtons(e)))
+//group.forEach((g) => g.addEventListener('mouseleave', (e) => disableButtons(e)))
