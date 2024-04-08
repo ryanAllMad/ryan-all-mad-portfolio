@@ -72,18 +72,19 @@ header .header-hide {
 	background-size: cover;
 }
 .project .group {
-	width: calc(100% - 1em);
-    height: 100%;
-    background: rgba(0, 0, 0);
-    color: rgba(225, 225, 225, 0);
-    transition: .5s ease;
-    opacity: 0.5;
 	padding-left: 1em;
 	container-type: inline-size;
+	transition: .5s ease;
+	width: calc(100% - 1em);
+    height: 100%;
+	background: rgba(0, 0, 0);
 }
-.project .group:hover,
-.project .group:focus,
-.project .group:focus-within {
+.project .group:not(.focussed) {
+    
+    color: rgba(225, 225, 225, 0);
+    opacity: 0.5;
+}
+.project .group.focussed {
 	opacity: 1;
     color: rgba(225, 225, 225);
 }

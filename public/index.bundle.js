@@ -583,7 +583,7 @@ const Contact = () => {
 ;// CONCATENATED MODULE: ./views/components/ShowSkills.js
 
 const ShowSkills = () => {
-  const skillsArr = [`JavaScript`, `React`, `Typescript`, `Redux `, `Node `, `SCSS/CSS`, `PHP`, `WCAG`, `NPM`, `CircleCI`, `WordPress`, `Gutenberg`];
+  const skillsArr = [`JavaScript`, `React`, `Typescript`, `Redux `, `Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `PHP`, `WCAG`, `NPM`, `CircleCI`, `WordPress`, `Gutenberg`];
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     className: "show-skills",
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
@@ -660,20 +660,25 @@ const Group = props => {
     projectTitle
   } = props;
   const [showOnHover, setShowOnHover] = react.useState(false);
+  const [focussedClass, setFocussedClass] = react.useState('');
   const handleMouseOver = () => {
     setShowOnHover(true);
+    setFocussedClass('focussed');
   };
   const handleMouseOut = () => {
     setShowOnHover(false);
+    setFocussedClass('');
   };
   const handleGroupKeyDown = e => {
     if (e.key === 'Shift') {
       setShowOnHover(false);
+      setFocussedClass('');
     }
   };
   const handleLastButtonKeyDown = e => {
     if (e.key === 'Tab') {
       setShowOnHover(false);
+      setFocussedClass('');
     }
   };
   return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
@@ -682,7 +687,7 @@ const Group = props => {
     onFocus: handleMouseOver,
     onKeyDown: e => handleGroupKeyDown(e),
     id: id,
-    className: "group",
+    className: `group ${focussedClass}`,
     tabIndex: 0,
     children: showOnHover && /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
@@ -710,9 +715,9 @@ const Group = props => {
 
 
 const Main = () => {
-  const portfolioSkills = ['Node', 'React as a template engine', 'Webpack', 'Vanilla JS', 'CSS3'];
+  const portfolioSkills = ['Node', 'Azure', 'React + React SSR', 'Webpack', 'CSS3'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
-  const allySkills = ['React', 'Typescript', 'Gutenberg', 'WordPress', 'PHP', 'SCSS', 'Webpack'];
+  const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
   const viteSkills = ['React', 'Vite', 'Redux', 'Material UI'];
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {

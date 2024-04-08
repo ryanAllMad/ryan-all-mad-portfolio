@@ -4,24 +4,29 @@ import ToProjectButtons from './ToProjectButtons.js';
 const Group = (props) => {
 	const { id, title, skills, projectLink, githubLink, projectTitle } = props;
 	const [showOnHover, setShowOnHover] = React.useState(false);
+	const [focussedClass, setFocussedClass] = React.useState('');
 
 	const handleMouseOver = () => {
 		setShowOnHover(true);
+		setFocussedClass('focussed');
 	};
 	const handleMouseOut = () => {
 		setShowOnHover(false);
+		setFocussedClass('');
 	};
 	const handleGroupKeyDown = (e) => {
-		if(e.key === 'Shift') {
-			setShowOnHover(false)
+		if (e.key === 'Shift') {
+			setShowOnHover(false);
+			setFocussedClass('');
 		}
-	}
+	};
 	const handleLastButtonKeyDown = (e) => {
-		if(e.key === 'Tab') {
-			setShowOnHover(false)
+		if (e.key === 'Tab') {
+			setShowOnHover(false);
+			setFocussedClass('');
 		}
-	}
-		
+	};
+
 	return (
 		<div
 			onMouseOver={handleMouseOver}
@@ -29,7 +34,7 @@ const Group = (props) => {
 			onFocus={handleMouseOver}
 			onKeyDown={(e) => handleGroupKeyDown(e)}
 			id={id}
-			className='group'
+			className={`group ${focussedClass}`}
 			tabIndex={0}
 		>
 			{showOnHover && (
@@ -44,7 +49,7 @@ const Group = (props) => {
 					<div className='buttons'>
 						<ToProjectButtons
 							handleGitKeyDown={(e) => handleLastButtonKeyDown(e)}
-							githubLink={githubLink}	
+							githubLink={githubLink}
 							projectLink={projectLink}
 							projectTitle={projectTitle}
 						/>
