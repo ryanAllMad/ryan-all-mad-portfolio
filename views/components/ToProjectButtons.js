@@ -1,10 +1,13 @@
 const ToProjectButtons = (props) => {
-	const { projectLink, githubLink, projectTitle } = props;
+	const {
+		projectLink,
+		githubLink,
+		projectTitle,
+		handleGitKeyDown
+	} = props;
 	return (
-		<div className='buttons'>
+		<>
 			<a
-				role="button"
-				tabIndex={-1}
 				className='btn'
 				href={projectLink}
 				target='_blank'
@@ -12,16 +15,16 @@ const ToProjectButtons = (props) => {
 				{projectTitle}
 			</a>
 			<a
-				role="button"
+				onKeyDown={handleGitKeyDown}
 				className='btn'
-				tabIndex={-1}
 				href={githubLink}
 				target='_blank'
 			>
-				See the code {<span className='screen-reader-text'>for {projectTitle}</span>}
+				See the code{' '}
+				{<span className='screen-reader-text'>for {projectTitle}</span>}
 			</a>
-		</div>
+		</>
 	);
 };
 
-export default ToProjectButtons
+export default ToProjectButtons;

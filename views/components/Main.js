@@ -59,7 +59,7 @@ const Main = () => {
 					skills={viteSkills}
 					projectLink='https://ryanallmad.github.io/myvite-react-proj/'
 					githubLink='https://github.com/ryanAllMad/myvite-react-proj'
-					projectTitle='Vite React Typescript MUI Redux'
+					projectTitle='Vite'
 				/>
 			</section>
 		</main>

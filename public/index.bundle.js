@@ -624,24 +624,21 @@ const ToProjectButtons = props => {
   const {
     projectLink,
     githubLink,
-    projectTitle
+    projectTitle,
+    handleGitKeyDown
   } = props;
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-    className: "buttons",
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-      role: "button",
-      tabIndex: -1,
       className: "btn",
       href: projectLink,
       target: "_blank",
       children: projectTitle
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
-      role: "button",
+      onKeyDown: handleGitKeyDown,
       className: "btn",
-      tabIndex: -1,
       href: githubLink,
       target: "_blank",
-      children: ["See the code ", /*#__PURE__*/(0,jsx_runtime.jsxs)("span", {
+      children: ["See the code", ' ', /*#__PURE__*/(0,jsx_runtime.jsxs)("span", {
         className: "screen-reader-text",
         children: ["for ", projectTitle]
       })]
@@ -662,32 +659,50 @@ const Group = props => {
     githubLink,
     projectTitle
   } = props;
-  //const groupRef = React.useRef(null)
-  const [buttons, setButtons] = react.useState(false);
+  const [showOnHover, setShowOnHover] = react.useState(false);
   const handleMouseOver = () => {
-    setButtons(true);
+    setShowOnHover(true);
   };
   const handleMouseOut = () => {
-    setButtons(false);
+    setShowOnHover(false);
   };
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+  const handleGroupKeyDown = e => {
+    if (e.key === 'Shift') {
+      setShowOnHover(false);
+    }
+  };
+  const handleLastButtonKeyDown = e => {
+    if (e.key === 'Tab') {
+      setShowOnHover(false);
+    }
+  };
+  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     onMouseOver: handleMouseOver,
     onMouseOut: handleMouseOut,
+    onFocus: handleMouseOver,
+    onKeyDown: e => handleGroupKeyDown(e),
     id: id,
     className: "group",
-    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
-      children: title
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-      children: "Built with:"
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
-      children: skills.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
-        children: sk
-      }, sk.toLowerCase()))
-    }), buttons && /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
-      projectLink: projectLink,
-      githubLink: githubLink,
-      projectTitle: projectTitle
-    })]
+    tabIndex: 0,
+    children: showOnHover && /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+        children: title
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+        children: "Built with:"
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
+        children: skills.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+          children: sk
+        }, sk.toLowerCase()))
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        className: "buttons",
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
+          handleGitKeyDown: e => handleLastButtonKeyDown(e),
+          githubLink: githubLink,
+          projectLink: projectLink,
+          projectTitle: projectTitle
+        })
+      })]
+    })
   });
 };
 /* harmony default export */ const components_Group = (Group);
@@ -740,7 +755,7 @@ const Main = () => {
         skills: viteSkills,
         projectLink: "https://ryanallmad.github.io/myvite-react-proj/",
         githubLink: "https://github.com/ryanAllMad/myvite-react-proj",
-        projectTitle: "Vite React Typescript MUI Redux"
+        projectTitle: "Vite"
       })
     })]
   });
