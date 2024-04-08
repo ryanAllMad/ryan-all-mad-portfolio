@@ -3,9 +3,9 @@ import Group from './Group.js';
 const Main = () => {
 	const portfolioSkills = [
 		'Node',
-		'React as a template engine',
+		'Azure',
+		'React + React SSR',
 		'Webpack',
-		'Vanilla JS',
 		'CSS3',
 	];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
@@ -13,9 +13,9 @@ const Main = () => {
 		'React',
 		'Typescript',
 		'Gutenberg',
-		'WordPress',
 		'PHP',
 		'SCSS',
+		'CSS3',
 		'Webpack',
 	];
 	const viteSkills = ['React', 'Vite', 'Redux', 'Material UI'];
