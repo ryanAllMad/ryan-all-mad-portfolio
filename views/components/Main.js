@@ -28,7 +28,7 @@ const Main = () => {
 					title='Portfolio'
 					skills={portfolioSkills}
 					projectLink='/'
-					githubLink='/'
+					githubLink='https://github.com/ryanAllMad/ryan-all-mad-portfolio'
 					projectTitle='Portfolio'
 				/>
 			</section>

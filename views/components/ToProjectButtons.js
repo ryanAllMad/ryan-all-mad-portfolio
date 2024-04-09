@@ -5,14 +5,15 @@ const ToProjectButtons = (props) => {
 		projectTitle,
 		handleGitKeyDown
 	} = props;
+
 	return (
 		<>
 			<a
-				className='btn'
+				className={`btn${projectLink !== '/' ? '' : ' disabled'}`}
 				href={projectLink}
-				target='_blank'
+				target={projectLink !== '/' ? '_blank' : '_self'}
 			>
-				{projectTitle}
+				{projectLink !== '/' ? projectTitle : 'You are here!'}
 			</a>
 			<a
 				onKeyDown={handleGitKeyDown}

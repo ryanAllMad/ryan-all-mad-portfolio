@@ -629,10 +629,10 @@ const ToProjectButtons = props => {
   } = props;
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-      className: "btn",
+      className: `btn${projectLink !== '/' ? '' : ' disabled'}`,
       href: projectLink,
-      target: "_blank",
-      children: projectTitle
+      target: projectLink !== '/' ? '_blank' : '_self',
+      children: projectLink !== '/' ? projectTitle : 'You are here!'
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
       onKeyDown: handleGitKeyDown,
       className: "btn",
@@ -729,7 +729,7 @@ const Main = () => {
         title: "Portfolio",
         skills: portfolioSkills,
         projectLink: "/",
-        githubLink: "/",
+        githubLink: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
         projectTitle: "Portfolio"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {

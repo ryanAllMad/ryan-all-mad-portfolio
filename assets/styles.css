@@ -130,6 +130,13 @@ header .header-hide {
 	color:#fff;
 	border-color: #fff;
 }
+.btn.disabled,
+.btn.disabled:hover,
+.btn.disabled:focus {
+	background-color: rgb(50, 49, 50);
+	color:#fff;
+	border-color: #fff;
+}
 .one {
     grid-column: 1 / span 3;
 	background: url('./images/portfolio.png') 0 0 no-repeat;
