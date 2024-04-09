@@ -1,6 +1,7 @@
 import express from 'express'
 import { renderToPipeableStream } from 'react-dom/server';
 import GoalsPage from './views/GoalsPage.js';
+import process from 'process'
 
 //nvm use 21.7.2 
 const app = express();
@@ -20,4 +21,4 @@ app.use('/', (request, response) => {
 	});
 });
 
-app.listen(3000)
+app.listen(process.env.port || 3000)
