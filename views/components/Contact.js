@@ -19,7 +19,7 @@ const Contact = () => {
 						href='https://www.linkedin.com/in/ryan-duer/'
 						target='_blank'
 					>
-						<img src="/images/LinkedIn.png" alt="to github profile" />
+						<img src="/images/LinkedIn.png" alt="to linked in profile" />
 					</a>
 				</p>
 				<p>

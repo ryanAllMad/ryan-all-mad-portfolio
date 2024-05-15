@@ -563,7 +563,7 @@ const Contact = () => {
           target: "_blank",
           children: /*#__PURE__*/(0,jsx_runtime.jsx)("img", {
             src: "/images/LinkedIn.png",
-            alt: "to github profile"
+            alt: "to linked in profile"
           })
         })
       }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
@@ -582,16 +582,28 @@ const Contact = () => {
 /* harmony default export */ const components_Contact = (Contact);
 ;// CONCATENATED MODULE: ./views/components/ShowSkills.js
 
-const ShowSkills = () => {
+const ShowSkills = props => {
+  const {
+    onClick
+  } = props;
   const skillsArr = [`JavaScript`, `React`, `Typescript`, `Redux `, `Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `PHP`, `WCAG`, `NPM`, `CircleCI`, `WordPress`, `Gutenberg`];
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+    id: "skills-menu",
     className: "show-skills",
+    tabIndex: 0,
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
       children: "Skills"
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
       children: skillsArr.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
         children: sk
       }, sk.toLowerCase()))
+    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
+      class: "close-skills",
+      onClick: onClick,
+      children: ["X", /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+        className: "screen-reader-text",
+        children: "close skills menu"
+      })]
     })]
   });
 };
@@ -606,15 +618,32 @@ const Header = () => {
   const handleShowSkills = () => {
     setShowSkills(prev => !prev ? true : false);
   };
+  const handleKeyDown = e => {
+    if (e.code !== 'Enter' && e.code !== 'Space') {
+      return;
+    }
+    if (e.code !== 'Tab') {
+      e.preventDefault();
+    }
+    handleShowSkills();
+  };
   react.useEffect(() => {
     window.addEventListener('scroll', () => setShowSkills(false));
   }, []);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("header", {
     className: "desktop-hidden",
-    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      "aria-expanded": showSkills,
+      "aria-controls": "skills-menu",
+      tabIndex: 0,
+      "aria-label": "see skills",
+      onKeyDown: e => handleKeyDown(e),
+      role: "button",
       onClick: handleShowSkills,
       className: "logo"
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_Contact, {}), showSkills && /*#__PURE__*/(0,jsx_runtime.jsx)(components_ShowSkills, {})]
+    }), showSkills && /*#__PURE__*/(0,jsx_runtime.jsx)(components_ShowSkills, {
+      onClick: () => setShowSkills(false)
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_Contact, {})]
   });
 };
 /* harmony default export */ const components_Header = (Header);
@@ -624,17 +653,20 @@ const ToProjectButtons = props => {
   const {
     projectLink,
     githubLink,
-    projectTitle,
-    handleGitKeyDown
+    projectTitle
   } = props;
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("a", {
       className: `btn${projectLink !== '/' ? '' : ' disabled'}`,
       href: projectLink,
       target: projectLink !== '/' ? '_blank' : '_self',
-      children: projectLink !== '/' ? projectTitle : 'You are here!'
+      children: projectLink !== '/' ? /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+          className: "screen-reader-text",
+          children: "to project"
+        }), projectTitle]
+      }) : 'You are here!'
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
-      onKeyDown: handleGitKeyDown,
       className: "btn",
       href: githubLink,
       target: "_blank",
@@ -665,27 +697,8 @@ const Group = props => {
     setShowOnHover(true);
     setFocussedClass('focussed');
   };
-  const handleMouseOut = () => {
-    setShowOnHover(false);
-    setFocussedClass('');
-  };
-  const handleGroupKeyDown = e => {
-    if (e.key === 'Shift') {
-      setShowOnHover(false);
-      setFocussedClass('');
-    }
-  };
-  const handleLastButtonKeyDown = e => {
-    if (e.key === 'Tab') {
-      setShowOnHover(false);
-      setFocussedClass('');
-    }
-  };
   return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-    onMouseOver: handleMouseOver,
-    onMouseOut: handleMouseOut,
     onFocus: handleMouseOver,
-    onKeyDown: e => handleGroupKeyDown(e),
     id: id,
     className: `group ${focussedClass}`,
     tabIndex: 0,
@@ -701,7 +714,6 @@ const Group = props => {
       }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
         className: "buttons",
         children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
-          handleGitKeyDown: e => handleLastButtonKeyDown(e),
           githubLink: githubLink,
           projectLink: projectLink,
           projectTitle: projectTitle

@@ -3,7 +3,6 @@ const ToProjectButtons = (props) => {
 		projectLink,
 		githubLink,
 		projectTitle,
-		handleGitKeyDown
 	} = props;
 
 	return (
@@ -13,10 +12,11 @@ const ToProjectButtons = (props) => {
 				href={projectLink}
 				target={projectLink !== '/' ? '_blank' : '_self'}
 			>
-				{projectLink !== '/' ? projectTitle : 'You are here!'}
+				{projectLink !== '/' ? (
+					<><span className='screen-reader-text'>to project</span>{projectTitle}</>
+					) : 'You are here!'}
 			</a>
 			<a
-				onKeyDown={handleGitKeyDown}
 				className='btn'
 				href={githubLink}
 				target='_blank'

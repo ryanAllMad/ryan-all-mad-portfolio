@@ -9,15 +9,24 @@ const Header = () => {
 	const handleShowSkills = () => {
 		setShowSkills((prev) => !prev ? true : false)
 	}
+	const handleKeyDown = (e) => {
+		if (e.code !== 'Enter' && e.code !== 'Space') {
+			return
+		}
+		if (e.code !== 'Tab') {
+			e.preventDefault()
+		}
+		handleShowSkills()
+	}
 	React.useEffect(() => {
 		window.addEventListener('scroll', () => setShowSkills(false))
 	}, [])
 
 	return (
 		<header className='desktop-hidden'>
-			<section onClick={handleShowSkills} className='logo'></section>
+			<div aria-expanded={showSkills} aria-controls="skills-menu" tabIndex={0} aria-label="see skills" onKeyDown={(e) => handleKeyDown(e)} role="button" onClick={handleShowSkills} className='logo'></div>
+			{showSkills && <ShowSkills onClick={() =>setShowSkills(false)} />}
 			<Contact />
-			{showSkills && <ShowSkills />}
 		</header>
 	)
 }

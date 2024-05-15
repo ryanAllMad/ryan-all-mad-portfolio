@@ -1,5 +1,6 @@
 
-const ShowSkills = () => {
+const ShowSkills = (props) => {
+	const {onClick} = props
 	const skillsArr = [
 		`JavaScript`,
 		`React`,
@@ -18,13 +19,14 @@ const ShowSkills = () => {
 		`Gutenberg`,
 	];
 	return (
-		<div className="show-skills">
+		<div id="skills-menu" className="show-skills" tabIndex={0}>
 		<h2>Skills</h2>
 		<ul>
 			{skillsArr.map((sk) => (
 				<li key={sk.toLowerCase()}>{sk}</li>
 			))}
 		</ul>
+		<button class="close-skills" onClick={onClick}>X<span className="screen-reader-text">close skills menu</span></button>
 		</div>
 	)
 }

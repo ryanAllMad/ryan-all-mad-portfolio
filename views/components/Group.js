@@ -10,29 +10,10 @@ const Group = (props) => {
 		setShowOnHover(true);
 		setFocussedClass('focussed');
 	};
-	const handleMouseOut = () => {
-		setShowOnHover(false);
-		setFocussedClass('');
-	};
-	const handleGroupKeyDown = (e) => {
-		if (e.key === 'Shift') {
-			setShowOnHover(false);
-			setFocussedClass('');
-		}
-	};
-	const handleLastButtonKeyDown = (e) => {
-		if (e.key === 'Tab') {
-			setShowOnHover(false);
-			setFocussedClass('');
-		}
-	};
 
 	return (
 		<div
-			onMouseOver={handleMouseOver}
-			onMouseOut={handleMouseOut}
 			onFocus={handleMouseOver}
-			onKeyDown={(e) => handleGroupKeyDown(e)}
 			id={id}
 			className={`group ${focussedClass}`}
 			tabIndex={0}
@@ -48,7 +29,6 @@ const Group = (props) => {
 					</ul>
 					<div className='buttons'>
 						<ToProjectButtons
-							handleGitKeyDown={(e) => handleLastButtonKeyDown(e)}
 							githubLink={githubLink}
 							projectLink={projectLink}
 							projectTitle={projectTitle}
