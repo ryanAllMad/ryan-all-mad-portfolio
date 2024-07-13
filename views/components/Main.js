@@ -1,12 +1,14 @@
 import Group from './Group.js';
+import '../../assets/images/js-job-helper.mp4';
 
 const Main = () => {
-	const portfolioSkills = [
+	const demoSkills = [
 		'Node',
-		'Azure',
+		'MongoDB',
 		'React + React SSR',
 		'Webpack',
 		'CSS3',
+		'Demo skills',
 	];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
 	const allySkills = [
@@ -24,16 +26,6 @@ const Main = () => {
 			<section className='mobile-hidden logo'></section>
 			<section className='project one'>
 				<Group
-					id='portfolio'
-					title='Portfolio'
-					skills={portfolioSkills}
-					projectLink='/'
-					githubLink='https://github.com/ryanAllMad/ryan-all-mad-portfolio'
-					projectTitle='Portfolio'
-				/>
-			</section>
-			<section className='project two'>
-				<Group
 					id='dnd'
 					title='DnD Character sheet'
 					skills={dndSkills}
@@ -41,6 +33,27 @@ const Main = () => {
 					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
 					projectTitle='DnD Character Sheet'
 				/>
+			</section>
+			<section className='project two'>
+				<Group
+					id='js-job-demo'
+					title='Resume Builder'
+					skills={demoSkills}
+					githubLink='https://github.com/ryanAllMad/js-job-helper'
+					projectTitle='JS Job Helper: Resume Builder'
+				>
+					<video
+						id="js-vid"
+						loop
+						controls
+					>
+						<source
+							src='/js-job-helper.mp4'
+							type='video/mp4'
+						/>
+						Your browser does not support the video tag.
+					</video>
+				</Group>
 			</section>
 			<section className='project three'>
 				<Group
@@ -66,4 +79,4 @@ const Main = () => {
 	);
 };
 
-export default Main
+export default Main;

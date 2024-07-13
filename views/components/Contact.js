@@ -3,6 +3,7 @@ const Contact = () => {
 		<>
 			<section className="contact first">
 				<h1>Software Engineer</h1>
+				<a href="https://github.com/ryanAllMad/ryan-all-mad-portfolio" target="_blank">See the code for this portfolio here</a>
 				<p className="header-hide">2 Years Experience</p>
 			</section>
 			<section className="contact second">

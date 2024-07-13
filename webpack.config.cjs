@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
@@ -13,7 +13,7 @@ module.exports = {
 	output: {
 		path: __dirname + '/public',
 		filename: '[name].bundle.js',
-		assetModuleFilename: 'images/[name][ext][query]'
+		assetModuleFilename: 'images/[name][ext][query]',
 	},
 	module: {
 		rules: [
@@ -35,8 +35,26 @@ module.exports = {
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-				// More information here https://webpack.js.org/guides/asset-modules/
 				type: 'asset',
+			},
+			{
+				test: /\.html$/i,
+				use: [
+					{
+						loader: 'html-loader',
+					},
+				],
+			},
+			{
+				test: /\.(mov|mp4)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+						},
+					},
+				],
 			},
 		],
 	},
@@ -45,6 +63,10 @@ module.exports = {
 			'/assets/images/[name].png': path.resolve(
 				__dirname,
 				'public/images/[name].png'
+			),
+			'/assets/images/[name].mp4': path.resolve(
+				__dirname,
+				'public/images/[name].mp4'
 			),
 		},
 	},

@@ -8,13 +8,13 @@ const ToProjectButtons = (props) => {
 	return (
 		<>
 			<a
-				className={`btn${projectLink !== '/' ? '' : ' disabled'}`}
+				className={`btn${projectLink ? '' : ' disabled'}`}
 				href={projectLink}
-				target={projectLink !== '/' ? '_blank' : '_self'}
+				target={projectLink ? '_blank' : '_self'}
 			>
-				{projectLink !== '/' ? (
+				{projectLink ? (
 					<><span className='screen-reader-text'>to project</span>{projectTitle}</>
-					) : 'You are here!'}
+					) : <><span className='screen-reader-text'>This project isn't published.</span>{projectTitle}</>}
 			</a>
 			<a
 				className='btn'

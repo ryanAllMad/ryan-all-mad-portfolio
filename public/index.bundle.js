@@ -521,6 +521,42 @@ if (true) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
@@ -539,6 +575,10 @@ const Contact = () => {
       className: "contact first",
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
         children: "Software Engineer"
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+        href: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
+        target: "_blank",
+        children: "See the code for this portfolio here"
       }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
         className: "header-hide",
         children: "2 Years Experience"
@@ -657,15 +697,20 @@ const ToProjectButtons = props => {
   } = props;
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-      className: `btn${projectLink !== '/' ? '' : ' disabled'}`,
+      className: `btn${projectLink ? '' : ' disabled'}`,
       href: projectLink,
-      target: projectLink !== '/' ? '_blank' : '_self',
-      children: projectLink !== '/' ? /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+      target: projectLink ? '_blank' : '_self',
+      children: projectLink ? /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
           className: "screen-reader-text",
           children: "to project"
         }), projectTitle]
-      }) : 'You are here!'
+      }) : /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+          className: "screen-reader-text",
+          children: "This project isn't published."
+        }), projectTitle]
+      })
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
       className: "btn",
       href: githubLink,
@@ -689,7 +734,8 @@ const Group = props => {
     skills,
     projectLink,
     githubLink,
-    projectTitle
+    projectTitle,
+    children
   } = props;
   const [showOnHover, setShowOnHover] = react.useState(false);
   const [focussedClass, setFocussedClass] = react.useState('');
@@ -697,12 +743,12 @@ const Group = props => {
     setShowOnHover(true);
     setFocussedClass('focussed');
   };
-  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     onFocus: handleMouseOver,
     id: id,
     className: `group ${focussedClass}`,
     tabIndex: 0,
-    children: showOnHover && /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+    children: [children && children, showOnHover && /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
         children: title
       }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
@@ -719,15 +765,18 @@ const Group = props => {
           projectTitle: projectTitle
         })
       })]
-    })
+    })]
   });
 };
 /* harmony default export */ const components_Group = (Group);
+;// CONCATENATED MODULE: ./assets/images/js-job-helper.mp4
+/* harmony default export */ const js_job_helper = (__webpack_require__.p + "js-job-helper.mp4");
 ;// CONCATENATED MODULE: ./views/components/Main.js
 
 
+
 const Main = () => {
-  const portfolioSkills = ['Node', 'Azure', 'React + React SSR', 'Webpack', 'CSS3'];
+  const demoSkills = ['Node', 'MongoDB', 'React + React SSR', 'Webpack', 'CSS3', 'Demo skills'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
   const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
   const viteSkills = ['React', 'Vite', 'Redux', 'Material UI'];
@@ -737,22 +786,30 @@ const Main = () => {
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project one",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "portfolio",
-        title: "Portfolio",
-        skills: portfolioSkills,
-        projectLink: "/",
-        githubLink: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
-        projectTitle: "Portfolio"
-      })
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "project two",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "dnd",
         title: "DnD Character sheet",
         skills: dndSkills,
         projectLink: "https://yong-character-sheet.vercel.app/",
         githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
         projectTitle: "DnD Character Sheet"
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      className: "project two",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
+        id: "js-job-demo",
+        title: "Resume Builder",
+        skills: demoSkills,
+        githubLink: "https://github.com/ryanAllMad/js-job-helper",
+        projectTitle: "JS Job Helper: Resume Builder",
+        children: /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+          id: "js-vid",
+          loop: true,
+          controls: true,
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+            src: "/js-job-helper.mp4",
+            type: "video/mp4"
+          }), "Your browser does not support the video tag."]
+        })
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project three",
