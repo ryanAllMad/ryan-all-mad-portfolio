@@ -575,10 +575,6 @@ const Contact = () => {
       className: "contact first",
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
         children: "Software Engineer"
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-        href: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
-        target: "_blank",
-        children: "See the code for this portfolio here"
       }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
         className: "header-hide",
         children: "2 Years Experience"
@@ -588,9 +584,13 @@ const Contact = () => {
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
         className: "header-hide",
         children: "Skills"
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+      }), /*#__PURE__*/(0,jsx_runtime.jsxs)("p", {
         className: "header-hide",
-        children: "JavaScript | React Typescript | Redux | Node | SCSS/CSS | PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg"
+        children: ["JavaScript | React | Typescript | Redux | Node | SCSS/CSS | PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg ", /*#__PURE__*/(0,jsx_runtime.jsx)("br", {}), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+          href: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
+          target: "_blank",
+          children: "See the code for this portfolio here"
+        })]
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
       className: "contact third",
@@ -633,10 +633,14 @@ const ShowSkills = props => {
     tabIndex: 0,
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
       children: "Skills"
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
-      children: skillsArr.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("ul", {
+      children: [skillsArr.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
         children: sk
-      }, sk.toLowerCase()))
+      }, sk.toLowerCase())), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+        href: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
+        target: "_blank",
+        children: "See the code for this portfolio here"
+      })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
       class: "close-skills",
       onClick: onClick,
@@ -689,17 +693,43 @@ const Header = () => {
 /* harmony default export */ const components_Header = (Header);
 ;// CONCATENATED MODULE: ./views/components/ToProjectButtons.js
 
+
 const ToProjectButtons = props => {
   const {
     projectLink,
     githubLink,
-    projectTitle
+    projectTitle,
+    tooltipTitle
   } = props;
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+  const [showTooltip, setShowTooltip] = react.useState(false);
+  const renderTooltip = bool => {
+    if (projectLink) {
+      return;
+    }
+    setShowTooltip(bool);
+  };
+  const hideToolTip = e => {
+    if (e.key === 'Escape') {
+      setShowTooltip(false);
+    }
+  };
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+    className: "js-vid-caption",
+    children: [!projectLink && showTooltip && /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      id: "button-tool-tip",
+      className: "button-tool-tip",
+      role: "tooltip",
+      children: tooltipTitle
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+      onKeyDown: e => hideToolTip(e),
+      onFocus: () => renderTooltip(true),
+      onBlur: () => renderTooltip(false),
+      onMouseOver: () => renderTooltip(true),
+      onMouseLeave: () => renderTooltip(false),
       className: `btn${projectLink ? '' : ' disabled'}`,
       href: projectLink,
-      target: projectLink ? '_blank' : '_self',
+      target: projectLink && '_blank',
+      "aria-describedby": "button-tool-tip",
       children: projectLink ? /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
           className: "screen-reader-text",
@@ -735,7 +765,7 @@ const Group = props => {
     projectLink,
     githubLink,
     projectTitle,
-    children
+    tooltipTitle
   } = props;
   const [showOnHover, setShowOnHover] = react.useState(false);
   const [focussedClass, setFocussedClass] = react.useState('');
@@ -743,12 +773,12 @@ const Group = props => {
     setShowOnHover(true);
     setFocussedClass('focussed');
   };
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     onFocus: handleMouseOver,
     id: id,
     className: `group ${focussedClass}`,
     tabIndex: 0,
-    children: [children && children, showOnHover && /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+    children: showOnHover && /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
         children: title
       }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
@@ -762,10 +792,11 @@ const Group = props => {
         children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
           githubLink: githubLink,
           projectLink: projectLink,
-          projectTitle: projectTitle
+          projectTitle: projectTitle,
+          tooltipTitle: tooltipTitle
         })
       })]
-    })]
+    })
   });
 };
 /* harmony default export */ const components_Group = (Group);
@@ -775,11 +806,17 @@ const Group = props => {
 
 
 
+
+
 const Main = () => {
   const demoSkills = ['Node', 'MongoDB', 'React + React SSR', 'Webpack', 'CSS3', 'Demo skills'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
   const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
   const viteSkills = ['React', 'Vite', 'Redux', 'Material UI'];
+  const vidRef = (0,react.useRef)();
+  const playVid = () => {
+    vidRef.current.play();
+  };
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "mobile-hidden logo"
@@ -793,31 +830,33 @@ const Main = () => {
         githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
         projectTitle: "DnD Character Sheet"
       })
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
       className: "project two",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "js-job-demo",
-        title: "Resume Builder",
-        skills: demoSkills,
+      children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+        onFocus: playVid,
+        onMouseOver: playVid,
+        ref: vidRef,
+        id: "js-vid",
+        loop: true,
+        controls: true,
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+          src: "/js-job-helper.mp4",
+          type: "video/mp4"
+        }), "Your browser does not support the video tag."]
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
         githubLink: "https://github.com/ryanAllMad/js-job-helper",
-        projectTitle: "JS Job Helper: Resume Builder",
-        children: /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-          id: "js-vid",
-          loop: true,
-          controls: true,
-          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
-            src: "/js-job-helper.mp4",
-            type: "video/mp4"
-          }), "Your browser does not support the video tag."]
-        })
-      })
+        projectLink: "",
+        projectTitle: "JS Job Helper: Resume Builder App",
+        tooltipTitle: "Open source project for dev's"
+      })]
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project three",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "ally",
         title: "A11y Check Plugin",
         skills: allySkills,
-        projectLink: "https://github.com/ryanAllMad/a11y-checker?tab=readme-ov-file#a11y-check",
+        projectLink: "",
+        tooltipTitle: "Plugin available on Github",
         githubLink: "https://github.com/ryanAllMad/a11y-checker",
         projectTitle: "A11y Check"
       })

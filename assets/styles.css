@@ -143,7 +143,8 @@ header .header-hide {
 .btn.disabled {
 	background-color: rgb(50, 49, 50);
 	color:#fff;
-	border-color: #fff
+	border-color: #fff;
+	cursor: not-allowed;
 }
 .btn.disabled:hover,
 .btn.disabled:focus {
@@ -160,6 +161,9 @@ header .header-hide {
     grid-column: 1 / span 3;
 	/*background: url('') 0 5% no-repeat;*/
 	min-height: calc(335px + 1em);
+	display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 .three {
     grid-column: 1 / span 3;
@@ -189,6 +193,34 @@ header h1 {
 header .contact.first {
 	text-align: center;
     flex-grow: 1;
+}
+.js-vid-caption {
+    background: black;
+    padding: 1em;
+    text-align: center;
+	position: relative;
+	flex-grow: 1;
+	vertical-align: middle;
+}
+.button-tool-tip {
+	position: absolute;
+	margin-top: -20px;
+	top:0%;
+	left: 42%;
+	transform: translate(-50%, -70%);
+	border: 1px solid #fff;
+	background-color: black;
+	border-radius: 4px;
+	color:#fff;
+    padding: 0.25em;
+	opacity: 0;
+	transition: opacity 2s;
+}
+.js-vid-caption:hover .button-tool-tip {
+    opacity: 1;
+}
+.js-vid-caption:hover .btn.disabled {
+	border: 1px inset #000;
 }
 #js-vid {
 	width: 100%;
@@ -232,6 +264,10 @@ header .contact.first {
 	}
 	.project .group {
 		container-type: size;
+	}
+	*:focus {
+		outline: 2px solid rgba(188, 24, 35, 1);
+		border-radius: 4px;
 	}
 	.logo {
 		grid-row: 4 / span 3;

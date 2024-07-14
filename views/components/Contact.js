@@ -3,14 +3,15 @@ const Contact = () => {
 		<>
 			<section className="contact first">
 				<h1>Software Engineer</h1>
-				<a href="https://github.com/ryanAllMad/ryan-all-mad-portfolio" target="_blank">See the code for this portfolio here</a>
+				
 				<p className="header-hide">2 Years Experience</p>
 			</section>
 			<section className="contact second">
 			<h2 className="header-hide">Skills</h2>
 				<p className="header-hide">
-					JavaScript | React Typescript | Redux | Node | SCSS/CSS |
-					PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg
+					JavaScript | React | Typescript | Redux | Node | SCSS/CSS |
+					PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg <br />
+					<a href="https://github.com/ryanAllMad/ryan-all-mad-portfolio" target="_blank">See the code for this portfolio here</a>
 				</p>
 			</section>
 			<section className="contact third">

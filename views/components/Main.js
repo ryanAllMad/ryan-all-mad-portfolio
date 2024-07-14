@@ -1,4 +1,6 @@
+import { useEffect, useRef } from 'react';
 import Group from './Group.js';
+import ToProjectButtons from './ToProjectButtons.js';
 import '../../assets/images/js-job-helper.mp4';
 
 const Main = () => {
@@ -21,6 +23,10 @@ const Main = () => {
 		'Webpack',
 	];
 	const viteSkills = ['React', 'Vite', 'Redux', 'Material UI'];
+	const vidRef = useRef()
+	const playVid = () => {
+		vidRef.current.play()
+	}
 	return (
 		<main>
 			<section className='mobile-hidden logo'></section>
@@ -35,14 +41,10 @@ const Main = () => {
 				/>
 			</section>
 			<section className='project two'>
-				<Group
-					id='js-job-demo'
-					title='Resume Builder'
-					skills={demoSkills}
-					githubLink='https://github.com/ryanAllMad/js-job-helper'
-					projectTitle='JS Job Helper: Resume Builder'
-				>
 					<video
+						onFocus={playVid}
+						onMouseOver={playVid}
+						ref={vidRef}
 						id="js-vid"
 						loop
 						controls
@@ -53,14 +55,21 @@ const Main = () => {
 						/>
 						Your browser does not support the video tag.
 					</video>
-				</Group>
+					
+					<ToProjectButtons
+							githubLink='https://github.com/ryanAllMad/js-job-helper'
+							projectLink=''
+							projectTitle='JS Job Helper: Resume Builder App'
+							tooltipTitle="Open source project for dev's"
+						/>
 			</section>
 			<section className='project three'>
 				<Group
 					id='ally'
 					title='A11y Check Plugin'
 					skills={allySkills}
-					projectLink='https://github.com/ryanAllMad/a11y-checker?tab=readme-ov-file#a11y-check'
+					projectLink=''
+					tooltipTitle="Plugin available on Github"
 					githubLink='https://github.com/ryanAllMad/a11y-checker'
 					projectTitle='A11y Check'
 				/>
