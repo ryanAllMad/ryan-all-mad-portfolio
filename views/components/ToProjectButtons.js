@@ -29,6 +29,11 @@ const ToProjectButtons = (props) => {
 				onBlur={() => renderTooltip(false)}
 				onMouseOver={() => renderTooltip(true)}
 				onMouseLeave={() => renderTooltip(false)}
+				onClick={(e) => {
+					if(!projectLink) {
+						e.preventDefault()
+					}
+				}}
 				className={`btn${projectLink ? '' : ' disabled'}`}
 				href={projectLink}
 				target={projectLink && '_blank'}
@@ -36,15 +41,29 @@ const ToProjectButtons = (props) => {
 			>
 				{projectLink ? (
 					<><span className='screen-reader-text'>to project</span>{projectTitle}</>
-					) : <><span className='screen-reader-text'>This project isn't published.</span>{projectTitle}</>}
+					) : <><span className='screen-reader-text'>This link is disabled.</span>{projectTitle}</>}
 			</a>
 			<a
-				className='btn'
+				className={`btn ${!githubLink && 'disabled'}`}
 				href={githubLink}
+				onClick={(e) => {
+					if(!githubLink) {
+						e.preventDefault()
+					}
+				}}
 				target='_blank'
 			>
-				See the code{' '}
-				{<span className='screen-reader-text'>for {projectTitle}</span>}
+				{githubLink ? (
+					<>
+						{`See the code`}
+						<span className='screen-reader-text'>on Github</span>
+					</>
+			) : (
+			<>
+			{projectTitle}
+			<span className='screen-reader-text'>This link is disabled</span>
+			</>
+			)}
 			</a>
 		</div>
 	);

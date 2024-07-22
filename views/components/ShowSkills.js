@@ -4,18 +4,17 @@ const ShowSkills = (props) => {
 		`JavaScript`,
 		`React`,
 		`Typescript`,
-		`Redux `,
 		`Node`,
 		`Azure`,
 		`Git`,
 		`Github`,
 		`SCSS/CSS`,
-		`PHP`,
 		`WCAG`,
 		`NPM`,
 		`CircleCI`,
-		`WordPress`,
-		`Gutenberg`,
+		`Demo's`,
+		`Technical Writing`,
+		`Collab`
 	];
 	return (
 		<div

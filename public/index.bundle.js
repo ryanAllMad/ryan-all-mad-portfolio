@@ -626,7 +626,7 @@ const ShowSkills = props => {
   const {
     onClick
   } = props;
-  const skillsArr = [`JavaScript`, `React`, `Typescript`, `Redux `, `Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `PHP`, `WCAG`, `NPM`, `CircleCI`, `WordPress`, `Gutenberg`];
+  const skillsArr = [`JavaScript`, `React`, `Typescript`, `Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `WCAG`, `NPM`, `CircleCI`, `Demo's`, `Technical Writing`, `Collab`];
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     id: "skills-menu",
     className: "show-skills",
@@ -726,6 +726,11 @@ const ToProjectButtons = props => {
       onBlur: () => renderTooltip(false),
       onMouseOver: () => renderTooltip(true),
       onMouseLeave: () => renderTooltip(false),
+      onClick: e => {
+        if (!projectLink) {
+          e.preventDefault();
+        }
+      },
       className: `btn${projectLink ? '' : ' disabled'}`,
       href: projectLink,
       target: projectLink && '_blank',
@@ -738,17 +743,29 @@ const ToProjectButtons = props => {
       }) : /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
           className: "screen-reader-text",
-          children: "This project isn't published."
+          children: "This link is disabled."
         }), projectTitle]
       })
-    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
-      className: "btn",
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+      className: `btn ${!githubLink && 'disabled'}`,
       href: githubLink,
+      onClick: e => {
+        if (!githubLink) {
+          e.preventDefault();
+        }
+      },
       target: "_blank",
-      children: ["See the code", ' ', /*#__PURE__*/(0,jsx_runtime.jsxs)("span", {
-        className: "screen-reader-text",
-        children: ["for ", projectTitle]
-      })]
+      children: githubLink ? /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+        children: [`See the code`, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+          className: "screen-reader-text",
+          children: "on Github"
+        })]
+      }) : /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+        children: [projectTitle, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+          className: "screen-reader-text",
+          children: "This link is disabled"
+        })]
+      })
     })]
   });
 };
@@ -775,6 +792,7 @@ const Group = props => {
   };
   return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     onFocus: handleMouseOver,
+    onMouseOver: handleMouseOver,
     id: id,
     className: `group ${focussedClass}`,
     tabIndex: 0,
@@ -802,39 +820,39 @@ const Group = props => {
 /* harmony default export */ const components_Group = (Group);
 ;// CONCATENATED MODULE: ./assets/images/js-job-helper.mp4
 /* harmony default export */ const js_job_helper = (__webpack_require__.p + "js-job-helper.mp4");
+;// CONCATENATED MODULE: ./assets/images/a11y-vid.mp4
+/* harmony default export */ const a11y_vid = (__webpack_require__.p + "a11y-vid.mp4");
 ;// CONCATENATED MODULE: ./views/components/Main.js
 
 
 
 
 
+
 const Main = () => {
-  const demoSkills = ['Node', 'MongoDB', 'React + React SSR', 'Webpack', 'CSS3', 'Demo skills'];
+  const demoSkills = ['Demo/Presentation skills', 'Node', 'MongoDB', 'React + React SSR', 'Webpack', 'CSS3'];
+  const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
   const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
-  const viteSkills = ['React', 'Vite', 'Redux', 'Material UI'];
+  const blogSkills = ['SEO', 'Technical Writing', 'Mentoring', 'Front end', 'Javascript'];
   const vidRef = (0,react.useRef)();
-  const playVid = () => {
-    vidRef.current.play();
+  const a11yVidRef = (0,react.useRef)();
+  const playVid = el => {
+    el.play();
+  };
+  const pauseVid = el => {
+    el.pause();
   };
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "mobile-hidden logo"
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "project one",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "dnd",
-        title: "DnD Character sheet",
-        skills: dndSkills,
-        projectLink: "https://yong-character-sheet.vercel.app/",
-        githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
-        projectTitle: "DnD Character Sheet"
-      })
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
-      className: "project two",
+      className: "project one",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        onFocus: playVid,
-        onMouseOver: playVid,
+        onFocus: () => playVid(vidRef.current),
+        onMouseOver: () => playVid(vidRef.current),
+        onMouseOut: () => pauseVid(vidRef.current),
+        onBlur: () => pauseVid(vidRef.current),
         ref: vidRef,
         id: "js-vid",
         loop: true,
@@ -849,8 +867,49 @@ const Main = () => {
         projectTitle: "JS Job Helper: Resume Builder App",
         tooltipTitle: "Open source project for dev's"
       })]
+    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
+      className: "project two",
+      children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+        onFocus: () => playVid(a11yVidRef.current),
+        onMouseOver: () => playVid(a11yVidRef.current),
+        onBlur: () => pauseVid(a11yVidRef.current),
+        onMouseOut: () => pauseVid(a11yVidRef.current),
+        ref: a11yVidRef,
+        id: "a11y-vid",
+        loop: true,
+        controls: true,
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+          src: "/a11y-vid.mp4",
+          type: "video/mp4"
+        }), "Your browser does not support the video tag."]
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
+        githubLink: "https://github.com/ryanAllMad/a11y-react",
+        projectLink: "",
+        projectTitle: "WAI-ARIA Authoring Patterns",
+        tooltipTitle: "Test suite in vitest"
+      })]
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project three",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
+        id: "portfolio",
+        title: "My Portfolio on Azure",
+        skills: portfolioSkills,
+        tooltipTitle: "You are here!",
+        githubLink: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
+        projectTitle: "My portfolio"
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      className: "project four",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
+        id: "dnd",
+        title: "DnD Character sheet",
+        skills: dndSkills,
+        projectLink: "https://yong-character-sheet.vercel.app/",
+        githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
+        projectTitle: "DnD Character Sheet"
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      className: "project five",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "ally",
         title: "A11y Check Plugin",
@@ -861,14 +920,13 @@ const Main = () => {
         projectTitle: "A11y Check"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "project four",
+      className: "project six",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "vite",
-        title: "Vite-React-Redux List",
-        skills: viteSkills,
-        projectLink: "https://ryanallmad.github.io/myvite-react-proj/",
-        githubLink: "https://github.com/ryanAllMad/myvite-react-proj",
-        projectTitle: "Vite"
+        id: "blog",
+        title: "All Mad Designs Blog",
+        skills: blogSkills,
+        projectLink: "https://allmaddesigns.com",
+        projectTitle: "My Tech Blog"
       })
     })]
   });

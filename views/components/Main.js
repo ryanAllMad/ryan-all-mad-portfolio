@@ -1,17 +1,25 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Group from './Group.js';
 import ToProjectButtons from './ToProjectButtons.js';
 import '../../assets/images/js-job-helper.mp4';
+import '../../assets/images/a11y-vid.mp4';
 
 const Main = () => {
 	const demoSkills = [
+		'Demo/Presentation skills',
 		'Node',
 		'MongoDB',
 		'React + React SSR',
 		'Webpack',
 		'CSS3',
-		'Demo skills',
 	];
+	const portfolioSkills = [
+		'React SSR',
+		'React',
+		'CSS3',
+		'Node',
+		'Azure'
+	]
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
 	const allySkills = [
 		'React',
@@ -22,28 +30,30 @@ const Main = () => {
 		'CSS3',
 		'Webpack',
 	];
-	const viteSkills = ['React', 'Vite', 'Redux', 'Material UI'];
+	const blogSkills = [
+		'SEO',
+		'Technical Writing',
+		'Mentoring',
+		'Front end',
+		'Javascript'
+	]
 	const vidRef = useRef()
-	const playVid = () => {
-		vidRef.current.play()
+	const a11yVidRef = useRef()
+	const playVid = (el) => {
+		el.play()
+	}
+	const pauseVid = (el) => {
+		el.pause()
 	}
 	return (
 		<main>
 			<section className='mobile-hidden logo'></section>
 			<section className='project one'>
-				<Group
-					id='dnd'
-					title='DnD Character sheet'
-					skills={dndSkills}
-					projectLink='https://yong-character-sheet.vercel.app/'
-					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
-					projectTitle='DnD Character Sheet'
-				/>
-			</section>
-			<section className='project two'>
-					<video
-						onFocus={playVid}
-						onMouseOver={playVid}
+			<video
+						onFocus={() => playVid(vidRef.current)}
+						onMouseOver={() => playVid(vidRef.current)}
+						onMouseOut={() => pauseVid(vidRef.current)}
+						onBlur={() => pauseVid(vidRef.current)}
 						ref={vidRef}
 						id="js-vid"
 						loop
@@ -63,8 +73,52 @@ const Main = () => {
 							tooltipTitle="Open source project for dev's"
 						/>
 			</section>
+			<section className='project two'>
+			<video
+						onFocus={() => playVid(a11yVidRef.current)}
+						onMouseOver={() => playVid(a11yVidRef.current)}
+						onBlur={() => pauseVid(a11yVidRef.current)}
+						onMouseOut={() => pauseVid(a11yVidRef.current)}
+						ref={a11yVidRef}
+						id="a11y-vid"
+						loop
+						controls
+					>
+						<source
+							src='/a11y-vid.mp4'
+							type='video/mp4'
+						/>
+						Your browser does not support the video tag.
+					</video>
+					<ToProjectButtons
+							githubLink='https://github.com/ryanAllMad/a11y-react'
+							projectLink=''
+							projectTitle='WAI-ARIA Authoring Patterns'
+							tooltipTitle="Test suite in vitest"
+						/>
+			</section>
 			<section className='project three'>
 				<Group
+					id='portfolio'
+					title="My Portfolio on Azure"
+					skills={portfolioSkills}
+					tooltipTitle="You are here!"
+					githubLink='https://github.com/ryanAllMad/ryan-all-mad-portfolio'
+					projectTitle='My portfolio'
+				/>
+			</section>
+			<section className='project four'>
+			<Group
+					id='dnd'
+					title='DnD Character sheet'
+					skills={dndSkills}
+					projectLink='https://yong-character-sheet.vercel.app/'
+					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
+					projectTitle='DnD Character Sheet'
+				/>
+			</section>
+			<section className='project five'>
+			<Group
 					id='ally'
 					title='A11y Check Plugin'
 					skills={allySkills}
@@ -74,14 +128,13 @@ const Main = () => {
 					projectTitle='A11y Check'
 				/>
 			</section>
-			<section className='project four'>
+			<section className='project six'>
 				<Group
-					id='vite'
-					title='Vite-React-Redux List'
-					skills={viteSkills}
-					projectLink='https://ryanallmad.github.io/myvite-react-proj/'
-					githubLink='https://github.com/ryanAllMad/myvite-react-proj'
-					projectTitle='Vite'
+				id='blog'
+				title='All Mad Designs Blog'
+				skills={blogSkills}
+				projectLink='https://allmaddesigns.com'
+				projectTitle='My Tech Blog'
 				/>
 			</section>
 		</main>

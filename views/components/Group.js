@@ -14,6 +14,7 @@ const Group = (props) => {
 	return (
 		<div
 			onFocus={handleMouseOver}
+			onMouseOver={handleMouseOver}
 			id={id}
 			className={`group ${focussedClass}`}
 			tabIndex={0}
