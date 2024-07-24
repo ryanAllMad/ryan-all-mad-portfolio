@@ -36,6 +36,7 @@ const ToProjectButtons = (props) => {
 				}}
 				className={`btn${projectLink ? '' : ' disabled'}`}
 				href={projectLink}
+				tabIndex={!projectLink ? '-1' : '0'}
 				target={projectLink && '_blank'}
 				aria-describedby='button-tool-tip'
 			>
@@ -46,6 +47,7 @@ const ToProjectButtons = (props) => {
 			<a
 				className={`btn ${!githubLink && 'disabled'}`}
 				href={githubLink}
+				tabIndex={!githubLink ? '-1' : '0'}
 				onClick={(e) => {
 					if(!githubLink) {
 						e.preventDefault()
