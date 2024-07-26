@@ -587,9 +587,9 @@ const Contact = () => {
       }), /*#__PURE__*/(0,jsx_runtime.jsxs)("p", {
         className: "header-hide",
         children: ["JavaScript | React | Typescript | Redux | Node | SCSS/CSS | PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg ", /*#__PURE__*/(0,jsx_runtime.jsx)("br", {}), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-          href: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
+          href: "https://codepen.io/all-mad-designs",
           target: "_blank",
-          children: "See the code for this portfolio here"
+          children: "See my CSS portfolio here"
         })]
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
@@ -637,9 +637,9 @@ const ShowSkills = props => {
       children: [skillsArr.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
         children: sk
       }, sk.toLowerCase())), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-        href: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
+        href: "https://codepen.io/all-mad-designs",
         target: "_blank",
-        children: "See the code for this portfolio here"
+        children: "See my CSS portfolio here"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
       class: "close-skills",
@@ -790,7 +790,7 @@ const Group = props => {
   const [focussedClass, setFocussedClass] = react.useState('');
   const handleMouseOver = () => {
     setShowOnHover(true);
-    setFocussedClass('focussed');
+    setFocussedClass('focussed zoom-scroll');
   };
   return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     onFocus: handleMouseOver,

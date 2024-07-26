@@ -8,7 +8,7 @@ const Group = (props) => {
 
 	const handleMouseOver = () => {
 		setShowOnHover(true);
-		setFocussedClass('focussed');
+		setFocussedClass('focussed zoom-scroll');
 	};
 
 	return (

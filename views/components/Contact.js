@@ -11,7 +11,12 @@ const Contact = () => {
 				<p className="header-hide">
 					JavaScript | React | Typescript | Redux | Node | SCSS/CSS |
 					PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg <br />
-					<a href="https://github.com/ryanAllMad/ryan-all-mad-portfolio" target="_blank">See the code for this portfolio here</a>
+					<a
+					href='https://codepen.io/all-mad-designs'
+					target='_blank'
+				>
+					See my CSS portfolio here
+				</a>
 				</p>
 			</section>
 			<section className="contact third">

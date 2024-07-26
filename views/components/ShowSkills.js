@@ -28,10 +28,10 @@ const ShowSkills = (props) => {
 					<li key={sk.toLowerCase()}>{sk}</li>
 				))}
 				<a
-					href='https://github.com/ryanAllMad/ryan-all-mad-portfolio'
+					href='https://codepen.io/all-mad-designs'
 					target='_blank'
 				>
-					See the code for this portfolio here
+					See my CSS portfolio here
 				</a>
 			</ul>
 			<button
