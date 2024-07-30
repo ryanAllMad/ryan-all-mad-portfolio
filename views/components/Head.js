@@ -30,6 +30,7 @@ const Head = () => {
 					async
 					defer
 				/>
+				<title>Ryan's Portfolio</title>
 			</head>
 		</>
 	);

@@ -284,6 +284,12 @@ header .contact.first {
 	max-height: 418px;
 	margin: auto;
 }
+.clickme button {
+	background-color: transparent;
+	border: none;
+	padding: 14px;
+	font-size: 18px;
+}
 @container (max-width: 279px) {
 	.group p, .group ul, .group .btn {
 		font-size: 0.65em;
@@ -313,6 +319,11 @@ header .contact.first {
 	}
 }
 @media screen and (min-width: 800px) {
+	.clickme {
+		grid-row: 2 /span 1;
+		grid-column: 2 / span 1;
+	}
+
 	* {
 		cursor: none;
 	}

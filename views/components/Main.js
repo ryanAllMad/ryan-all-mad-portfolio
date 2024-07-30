@@ -3,12 +3,14 @@ import Group from './Group.js';
 import ToProjectButtons from './ToProjectButtons.js';
 import '../../assets/images/js-job-helper.mp4';
 import '../../assets/images/a11y-vid.mp4';
+import * as confetti from 'canvas-confetti';
 
 const Main = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [left, setLeft] = useState()
 	const [top, setTop] = useState()
 	const [fill, setFill] = useState('#bc1923')
+	const [clickMe, setClickMe] = useState('Click here!')
 	const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
 	const allySkills = [
@@ -86,6 +88,10 @@ const Main = () => {
 		triggerAnimations(groupSixRef.current, evenAnimations, animationTiming);
 		setIsLoaded(true);
 	};
+	const handleButton = () => {
+		confetti.default();
+		setClickMe('')
+	}
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			window.addEventListener('load', onLoadWindow);
@@ -95,6 +101,7 @@ const Main = () => {
 			});
 			window.addEventListener('mouseleave', () => {
 				setIsLoaded(false)
+				setClickMe('Click Me!')
 			});
 		}
 	}, [window]);
@@ -115,6 +122,7 @@ const Main = () => {
 					></circle>
 				</svg>
 			)}
+			{clickMe !== '' && <section class="clickme"><button onClick={handleButton}>Click here!</button></section>}
 			<section onMouseEnter={() =>setFill('#fff')} onMouseLeave={() =>setFill('#bc1923')} className='mobile-hidden logo'></section>
 			<section
 				onMouseEnter={() =>setFill('transparent')} 
