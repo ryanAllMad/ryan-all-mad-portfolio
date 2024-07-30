@@ -832,33 +832,114 @@ const Group = props => {
 
 
 const Main = () => {
-  const demoSkills = ['Demo/Presentation skills', 'Node', 'MongoDB', 'React + React SSR', 'Webpack', 'CSS3'];
+  const [isLoaded, setIsLoaded] = (0,react.useState)(false);
+  const [left, setLeft] = (0,react.useState)();
+  const [top, setTop] = (0,react.useState)();
+  const [fill, setFill] = (0,react.useState)('#bc1923');
   const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
   const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
   const blogSkills = ['SEO', 'Technical Writing', 'Mentoring', 'Front end', 'Javascript'];
   const vidRef = (0,react.useRef)();
   const a11yVidRef = (0,react.useRef)();
+  const groupOneRef = (0,react.useRef)();
+  const groupTwoRef = (0,react.useRef)();
+  const groupThreeRef = (0,react.useRef)();
+  const groupFourRef = (0,react.useRef)();
+  const groupFiveRef = (0,react.useRef)();
+  const groupSixRef = (0,react.useRef)();
+  const svgRef = (0,react.useRef)();
   const playVid = el => {
     el.play();
   };
   const pauseVid = el => {
     el.pause();
   };
+  const triggerAnimations = (el, animationFrames, animationTiming) => {
+    el.animate(animationFrames, animationTiming);
+    el.classList.add('show');
+  };
+  const animationTiming = {
+    duration: 1500,
+    iterations: 1
+  };
+  const videoTransforms = [{
+    scale: '0 1'
+  }, {
+    scale: '1 1'
+  }];
+  const evenAnimations = [{
+    transform: `translateY(150%)`,
+    opacity: 0
+  }, {
+    transform: `translateY(50%)`
+  }, {
+    transform: `translateY(0%)`,
+    opacity: 1
+  }];
+  const oddAnimations = [{
+    transform: `translateX(150%)`,
+    opacity: 0
+  }, {
+    transform: `translateX(50%)`
+  }, {
+    transform: `translateX(0%)`,
+    opacity: 1
+  }];
+  const onLoadWindow = () => {
+    triggerAnimations(groupOneRef.current, videoTransforms, animationTiming);
+    triggerAnimations(groupTwoRef.current, videoTransforms, animationTiming);
+    triggerAnimations(groupThreeRef.current, oddAnimations, animationTiming);
+    triggerAnimations(groupFourRef.current, evenAnimations, animationTiming);
+    triggerAnimations(groupFiveRef.current, oddAnimations, animationTiming);
+    triggerAnimations(groupSixRef.current, evenAnimations, animationTiming);
+    setIsLoaded(true);
+  };
+  (0,react.useEffect)(() => {
+    if (typeof window !== undefined) {
+      window.addEventListener('load', onLoadWindow);
+      window.addEventListener('mousemove', event => {
+        setLeft(event.pageX + 4 + 'px');
+        setTop(event.pageY + 4 + 'px');
+      });
+      window.addEventListener('mouseleave', () => {
+        setIsLoaded(false);
+      });
+    }
+  }, [window]);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
-    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+    children: [isLoaded && /*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
+      style: {
+        top: top,
+        left: left,
+        fill: fill
+      },
+      ref: svgRef,
+      class: "dot gooey",
+      viewBox: "0 0 100 100",
+      xmlns: "http://www.w3.org/2000/svg",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)("circle", {
+        cx: "50",
+        cy: "50",
+        r: "50"
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      onMouseEnter: () => setFill('#fff'),
+      onMouseLeave: () => setFill('#bc1923'),
       className: "mobile-hidden logo"
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
+      onMouseEnter: () => setFill('transparent'),
+      onMouseLeave: () => setFill('#bc1923'),
+      ref: groupOneRef,
       className: "project one",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
         onFocus: () => playVid(vidRef.current),
-        onMouseOver: () => playVid(vidRef.current),
-        onMouseOut: () => pauseVid(vidRef.current),
+        onMouseEnter: () => playVid(vidRef.current),
+        onMouseLeave: () => pauseVid(vidRef.current),
         onBlur: () => pauseVid(vidRef.current),
         ref: vidRef,
         id: "js-vid",
         loop: true,
-        controls: true,
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
           src: "/js-job-helper.mp4",
           type: "video/mp4"
@@ -870,6 +951,9 @@ const Main = () => {
         tooltipTitle: "Open source project for dev's"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
+      onMouseEnter: () => setFill('transparent'),
+      onMouseLeave: () => setFill('#bc1923'),
+      ref: groupTwoRef,
       className: "project two",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
         onFocus: () => playVid(a11yVidRef.current),
@@ -879,8 +963,8 @@ const Main = () => {
         ref: a11yVidRef,
         id: "a11y-vid",
         loop: true,
-        controls: true,
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+          loop: true,
           src: "/a11y-vid.mp4",
           type: "video/mp4"
         }), "Your browser does not support the video tag."]
@@ -891,6 +975,7 @@ const Main = () => {
         tooltipTitle: "Test suite in vitest"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      ref: groupThreeRef,
       className: "project three",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "portfolio",
@@ -901,6 +986,7 @@ const Main = () => {
         projectTitle: "My portfolio"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      ref: groupFourRef,
       className: "project four",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "dnd",
@@ -911,6 +997,7 @@ const Main = () => {
         projectTitle: "DnD Character Sheet"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      ref: groupFiveRef,
       className: "project five",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "ally",
@@ -922,6 +1009,7 @@ const Main = () => {
         projectTitle: "A11y Check"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      ref: groupSixRef,
       className: "project six",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "blog",
