@@ -1,5 +1,5 @@
 const ShowSkills = (props) => {
-	const { onClick } = props;
+	const { onClick, classes } = props;
 	const skillsArr = [
 		`JavaScript`,
 		`React`,
@@ -19,7 +19,7 @@ const ShowSkills = (props) => {
 	return (
 		<div
 			id='skills-menu'
-			className='show-skills'
+			className={`show-skills ${classes}`}
 			tabIndex={0}
 		>
 			<h2>Skills</h2>
@@ -38,7 +38,7 @@ const ShowSkills = (props) => {
 				class='close-skills'
 				onClick={onClick}
 			>
-				X<span className='screen-reader-text'>close skills menu</span>
+				<span>&#9661;</span><span className='screen-reader-text'>close skills menu</span>
 			</button>
 		</div>
 	);

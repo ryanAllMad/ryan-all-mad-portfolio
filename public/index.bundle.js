@@ -630,12 +630,13 @@ const Contact = () => {
 
 const ShowSkills = props => {
   const {
-    onClick
+    onClick,
+    classes
   } = props;
   const skillsArr = [`JavaScript`, `React`, `Typescript`, `Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `WCAG`, `NPM`, `CircleCI`, `Demo's`, `Technical Writing`, `Collab`];
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     id: "skills-menu",
-    className: "show-skills",
+    className: `show-skills ${classes}`,
     tabIndex: 0,
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
       children: "Skills"
@@ -650,7 +651,9 @@ const ShowSkills = props => {
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
       class: "close-skills",
       onClick: onClick,
-      children: ["X", /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+        children: "\u25BD"
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
         className: "screen-reader-text",
         children: "close skills menu"
       })]
@@ -664,9 +667,11 @@ const ShowSkills = props => {
 
 
 const Header = () => {
-  const [showSkills, setShowSkills] = react.useState(false);
+  const [showSkills, setShowSkills] = (0,react.useState)(false);
+  const [animateClass, setAnimateClass] = (0,react.useState)('');
   const handleShowSkills = () => {
     setShowSkills(prev => !prev ? true : false);
+    setAnimateClass('drawer');
   };
   const handleKeyDown = e => {
     if (e.code !== 'Enter' && e.code !== 'Space') {
@@ -677,23 +682,39 @@ const Header = () => {
     }
     handleShowSkills();
   };
-  react.useEffect(() => {
+  (0,react.useEffect)(() => {
     window.addEventListener('scroll', () => setShowSkills(false));
   }, []);
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)("header", {
-    className: "desktop-hidden",
-    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-      "aria-expanded": showSkills,
-      "aria-controls": "skills-menu",
-      tabIndex: 0,
-      "aria-label": "see skills",
-      onKeyDown: e => handleKeyDown(e),
-      role: "button",
-      onClick: handleShowSkills,
-      className: "logo"
-    }), showSkills && /*#__PURE__*/(0,jsx_runtime.jsx)(components_ShowSkills, {
-      onClick: () => setShowSkills(false)
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_Contact, {})]
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("header", {
+      className: "desktop-hidden",
+      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        "aria-expanded": showSkills,
+        "aria-controls": "skills-menu",
+        tabIndex: 0,
+        "aria-label": "see skills",
+        onKeyDown: e => handleKeyDown(e),
+        role: "button",
+        onClick: handleShowSkills,
+        className: "logo",
+        children: !showSkills && /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+          className: "arrow",
+          children: "\u25BD"
+        })
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_Contact, {})]
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      className: "skills-container",
+      style: {
+        position: 'relative'
+      },
+      children: showSkills && /*#__PURE__*/(0,jsx_runtime.jsx)(components_ShowSkills, {
+        classes: animateClass,
+        onClick: () => {
+          setShowSkills(false);
+          setAnimateClass('drawer-close');
+        }
+      })
+    })]
   });
 };
 /* harmony default export */ const components_Header = (Header);
