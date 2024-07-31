@@ -1729,8 +1729,6 @@ var create = confetti_module_module.exports.create;
 
 
 const Main = () => {
-  // TODO
-  // 3. fix video start issue
   const [isLoaded, setIsLoaded] = (0,react.useState)(false);
   const [left, setLeft] = (0,react.useState)();
   const [top, setTop] = (0,react.useState)();
@@ -1821,24 +1819,24 @@ const Main = () => {
   }];
   const onMouseMove = () => {
     triggerAnimations(svgRef.current, gooeyAnimation, {
-      duration: 3000,
+      duration: 2000,
       iterations: Infinity,
       easing: 'linear'
     });
     triggerAnimations(otherSvgRef.current, otherGooeyAnimation, {
-      duration: 3000,
+      duration: 2000,
       iterations: Infinity,
       easing: 'linear'
     });
   };
   const onLoadWindow = () => {
+    setIsLoaded(true);
     triggerAnimations(groupOneRef.current, videoTransforms, animationTiming);
     triggerAnimations(groupTwoRef.current, videoTransforms, animationTiming);
     triggerAnimations(groupThreeRef.current, oddAnimations, animationTiming);
     triggerAnimations(groupFourRef.current, evenAnimations, animationTiming);
     triggerAnimations(groupFiveRef.current, oddAnimations, animationTiming);
     triggerAnimations(groupSixRef.current, evenAnimations, animationTiming);
-    setIsLoaded(true);
   };
   const handleButton = () => {
     if (clickMe === 'Click to Start Videos') {
@@ -1953,10 +1951,22 @@ const Main = () => {
       ref: groupOneRef,
       className: "project one",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        onFocus: () => playVid(vidRef.current),
-        onMouseEnter: () => playVid(vidRef.current),
-        onMouseLeave: () => pauseVid(vidRef.current),
-        onBlur: () => pauseVid(vidRef.current),
+        onFocus: () => {
+          playVid(vidRef.current);
+          setClickMe('Pause videos');
+        },
+        onMouseEnter: () => {
+          playVid(vidRef.current);
+          setClickMe('Pause videos');
+        },
+        onMouseLeave: () => {
+          pauseVid(vidRef.current);
+          setClickMe('Click to Start Videos');
+        },
+        onBlur: () => {
+          pauseVid(vidRef.current);
+          setClickMe('Click to Start Videos');
+        },
         ref: vidRef,
         id: "js-vid",
         loop: true,
@@ -1976,10 +1986,22 @@ const Main = () => {
       ref: groupTwoRef,
       className: "project two",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        onFocus: () => playVid(a11yVidRef.current),
-        onMouseOver: () => playVid(a11yVidRef.current),
-        onBlur: () => pauseVid(a11yVidRef.current),
-        onMouseOut: () => pauseVid(a11yVidRef.current),
+        onFocus: () => {
+          playVid(a11yVidRef.current);
+          setClickMe('Pause videos');
+        },
+        onMouseOver: () => {
+          playVid(a11yVidRef.current);
+          setClickMe('Pause videos');
+        },
+        onBlur: () => {
+          pauseVid(a11yVidRef.current);
+          setClickMe('Click to Start Videos');
+        },
+        onMouseOut: () => {
+          pauseVid(a11yVidRef.current);
+          setClickMe('Click to Start Videos');
+        },
         ref: a11yVidRef,
         id: "a11y-vid",
         loop: true,
