@@ -62,7 +62,7 @@ const ToProjectButtons = (props) => {
 					</>
 			) : (
 			<>
-			{projectTitle}
+			{githubLink ? projectTitle : ''}
 			<span className='screen-reader-text'>This link is disabled</span>
 			</>
 			)}

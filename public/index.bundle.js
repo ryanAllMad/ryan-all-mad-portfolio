@@ -769,7 +769,7 @@ const ToProjectButtons = props => {
           children: "on Github"
         })]
       }) : /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-        children: [projectTitle, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+        children: [githubLink ? projectTitle : '', /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
           className: "screen-reader-text",
           children: "This link is disabled"
         })]
@@ -1730,6 +1730,7 @@ var create = confetti_module_module.exports.create;
 
 const Main = () => {
   const [isLoaded, setIsLoaded] = (0,react.useState)(false);
+  const [playState, setPlayState] = (0,react.useState)(false);
   const [left, setLeft] = (0,react.useState)();
   const [top, setTop] = (0,react.useState)();
   const [fill, setFill] = (0,react.useState)('rgb(246 4 4)');
@@ -1801,30 +1802,30 @@ const Main = () => {
   }];
   const otherGooeyAnimation = [{
     filter: 'blur(0rem)',
-    transform: 'translateX(-6rem)',
+    transform: 'translateX(-40px)',
     opacity: 0
   }, {
     filter: 'blur(0.1rem)',
-    transform: 'translateX(-3rem)',
+    transform: 'translateX(-20px)',
     opacity: 1
   }, {
     filter: 'blur(0.25rem)',
     transform: 'translateX(0)'
   }, {
     filter: 'blur(0.1rem)',
-    transform: 'translateX(-3rem)'
+    transform: 'translateX(-20px)'
   }, {
     filter: 'blur(0rem)',
-    transform: 'translateX(-6rem)'
+    transform: 'translateX(-40px)'
   }];
   const onMouseMove = () => {
     triggerAnimations(svgRef.current, gooeyAnimation, {
-      duration: 2000,
+      duration: 2500,
       iterations: Infinity,
       easing: 'linear'
     });
     triggerAnimations(otherSvgRef.current, otherGooeyAnimation, {
-      duration: 2000,
+      duration: 2500,
       iterations: Infinity,
       easing: 'linear'
     });
@@ -1839,15 +1840,12 @@ const Main = () => {
     triggerAnimations(groupSixRef.current, evenAnimations, animationTiming);
   };
   const handleButton = () => {
-    if (clickMe === 'Click to Start Videos') {
-      confetti_module();
-      setClickMe('Pause videos');
-      playVid(vidRef.current);
-      playVid(a11yVidRef.current);
-    } else {
-      setClickMe('Click to Start Videos');
-      pauseVid(vidRef.current);
-      pauseVid(a11yVidRef.current);
+    setPlayState(!playState);
+  };
+  const handlePlayState = ref => {
+    if (playState) {
+      playVid(ref);
+      setClickMe('Stop videos');
     }
   };
   (0,react.useEffect)(() => {
@@ -1856,8 +1854,8 @@ const Main = () => {
         onLoadWindow();
       });
       window.addEventListener('mousemove', event => {
-        setLeft(event.pageX + 4 + 'px');
-        setTop(event.pageY + 4);
+        setLeft(event.pageX + 'px');
+        setTop(event.pageY + 'px');
       });
       window.addEventListener('mouseleave', () => {
         setIsLoaded(false);
@@ -1867,6 +1865,18 @@ const Main = () => {
       });
     }
   }, [window]);
+  (0,react.useEffect)(() => {
+    if (playState) {
+      confetti_module();
+      setClickMe('Stop videos');
+      playVid(vidRef.current);
+      playVid(a11yVidRef.current);
+    } else {
+      setClickMe('Click to Start Videos');
+      pauseVid(vidRef.current);
+      pauseVid(a11yVidRef.current);
+    }
+  }, [playState]);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
     ref: mainRef,
     children: [isLoaded && /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
@@ -1881,10 +1891,12 @@ const Main = () => {
           position: 'relative'
         },
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
-          ref: otherSvgRef,
+          ref: svgRef,
+          width: "25",
+          height: "25",
           style: {
             position: 'absolute',
-            top: '10px',
+            top: '0px',
             fill: fill
           },
           class: "dot gooey",
@@ -1896,13 +1908,15 @@ const Main = () => {
             r: "50"
           })
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
+          width: "25",
+          height: "25",
           style: {
             position: 'absolute',
-            top: 0,
-            left: '20px',
+            top: '5px',
+            left: '0px',
             fill: fill
           },
-          ref: svgRef,
+          ref: otherSvgRef,
           class: "dot gooey",
           viewBox: "0 0 100 100",
           xmlns: "http://www.w3.org/2000/svg",
@@ -1951,21 +1965,14 @@ const Main = () => {
       ref: groupOneRef,
       className: "project one",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        onFocus: () => {
-          playVid(vidRef.current);
-          setClickMe('Pause videos');
-        },
-        onMouseEnter: () => {
-          playVid(vidRef.current);
-          setClickMe('Pause videos');
-        },
+        tabIndex: 0,
+        onFocus: () => handlePlayState(vidRef.current),
+        onMouseEnter: () => handlePlayState(vidRef.current),
         onMouseLeave: () => {
           pauseVid(vidRef.current);
-          setClickMe('Click to Start Videos');
         },
         onBlur: () => {
           pauseVid(vidRef.current);
-          setClickMe('Click to Start Videos');
         },
         ref: vidRef,
         id: "js-vid",
@@ -1986,21 +1993,14 @@ const Main = () => {
       ref: groupTwoRef,
       className: "project two",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        onFocus: () => {
-          playVid(a11yVidRef.current);
-          setClickMe('Pause videos');
-        },
-        onMouseOver: () => {
-          playVid(a11yVidRef.current);
-          setClickMe('Pause videos');
-        },
+        tabIndex: 0,
+        onFocus: () => handlePlayState(a11yVidRef.current),
+        onMouseOver: () => handlePlayState(a11yVidRef.current),
         onBlur: () => {
           pauseVid(a11yVidRef.current);
-          setClickMe('Click to Start Videos');
         },
         onMouseOut: () => {
           pauseVid(a11yVidRef.current);
-          setClickMe('Click to Start Videos');
         },
         ref: a11yVidRef,
         id: "a11y-vid",

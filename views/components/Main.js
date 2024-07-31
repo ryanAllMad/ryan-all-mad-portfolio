@@ -7,6 +7,7 @@ import * as confetti from 'canvas-confetti';
 
 const Main = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [playState, setPlayState] = useState(false)
 	const [left, setLeft] = useState();
 	const [top, setTop] = useState();
 	const [fill, setFill] = useState('rgb(246 4 4)');
@@ -73,20 +74,20 @@ const Main = () => {
 		{ filter: 'blur(0rem)' },
 	];
 	const otherGooeyAnimation = [
-		{ filter: 'blur(0rem)', transform: 'translateX(-6rem)', opacity: 0 },
-		{ filter: 'blur(0.1rem)', transform: 'translateX(-3rem)', opacity: 1 },
+		{ filter: 'blur(0rem)', transform: 'translateX(-40px)', opacity: 0 },
+		{ filter: 'blur(0.1rem)', transform: 'translateX(-20px)', opacity: 1 },
 		{ filter: 'blur(0.25rem)', transform: 'translateX(0)' },
-		{ filter: 'blur(0.1rem)', transform: 'translateX(-3rem)' },
-		{ filter: 'blur(0rem)', transform: 'translateX(-6rem)' },
+		{ filter: 'blur(0.1rem)', transform: 'translateX(-20px)' },
+		{ filter: 'blur(0rem)', transform: 'translateX(-40px)' },
 	];
 	const onMouseMove = () => {
 		triggerAnimations(svgRef.current, gooeyAnimation, {
-			duration: 2000,
+			duration: 2500,
 			iterations: Infinity,
 			easing: 'linear',
 		});
 		triggerAnimations(otherSvgRef.current, otherGooeyAnimation, {
-			duration: 2000,
+			duration: 2500,
 			iterations: Infinity,
 			easing: 'linear',
 		});
@@ -116,27 +117,23 @@ const Main = () => {
 		triggerAnimations(groupFiveRef.current, oddAnimations, animationTiming);
 		triggerAnimations(groupSixRef.current, evenAnimations, animationTiming);
 	};
-	const handleButton = () => {		
-		if(clickMe === 'Click to Start Videos') {
-			confetti.default();
-			setClickMe('Pause videos');
-			playVid(vidRef.current);
-			playVid(a11yVidRef.current);
-		} else {
-			setClickMe('Click to Start Videos');
-			pauseVid(vidRef.current);
-			pauseVid(a11yVidRef.current);
-		}
-		
+	const handleButton = () => {	
+		setPlayState(!playState)
 	};
+	const handlePlayState = (ref) => {
+		if(playState) {
+			playVid(ref)
+			setClickMe('Stop videos');
+		}
+	}
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			window.addEventListener('load', () => {
 					onLoadWindow();
 			});
 			window.addEventListener('mousemove', (event) => {
-				setLeft(event.pageX + 4 + 'px');
-				setTop(event.pageY + 4);
+				setLeft(event.pageX  + 'px');
+				setTop(event.pageY + 'px');
 			});
 			window.addEventListener('mouseleave', () => {
 				setIsLoaded(false);
@@ -146,6 +143,18 @@ const Main = () => {
 			});
 		}
 	}, [window]);
+	useEffect(() => {
+		if(playState) {
+			confetti.default();
+			setClickMe('Stop videos');
+			playVid(vidRef.current);
+			playVid(a11yVidRef.current);
+		} else {
+			setClickMe('Click to Start Videos');
+			pauseVid(vidRef.current);
+			pauseVid(a11yVidRef.current);
+		}
+	}, [playState])
 	return (
 		<main ref={mainRef}>
 			{isLoaded && (
@@ -155,10 +164,12 @@ const Main = () => {
 				>
 					<div style={{ position: 'relative' }}>
 						<svg
-							ref={otherSvgRef}
+							ref={svgRef}
+							width="25"
+							height="25"
 							style={{
 								position: 'absolute',
-								top: '10px',
+								top: '0px',
 								fill: fill,
 							}}
 							class='dot gooey'
@@ -172,13 +183,15 @@ const Main = () => {
 							></circle>
 						</svg>
 						<svg
+							width="25"
+							height="25"
 							style={{
 								position: 'absolute',
-								top: 0,
-								left: '20px',
+								top: '5px',
+								left: '0px',
 								fill: fill,
 							}}
-							ref={svgRef}
+							ref={otherSvgRef}
 							class='dot gooey'
 							viewBox='0 0 100 100'
 							xmlns='http://www.w3.org/2000/svg'
@@ -234,22 +247,14 @@ const Main = () => {
 				className='project one'
 			>
 				<video
-				onFocus={() => {
-					playVid(vidRef.current)
-					setClickMe('Pause videos');
-				}}
-				onMouseEnter={() => {
-					playVid(vidRef.current)
-					setClickMe('Pause videos');
-				}}
-					
+				tabIndex={0}
+				onFocus={() => handlePlayState(vidRef.current)}
+				onMouseEnter={() => handlePlayState(vidRef.current)}
 				onMouseLeave={() => {
 					pauseVid(vidRef.current)
-					setClickMe('Click to Start Videos');
 				}}
 				onBlur={() => {
 					pauseVid(vidRef.current)
-					setClickMe('Click to Start Videos');
 				}}
 					ref={vidRef}
 					id='js-vid'
@@ -276,21 +281,14 @@ const Main = () => {
 				className='project two'
 			>
 				<video
-				onFocus={() => {
-					playVid(a11yVidRef.current)
-					setClickMe('Pause videos');
-				}}
-				onMouseOver={() => {
-					playVid(a11yVidRef.current)
-					setClickMe('Pause videos');
-				}}
+				tabIndex={0}
+				onFocus={() => handlePlayState(a11yVidRef.current)}
+				onMouseOver={() => handlePlayState(a11yVidRef.current)}
 				onBlur={() => {
 					pauseVid(a11yVidRef.current)
-					setClickMe('Click to Start Videos');
 					}}
 				onMouseOut={() => {
 					pauseVid(a11yVidRef.current)
-					setClickMe('Click to Start Videos');
 				}}
 					ref={a11yVidRef}
 					id='a11y-vid'
