@@ -11,20 +11,6 @@
 	width: 1px;
 	word-wrap: normal !important;
 }
-@keyframes gooey {
-	0%{
-	transform:scale(1.1);
-	}
-	33%{
-		transform:scale(0.9);
-	}
-	66%{
-		transform:scale(0.7);
-	}
-	100%{
-		transform:scale(1.1);
-	}
-}
 
 @keyframes zoom-scroll {
 	0% {
@@ -45,6 +31,7 @@
 }
 .dot {
 	display: none;
+	opacity: 0;
 }
 .show {
 	opacity: 1 !important;
@@ -58,6 +45,7 @@
 }
 a {
 	padding: 20px;
+	color: rgb(255, 0, 0);
 }
 footer {
 	display: none;
@@ -169,31 +157,35 @@ header .header-hide {
     text-transform: uppercase;
     min-width: 64px;
     padding: 5px 15px;
-    border-radius: 4px;
 	transition: .5s ease;
-    border: 1px solid #ED7880;
-    color: #ED7880;
+    border: 1px solid #000;
+    color: rgb(246 4 4);
 	background-color: rgba(188, 24, 35, 0);
 	margin: 0.5em 0.5em 0 0;
     font-size: 0.75em;
 }
-.btn:hover,
-.btn:focus {
-	background-color: rgba(188, 24, 35, 1);
-	color:#fff;
-	border-color: #fff;
+.btn:not(.disabled):hover,
+.btn:not(.disabled):focus {
+    color: #fff;
+	background-color: transparent;
+    border-color: transparent;
+}
+.btn:not(.disabled):hover,
+.btn:not(.disabled):focus, 
+.clickme button:hover,
+.clickme button:focus {
+	text-shadow:#0ff -1.60012px 0px 0, red 1.60012px 0px 0;
 }
 .btn.disabled {
-	background-color: rgb(50, 49, 50);
 	color:#fff;
-	border-color: #fff;
+	border-color: transparent;
 	cursor: not-allowed;
 }
 .btn.disabled:hover,
 .btn.disabled:focus {
 	color: rgb(50, 49, 50);
-	background-color:#fff;
-	border-color: rgb(50, 49, 50);
+	background-color:transparent;
+	border-color: transparent;
 }
 .one, .two {
 	display: flex;
@@ -231,18 +223,13 @@ header h1 {
     padding-left: 0.25em;
 }
 .contact img {
-	width: 30px;
-    padding: .25em;
 	filter: hue-rotate(148deg);
 }
 .contact.third {
 	display: flex;
     flex-flow: row wrap;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-content: flex-start;
-}
-.contact.third >* {
-    max-width: calc(100% / 3);
 }
 h2.header-hide {
     min-width: 100%;
@@ -263,11 +250,11 @@ header .contact.first {
 	position: absolute;
 	margin-top: -20px;
 	top:0%;
-	left: 42%;
+	left: 50%;
 	transform: translate(-50%, -70%);
-	border: 1px solid #fff;
+	border: 1px solid #000;
 	background-color: black;
-	border-radius: 4px;
+	box-shadow: -1.60012px 1px 0px rgb(255, 0, 0), 1.60012px 2px 0px rgb(0, 255, 255);
 	color:#fff;
     padding: 0.25em;
 	opacity: 0;
@@ -276,13 +263,15 @@ header .contact.first {
 .js-vid-caption:hover .button-tool-tip {
     opacity: 1;
 }
-.js-vid-caption:hover .btn.disabled {
-	border: 1px inset #000;
-}
+
 #js-vid {
 	width: 100%;
 	max-height: 418px;
 	margin: auto;
+}
+.clickme {
+    grid-column: 2 / span 1;
+	min-height: 50px;
 }
 .clickme button {
 	background-color: transparent;
@@ -323,8 +312,10 @@ header .contact.first {
 		grid-row: 2 /span 1;
 		grid-column: 2 / span 1;
 	}
-
-	* {
+	.contact.third >* {
+		max-width: calc(100% / 3);
+	}
+	*:not(:has(>a)) {
 		cursor: none;
 	}
 	video:hover, a:hover, button:hover {
@@ -333,16 +324,22 @@ header .contact.first {
 	.contact.third a {
 		display: block;
 		height: 40px;
+		width: 40px;
 	}
-	/*.gooey {
-		animation: 4563.16ms linear infinite alternate running gooey;
-	}*/
+	.contact a:hover, aside a:hover {
+		outline: 2px solid #bc1823;
+	}
 	.dot {
-		position:absolute;
 		display: block;
 		width:100px;
 		z-index: 25;
-		transition: fill 0.5s;
+		transition: fill ease-out 0.5s, transform linear 200ms;
+		clip-path: content-box;
+
+	}
+	.gooeys {
+		filter: url('#gooey-filter');
+		z-index: 50;
 	}
 	.wrapper {
 		display: grid;
@@ -367,7 +364,6 @@ header .contact.first {
 	}
 	*:focus {
 		outline: 2px solid rgba(188, 24, 35, 1);
-		border-radius: 4px;
 	}
 	.logo {
 		grid-row: 4 / span 3;

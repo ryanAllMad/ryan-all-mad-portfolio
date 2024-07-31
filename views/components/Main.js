@@ -7,10 +7,10 @@ import * as confetti from 'canvas-confetti';
 
 const Main = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [left, setLeft] = useState()
-	const [top, setTop] = useState()
-	const [fill, setFill] = useState('#bc1923')
-	const [clickMe, setClickMe] = useState('Click here!')
+	const [left, setLeft] = useState();
+	const [top, setTop] = useState();
+	const [fill, setFill] = useState('rgb(246 4 4)');
+	const [clickMe, setClickMe] = useState('Click to Start Videos');
 	const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
 	const allySkills = [
@@ -29,6 +29,7 @@ const Main = () => {
 		'Front end',
 		'Javascript',
 	];
+	const mainRef = useRef();
 	const vidRef = useRef();
 	const a11yVidRef = useRef();
 	const groupOneRef = useRef();
@@ -37,7 +38,8 @@ const Main = () => {
 	const groupFourRef = useRef();
 	const groupFiveRef = useRef();
 	const groupSixRef = useRef();
-	const svgRef = useRef()
+	const svgRef = useRef();
+	const otherSvgRef = useRef();
 	const playVid = (el) => {
 		el.play();
 	};
@@ -49,7 +51,7 @@ const Main = () => {
 		el.classList.add('show');
 	};
 	const animationTiming = {
-		duration: 1500,
+		duration: 1000,
 		iterations: 1,
 	};
 	const videoTransforms = [{ scale: '0 1' }, { scale: '1 1' }];
@@ -63,6 +65,32 @@ const Main = () => {
 		{ transform: `translateX(50%)` },
 		{ transform: `translateX(0%)`, opacity: 1 },
 	];
+	const gooeyAnimation = [
+		{ filter: 'blur(0rem)', opacity: 0 },
+		{ filter: 'blur(0.1rem)', opacity: 1 },
+		{ filter: 'blur(0.25rem)' },
+		{ filter: 'blur(0.1rem)' },
+		{ filter: 'blur(0rem)' },
+	];
+	const otherGooeyAnimation = [
+		{ filter: 'blur(0rem)', transform: 'translateX(-6rem)', opacity: 0 },
+		{ filter: 'blur(0.1rem)', transform: 'translateX(-3rem)', opacity: 1 },
+		{ filter: 'blur(0.25rem)', transform: 'translateX(0)' },
+		{ filter: 'blur(0.1rem)', transform: 'translateX(-3rem)' },
+		{ filter: 'blur(0rem)', transform: 'translateX(-6rem)' },
+	];
+	const onMouseMove = () => {
+		triggerAnimations(svgRef.current, gooeyAnimation, {
+			duration: 3000,
+			iterations: Infinity,
+			easing: 'linear',
+		});
+		triggerAnimations(otherSvgRef.current, otherGooeyAnimation, {
+			duration: 3000,
+			iterations: Infinity,
+			easing: 'linear',
+		});
+	};
 	const onLoadWindow = () => {
 		triggerAnimations(
 			groupOneRef.current,
@@ -88,53 +116,128 @@ const Main = () => {
 		triggerAnimations(groupSixRef.current, evenAnimations, animationTiming);
 		setIsLoaded(true);
 	};
-	const handleButton = () => {
-		confetti.default();
-		setClickMe('')
-	}
+	const handleButton = () => {		
+		if(clickMe === 'Click to Start Videos') {
+			confetti.default();
+			setClickMe('Pause videos');
+			playVid(vidRef.current);
+			playVid(a11yVidRef.current);
+		} else {
+			setClickMe('Click to Start Videos');
+			pauseVid(vidRef.current);
+			pauseVid(a11yVidRef.current);
+		}
+		
+	};
 	useEffect(() => {
 		if (typeof window !== undefined) {
-			window.addEventListener('load', onLoadWindow);
+			window.addEventListener('load', () => {
+					onLoadWindow();
+			});
 			window.addEventListener('mousemove', (event) => {
 				setLeft(event.pageX + 4 + 'px');
-				setTop(event.pageY + 4 + 'px');
+				setTop(event.pageY + 4);
 			});
 			window.addEventListener('mouseleave', () => {
-				setIsLoaded(false)
-				setClickMe('Click Me!')
+				setIsLoaded(false);
+			});
+			mainRef.current.addEventListener('mouseenter', () => {
+				onMouseMove();
 			});
 		}
 	}, [window]);
 	return (
-		<main>
+		<main ref={mainRef}>
 			{isLoaded && (
-				<svg
-					style={{ top: top, left: left, fill: fill}}
-					ref={svgRef}
-					class='dot gooey'
-					viewBox='0 0 100 100'
-					xmlns='http://www.w3.org/2000/svg'
+				<div
+					className='gooeys'
+					style={{ position: 'absolute', top: top, left: left }}
 				>
-					<circle
-						cx='50'
-						cy='50'
-						r='50'
-					></circle>
-				</svg>
+					<div style={{ position: 'relative' }}>
+						<svg
+							ref={otherSvgRef}
+							style={{
+								position: 'absolute',
+								top: '10px',
+								fill: fill,
+							}}
+							class='dot gooey'
+							viewBox='0 0 100 100'
+							xmlns='http://www.w3.org/2000/svg'
+						>
+							<circle
+								cx='50'
+								cy='50'
+								r='50'
+							></circle>
+						</svg>
+						<svg
+							style={{
+								position: 'absolute',
+								top: 0,
+								left: '20px',
+								fill: fill,
+							}}
+							ref={svgRef}
+							class='dot gooey'
+							viewBox='0 0 100 100'
+							xmlns='http://www.w3.org/2000/svg'
+						>
+							<circle
+								cx='50'
+								cy='50'
+								r='50'
+							></circle>
+						</svg>
+					</div>
+					<svg
+							xmlns='http://www.w3.org/2000/svg'
+							version='1.1'
+						>
+							<defs>
+								<filter id='gooey-filter'>
+									<feGaussianBlur
+										in='SourceGraphic'
+										stdDeviation='9'
+										result='blur'
+									/>
+									<feColorMatrix
+										in='blur'
+										mode='matrix'
+										values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9'
+										result='goo'
+									/>
+									<feComposite
+										in='SourceGraphic'
+										in2='goo'
+										operator='atop'
+									/>
+								</filter>
+							</defs>
+						</svg>
+				</div>
 			)}
-			{clickMe !== '' && <section class="clickme"><button onClick={handleButton}>Click here!</button></section>}
-			<section onMouseEnter={() =>setFill('#fff')} onMouseLeave={() =>setFill('#bc1923')} className='mobile-hidden logo'></section>
+			<section class='clickme'>
+				{clickMe !== '' && (
+					<button onClick={handleButton}>{clickMe}</button>
+				)}
+			</section>
 			<section
-				onMouseEnter={() =>setFill('transparent')} 
-				onMouseLeave={() =>setFill('#bc1923')}
+				onMouseEnter={() => setFill('#fff')}
+				onMouseLeave={() => setFill('rgb(246 4 4)')}
+				className='mobile-hidden logo'
+			></section>
+			<section
+				onMouseEnter={() => setFill('transparent')}
+				onMouseLeave={() => setFill('rgb(246 4 4)')}
 				ref={groupOneRef}
 				className='project one'
 			>
 				<video
-					onFocus={() => playVid(vidRef.current)}
-					onMouseEnter={() => playVid(vidRef.current)}
-					onMouseLeave={() => pauseVid(vidRef.current)}
-					onBlur={() => pauseVid(vidRef.current)}
+				onFocus={() => playVid(vidRef.current)}
+				onMouseEnter={() => playVid(vidRef.current)}
+				onMouseLeave={() => pauseVid(vidRef.current)}
+				onBlur={() => pauseVid(vidRef.current)}
 					ref={vidRef}
 					id='js-vid'
 					loop
@@ -154,16 +257,16 @@ const Main = () => {
 				/>
 			</section>
 			<section
-				onMouseEnter={() =>setFill('transparent')} 
-				onMouseLeave={() =>setFill('#bc1923')}
+				onMouseEnter={() => setFill('transparent')}
+				onMouseLeave={() => setFill('rgb(246 4 4)')}
 				ref={groupTwoRef}
 				className='project two'
 			>
 				<video
-					onFocus={() => playVid(a11yVidRef.current)}
-					onMouseOver={() => playVid(a11yVidRef.current)}
-					onBlur={() => pauseVid(a11yVidRef.current)}
-					onMouseOut={() => pauseVid(a11yVidRef.current)}
+				onFocus={() => playVid(a11yVidRef.current)}
+				onMouseOver={() => playVid(a11yVidRef.current)}
+				onBlur={() => pauseVid(a11yVidRef.current)}
+				onMouseOut={() => pauseVid(a11yVidRef.current)}
 					ref={a11yVidRef}
 					id='a11y-vid'
 					loop

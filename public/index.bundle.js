@@ -1729,15 +1729,18 @@ var create = confetti_module_module.exports.create;
 
 
 const Main = () => {
+  // TODO
+  // 3. fix video start issue
   const [isLoaded, setIsLoaded] = (0,react.useState)(false);
   const [left, setLeft] = (0,react.useState)();
   const [top, setTop] = (0,react.useState)();
-  const [fill, setFill] = (0,react.useState)('#bc1923');
-  const [clickMe, setClickMe] = (0,react.useState)('Click here!');
+  const [fill, setFill] = (0,react.useState)('rgb(246 4 4)');
+  const [clickMe, setClickMe] = (0,react.useState)('Click to Start Videos');
   const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
   const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
   const blogSkills = ['SEO', 'Technical Writing', 'Mentoring', 'Front end', 'Javascript'];
+  const mainRef = (0,react.useRef)();
   const vidRef = (0,react.useRef)();
   const a11yVidRef = (0,react.useRef)();
   const groupOneRef = (0,react.useRef)();
@@ -1747,6 +1750,7 @@ const Main = () => {
   const groupFiveRef = (0,react.useRef)();
   const groupSixRef = (0,react.useRef)();
   const svgRef = (0,react.useRef)();
+  const otherSvgRef = (0,react.useRef)();
   const playVid = el => {
     el.play();
   };
@@ -1758,7 +1762,7 @@ const Main = () => {
     el.classList.add('show');
   };
   const animationTiming = {
-    duration: 1500,
+    duration: 1000,
     iterations: 1
   };
   const videoTransforms = [{
@@ -1784,6 +1788,49 @@ const Main = () => {
     transform: `translateX(0%)`,
     opacity: 1
   }];
+  const gooeyAnimation = [{
+    filter: 'blur(0rem)',
+    opacity: 0
+  }, {
+    filter: 'blur(0.1rem)',
+    opacity: 1
+  }, {
+    filter: 'blur(0.25rem)'
+  }, {
+    filter: 'blur(0.1rem)'
+  }, {
+    filter: 'blur(0rem)'
+  }];
+  const otherGooeyAnimation = [{
+    filter: 'blur(0rem)',
+    transform: 'translateX(-6rem)',
+    opacity: 0
+  }, {
+    filter: 'blur(0.1rem)',
+    transform: 'translateX(-3rem)',
+    opacity: 1
+  }, {
+    filter: 'blur(0.25rem)',
+    transform: 'translateX(0)'
+  }, {
+    filter: 'blur(0.1rem)',
+    transform: 'translateX(-3rem)'
+  }, {
+    filter: 'blur(0rem)',
+    transform: 'translateX(-6rem)'
+  }];
+  const onMouseMove = () => {
+    triggerAnimations(svgRef.current, gooeyAnimation, {
+      duration: 3000,
+      iterations: Infinity,
+      easing: 'linear'
+    });
+    triggerAnimations(otherSvgRef.current, otherGooeyAnimation, {
+      duration: 3000,
+      iterations: Infinity,
+      easing: 'linear'
+    });
+  };
   const onLoadWindow = () => {
     triggerAnimations(groupOneRef.current, videoTransforms, animationTiming);
     triggerAnimations(groupTwoRef.current, videoTransforms, animationTiming);
@@ -1794,51 +1841,115 @@ const Main = () => {
     setIsLoaded(true);
   };
   const handleButton = () => {
-    confetti_module();
-    setClickMe('');
+    if (clickMe === 'Click to Start Videos') {
+      confetti_module();
+      setClickMe('Pause videos');
+      playVid(vidRef.current);
+      playVid(a11yVidRef.current);
+    } else {
+      setClickMe('Click to Start Videos');
+      pauseVid(vidRef.current);
+      pauseVid(a11yVidRef.current);
+    }
   };
   (0,react.useEffect)(() => {
     if (typeof window !== undefined) {
-      window.addEventListener('load', onLoadWindow);
+      window.addEventListener('load', () => {
+        onLoadWindow();
+      });
       window.addEventListener('mousemove', event => {
         setLeft(event.pageX + 4 + 'px');
-        setTop(event.pageY + 4 + 'px');
+        setTop(event.pageY + 4);
       });
       window.addEventListener('mouseleave', () => {
         setIsLoaded(false);
-        setClickMe('Click Me!');
+      });
+      mainRef.current.addEventListener('mouseenter', () => {
+        onMouseMove();
       });
     }
   }, [window]);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
-    children: [isLoaded && /*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
+    ref: mainRef,
+    children: [isLoaded && /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+      className: "gooeys",
       style: {
+        position: 'absolute',
         top: top,
-        left: left,
-        fill: fill
+        left: left
       },
-      ref: svgRef,
-      class: "dot gooey",
-      viewBox: "0 0 100 100",
-      xmlns: "http://www.w3.org/2000/svg",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)("circle", {
-        cx: "50",
-        cy: "50",
-        r: "50"
-      })
-    }), clickMe !== '' && /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+        style: {
+          position: 'relative'
+        },
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
+          ref: otherSvgRef,
+          style: {
+            position: 'absolute',
+            top: '10px',
+            fill: fill
+          },
+          class: "dot gooey",
+          viewBox: "0 0 100 100",
+          xmlns: "http://www.w3.org/2000/svg",
+          children: /*#__PURE__*/(0,jsx_runtime.jsx)("circle", {
+            cx: "50",
+            cy: "50",
+            r: "50"
+          })
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
+          style: {
+            position: 'absolute',
+            top: 0,
+            left: '20px',
+            fill: fill
+          },
+          ref: svgRef,
+          class: "dot gooey",
+          viewBox: "0 0 100 100",
+          xmlns: "http://www.w3.org/2000/svg",
+          children: /*#__PURE__*/(0,jsx_runtime.jsx)("circle", {
+            cx: "50",
+            cy: "50",
+            r: "50"
+          })
+        })]
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        version: "1.1",
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)("defs", {
+          children: /*#__PURE__*/(0,jsx_runtime.jsxs)("filter", {
+            id: "gooey-filter",
+            children: [/*#__PURE__*/(0,jsx_runtime.jsx)("feGaussianBlur", {
+              in: "SourceGraphic",
+              stdDeviation: "9",
+              result: "blur"
+            }), /*#__PURE__*/(0,jsx_runtime.jsx)("feColorMatrix", {
+              in: "blur",
+              mode: "matrix",
+              values: "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9",
+              result: "goo"
+            }), /*#__PURE__*/(0,jsx_runtime.jsx)("feComposite", {
+              in: "SourceGraphic",
+              in2: "goo",
+              operator: "atop"
+            })]
+          })
+        })
+      })]
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       class: "clickme",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
+      children: clickMe !== '' && /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
         onClick: handleButton,
-        children: "Click here!"
+        children: clickMe
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       onMouseEnter: () => setFill('#fff'),
-      onMouseLeave: () => setFill('#bc1923'),
+      onMouseLeave: () => setFill('rgb(246 4 4)'),
       className: "mobile-hidden logo"
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
       onMouseEnter: () => setFill('transparent'),
-      onMouseLeave: () => setFill('#bc1923'),
+      onMouseLeave: () => setFill('rgb(246 4 4)'),
       ref: groupOneRef,
       className: "project one",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
@@ -1861,7 +1972,7 @@ const Main = () => {
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
       onMouseEnter: () => setFill('transparent'),
-      onMouseLeave: () => setFill('#bc1923'),
+      onMouseLeave: () => setFill('rgb(246 4 4)'),
       ref: groupTwoRef,
       className: "project two",
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
