@@ -132,8 +132,8 @@ const Main = () => {
 					onLoadWindow();
 			});
 			window.addEventListener('mousemove', (event) => {
-				setLeft(event.pageX  + 'px');
-				setTop(event.pageY + 'px');
+				setLeft(event.pageX + 4  + 'px');
+				setTop(event.pageY + 4 + 'px');
 			});
 			window.addEventListener('mouseleave', () => {
 				setIsLoaded(false);
