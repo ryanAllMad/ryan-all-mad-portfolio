@@ -3,11 +3,14 @@ import Group from './Group.js';
 import ToProjectButtons from './ToProjectButtons.js';
 import '../../assets/images/js-job-helper.mp4';
 import '../../assets/images/a11y-vid.mp4';
+import { triggerAnimations } from '../helpers/helpers.js';
 import * as confetti from 'canvas-confetti';
 
 const Main = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [playState, setPlayState] = useState(false)
+	const [vidOneClass, setVidOneClass] = useState('')
+	const [vidTwoClass, setVidTwoClass] = useState('')
 	const [left, setLeft] = useState();
 	const [top, setTop] = useState();
 	const [fill, setFill] = useState('rgb(246 4 4)');
@@ -33,12 +36,6 @@ const Main = () => {
 	const mainRef = useRef();
 	const vidRef = useRef();
 	const a11yVidRef = useRef();
-	const groupOneRef = useRef();
-	const groupTwoRef = useRef();
-	const groupThreeRef = useRef();
-	const groupFourRef = useRef();
-	const groupFiveRef = useRef();
-	const groupSixRef = useRef();
 	const svgRef = useRef();
 	const otherSvgRef = useRef();
 	const playVid = (el) => {
@@ -47,25 +44,7 @@ const Main = () => {
 	const pauseVid = (el) => {
 		el.pause();
 	};
-	const triggerAnimations = (el, animationFrames, animationTiming) => {
-		el.animate(animationFrames, animationTiming);
-		el.classList.add('show');
-	};
-	const animationTiming = {
-		duration: 1000,
-		iterations: 1,
-	};
-	const videoTransforms = [{ scale: '0 1' }, { scale: '1 1' }];
-	const evenAnimations = [
-		{ transform: `translateY(150%)`, opacity: 0 },
-		{ transform: `translateY(50%)` },
-		{ transform: `translateY(0%)`, opacity: 1 },
-	];
-	const oddAnimations = [
-		{ transform: `translateX(150%)`, opacity: 0 },
-		{ transform: `translateX(50%)` },
-		{ transform: `translateX(0%)`, opacity: 1 },
-	];
+
 	const gooeyAnimation = [
 		{ filter: 'blur(0rem)', opacity: 0 },
 		{ filter: 'blur(0.1rem)', opacity: 1 },
@@ -94,28 +73,6 @@ const Main = () => {
 	};
 	const onLoadWindow = () => {
 		setIsLoaded(true);
-		triggerAnimations(
-			groupOneRef.current,
-			videoTransforms,
-			animationTiming
-		);
-		triggerAnimations(
-			groupTwoRef.current,
-			videoTransforms,
-			animationTiming
-		);
-		triggerAnimations(
-			groupThreeRef.current,
-			oddAnimations,
-			animationTiming
-		);
-		triggerAnimations(
-			groupFourRef.current,
-			evenAnimations,
-			animationTiming
-		);
-		triggerAnimations(groupFiveRef.current, oddAnimations, animationTiming);
-		triggerAnimations(groupSixRef.current, evenAnimations, animationTiming);
 	};
 	const handleButton = () => {	
 		setPlayState(!playState)
@@ -129,7 +86,7 @@ const Main = () => {
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			window.addEventListener('load', () => {
-					onLoadWindow();
+				onLoadWindow();
 			});
 			window.addEventListener('mousemove', (event) => {
 				setLeft(event.pageX + 4  + 'px');
@@ -241,10 +198,12 @@ const Main = () => {
 				className='mobile-hidden logo'
 			></section>
 			<section
-				onMouseEnter={() => setFill('transparent')}
+				onMouseEnter={() => {
+					setFill('transparent')
+					setVidOneClass('show-vids')
+				}}
 				onMouseLeave={() => setFill('rgb(246 4 4)')}
-				ref={groupOneRef}
-				className='project one'
+				className={`project one ${vidOneClass}`}
 			>
 				<video
 				tabIndex={0}
@@ -275,10 +234,12 @@ const Main = () => {
 				/>
 			</section>
 			<section
-				onMouseEnter={() => setFill('transparent')}
+				onMouseEnter={() => {
+					setFill('transparent')
+					setVidTwoClass('show-vids')
+				}}
 				onMouseLeave={() => setFill('rgb(246 4 4)')}
-				ref={groupTwoRef}
-				className='project two'
+				className={`project two ${vidTwoClass}`}
 			>
 				<video
 				tabIndex={0}
@@ -309,7 +270,6 @@ const Main = () => {
 				/>
 			</section>
 			<section
-				ref={groupThreeRef}
 				className='project three'
 			>
 				<Group
@@ -322,7 +282,6 @@ const Main = () => {
 				/>
 			</section>
 			<section
-				ref={groupFourRef}
 				className='project four'
 			>
 				<Group
@@ -335,7 +294,6 @@ const Main = () => {
 				/>
 			</section>
 			<section
-				ref={groupFiveRef}
 				className='project five'
 			>
 				<Group
@@ -349,7 +307,6 @@ const Main = () => {
 				/>
 			</section>
 			<section
-				ref={groupSixRef}
 				className='project six'
 			>
 				<Group

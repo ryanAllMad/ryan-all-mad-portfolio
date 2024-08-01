@@ -813,37 +813,52 @@ const Group = props => {
     projectTitle,
     tooltipTitle
   } = props;
-  const [showOnHover, setShowOnHover] = react.useState(false);
-  const [focussedClass, setFocussedClass] = react.useState('');
+  const groupRef = (0,react.useRef)();
+  const [clipClass, setClipClass] = (0,react.useState)('');
   const handleMouseOver = () => {
-    setShowOnHover(true);
-    setFocussedClass('focussed zoom-scroll');
+    setClipClass('polygon');
   };
-  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+  const handleOnScroll = () => {
+    const observe = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setClipClass('polygon');
+        }
+      });
+    });
+    return observe.observe(groupRef.current);
+  };
+  (0,react.useEffect)(() => {
+    if (typeof window !== undefined) {
+      if (window.innerWidth <= 800) {
+        handleOnScroll();
+      }
+    }
+  }, [window]);
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+    ref: groupRef,
     onFocus: handleMouseOver,
     onMouseOver: handleMouseOver,
     id: id,
-    className: `group ${focussedClass}`,
+    className: `group ${clipClass}`,
     tabIndex: 0,
-    children: showOnHover && /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
-        children: title
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-        children: "Built with:"
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
-        children: skills.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
-          children: sk
-        }, sk.toLowerCase()))
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-        className: "buttons",
-        children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
-          githubLink: githubLink,
-          projectLink: projectLink,
-          projectTitle: projectTitle,
-          tooltipTitle: tooltipTitle
-        })
-      })]
-    })
+    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+      children: title
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+      children: "Built with:"
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
+      children: skills.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+        children: sk
+      }, sk.toLowerCase()))
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      className: "buttons",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
+        githubLink: githubLink,
+        projectLink: projectLink,
+        projectTitle: projectTitle,
+        tooltipTitle: tooltipTitle
+      })
+    })]
   });
 };
 /* harmony default export */ const components_Group = (Group);
@@ -851,6 +866,11 @@ const Group = props => {
 /* harmony default export */ const js_job_helper = (__webpack_require__.p + "js-job-helper.mp4");
 ;// CONCATENATED MODULE: ./assets/images/a11y-vid.mp4
 /* harmony default export */ const a11y_vid = (__webpack_require__.p + "a11y-vid.mp4");
+;// CONCATENATED MODULE: ./views/helpers/helpers.js
+const triggerAnimations = (el, animationFrames, animationTiming) => {
+  el.animate(animationFrames, animationTiming);
+  el.classList.add('show');
+};
 ;// CONCATENATED MODULE: ./node_modules/canvas-confetti/dist/confetti.module.mjs
 // canvas-confetti v1.9.3 built on 2024-04-30T22:19:17.794Z
 var confetti_module_module = {};
@@ -1749,9 +1769,12 @@ var create = confetti_module_module.exports.create;
 
 
 
+
 const Main = () => {
   const [isLoaded, setIsLoaded] = (0,react.useState)(false);
   const [playState, setPlayState] = (0,react.useState)(false);
+  const [vidOneClass, setVidOneClass] = (0,react.useState)('');
+  const [vidTwoClass, setVidTwoClass] = (0,react.useState)('');
   const [left, setLeft] = (0,react.useState)();
   const [top, setTop] = (0,react.useState)();
   const [fill, setFill] = (0,react.useState)('rgb(246 4 4)');
@@ -1763,12 +1786,6 @@ const Main = () => {
   const mainRef = (0,react.useRef)();
   const vidRef = (0,react.useRef)();
   const a11yVidRef = (0,react.useRef)();
-  const groupOneRef = (0,react.useRef)();
-  const groupTwoRef = (0,react.useRef)();
-  const groupThreeRef = (0,react.useRef)();
-  const groupFourRef = (0,react.useRef)();
-  const groupFiveRef = (0,react.useRef)();
-  const groupSixRef = (0,react.useRef)();
   const svgRef = (0,react.useRef)();
   const otherSvgRef = (0,react.useRef)();
   const playVid = el => {
@@ -1777,37 +1794,6 @@ const Main = () => {
   const pauseVid = el => {
     el.pause();
   };
-  const triggerAnimations = (el, animationFrames, animationTiming) => {
-    el.animate(animationFrames, animationTiming);
-    el.classList.add('show');
-  };
-  const animationTiming = {
-    duration: 1000,
-    iterations: 1
-  };
-  const videoTransforms = [{
-    scale: '0 1'
-  }, {
-    scale: '1 1'
-  }];
-  const evenAnimations = [{
-    transform: `translateY(150%)`,
-    opacity: 0
-  }, {
-    transform: `translateY(50%)`
-  }, {
-    transform: `translateY(0%)`,
-    opacity: 1
-  }];
-  const oddAnimations = [{
-    transform: `translateX(150%)`,
-    opacity: 0
-  }, {
-    transform: `translateX(50%)`
-  }, {
-    transform: `translateX(0%)`,
-    opacity: 1
-  }];
   const gooeyAnimation = [{
     filter: 'blur(0rem)',
     opacity: 0
@@ -1853,12 +1839,6 @@ const Main = () => {
   };
   const onLoadWindow = () => {
     setIsLoaded(true);
-    triggerAnimations(groupOneRef.current, videoTransforms, animationTiming);
-    triggerAnimations(groupTwoRef.current, videoTransforms, animationTiming);
-    triggerAnimations(groupThreeRef.current, oddAnimations, animationTiming);
-    triggerAnimations(groupFourRef.current, evenAnimations, animationTiming);
-    triggerAnimations(groupFiveRef.current, oddAnimations, animationTiming);
-    triggerAnimations(groupSixRef.current, evenAnimations, animationTiming);
   };
   const handleButton = () => {
     setPlayState(!playState);
@@ -1981,10 +1961,12 @@ const Main = () => {
       onMouseLeave: () => setFill('rgb(246 4 4)'),
       className: "mobile-hidden logo"
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
-      onMouseEnter: () => setFill('transparent'),
+      onMouseEnter: () => {
+        setFill('transparent');
+        setVidOneClass('show-vids');
+      },
       onMouseLeave: () => setFill('rgb(246 4 4)'),
-      ref: groupOneRef,
-      className: "project one",
+      className: `project one ${vidOneClass}`,
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
         tabIndex: 0,
         onFocus: () => handlePlayState(vidRef.current),
@@ -2009,10 +1991,12 @@ const Main = () => {
         tooltipTitle: "Open source project for dev's"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
-      onMouseEnter: () => setFill('transparent'),
+      onMouseEnter: () => {
+        setFill('transparent');
+        setVidTwoClass('show-vids');
+      },
       onMouseLeave: () => setFill('rgb(246 4 4)'),
-      ref: groupTwoRef,
-      className: "project two",
+      className: `project two ${vidTwoClass}`,
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
         tabIndex: 0,
         onFocus: () => handlePlayState(a11yVidRef.current),
@@ -2038,7 +2022,6 @@ const Main = () => {
         tooltipTitle: "Test suite in vitest"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      ref: groupThreeRef,
       className: "project three",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "portfolio",
@@ -2049,7 +2032,6 @@ const Main = () => {
         projectTitle: "My portfolio"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      ref: groupFourRef,
       className: "project four",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "dnd",
@@ -2060,7 +2042,6 @@ const Main = () => {
         projectTitle: "DnD Character Sheet"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      ref: groupFiveRef,
       className: "project five",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "ally",
@@ -2072,7 +2053,6 @@ const Main = () => {
         projectTitle: "A11y Check"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      ref: groupSixRef,
       className: "project six",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "blog",

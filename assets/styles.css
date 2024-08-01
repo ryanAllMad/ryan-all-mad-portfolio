@@ -11,21 +11,6 @@
 	width: 1px;
 	word-wrap: normal !important;
 }
-
-@keyframes zoom-scroll {
-	0% {
-		filter: blur(5rem);
-		transform: scale(0);
-		opacity: 0;
-		visibility: hidden;
-	}
-	100% {
-		filter: blur(0);
-		transform: none;
-		opacity: 1;
-		visibility: visible;
-	}
-}
 @keyframes drawer {
 	0% {
 		opacity: 0;
@@ -46,14 +31,18 @@
 		transform: translateY(-600px);
 	}
 }
+.polygon {
+	clip-path: circle(117.7% at 84% 18%) !important;
+	opacity: 1 !important;
+}
+.show-vids {
+	clip-path: circle(70.7% at 50% 50%) !important;
+}
 .drawer {
 	animation: drawer ease-in 0.5s;
 }
 .drawer-close {
 	animation: drawer-close ease-in 0.5s;
-}
-.zoom-scroll {
-	animation: zoom-scroll ease-in-out 0.5s;
 }
 .dot {
 	display: none;
@@ -153,29 +142,19 @@ header .header-hide {
 	transform: rotate(180deg) translate(10px, 10px);
 	transition: transform 2s;
 }
-.project {
-	background-size: cover;
-	opacity: 0;
-	transition: opacity 1.5s;
-}
+
 .project .group {
 	padding-left: 1em;
 	container-type: inline-size;
-	transition: .5s ease;
 	width: calc(100% - 1em);
     height: 100%;
 	background: rgba(0, 0, 0);
-	
+	color: #fff;
+	clip-path: circle(36.8% at 84% 18%);
+	opacity: 0.5;
+	transition: all 1.5s ease;
 }
 
-.project .group:not(.focussed) {
-    color: rgba(225, 225, 225, 0);
-    opacity: 0.5;
-}
-.project .group.focussed {
-	opacity: 1;
-    color: rgba(225, 225, 225);
-}
 .group h2, 
 .group ul {
 	margin: 0;
@@ -239,30 +218,13 @@ header .header-hide {
     flex-flow: column;
     justify-content: center;
 	box-shadow: 1px 1px 1px #444, 1px 1px #444;
+	clip-path: circle(49.0% at 50% 50%);
+	transition: clip-path 1.5s ease;
 }
 .one, .two, .three, .four, .five, .six {
 	grid-column: 1 / span 3;
 }
-.one {
-	min-height: calc(324px + 1em);
-}
-.two {
-	min-height: calc(335px + 1em);
-}
-.three {
-	background: url('./images/portfolio.png') 0 5% no-repeat;
-	min-height: calc(380px + 1em);
-}
-.four {
-	background: url('./images/yong.png') 0 0 no-repeat;
-	min-height: calc(270px + 1em);
-}
-.five {
-	background: url('./images/ally-check.png') center center no-repeat;
-}
-.six {
-	background: url('./images/blog.png') center center no-repeat;
-}
+
 .mobile-hidden {
 	display: none;
 }
