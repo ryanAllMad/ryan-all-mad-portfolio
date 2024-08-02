@@ -7,8 +7,7 @@ import { triggerAnimations } from '../helpers/helpers.js';
 import * as confetti from 'canvas-confetti';
 
 const Main = () => {
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [playState, setPlayState] = useState(false)
+	const [playState, setPlayState] = useState(false);
 	const [vidOneClass, setVidOneClass] = useState('')
 	const [vidTwoClass, setVidTwoClass] = useState('')
 	const [left, setLeft] = useState();
@@ -71,9 +70,6 @@ const Main = () => {
 			easing: 'linear',
 		});
 	};
-	const onLoadWindow = () => {
-		setIsLoaded(true);
-	};
 	const handleButton = () => {	
 		setPlayState(!playState)
 	};
@@ -85,9 +81,6 @@ const Main = () => {
 	}
 	useEffect(() => {
 		if (typeof window !== undefined) {
-			window.addEventListener('load', () => {
-				onLoadWindow();
-			});
 			window.addEventListener('mousemove', (event) => {
 				setLeft(event.pageX + 4  + 'px');
 				setTop(event.pageY + 4 + 'px');
@@ -114,7 +107,6 @@ const Main = () => {
 	}, [playState])
 	return (
 		<main ref={mainRef}>
-			{isLoaded && (
 				<div
 					className='gooeys'
 					style={{ position: 'absolute', top: top, left: left }}
@@ -186,7 +178,6 @@ const Main = () => {
 							</defs>
 						</svg>
 				</div>
-			)}
 			<section class='clickme'>
 				{clickMe !== '' && (
 					<button onClick={handleButton}>{clickMe}</button>

@@ -1771,7 +1771,6 @@ var create = confetti_module_module.exports.create;
 
 
 const Main = () => {
-  const [isLoaded, setIsLoaded] = (0,react.useState)(false);
   const [playState, setPlayState] = (0,react.useState)(false);
   const [vidOneClass, setVidOneClass] = (0,react.useState)('');
   const [vidTwoClass, setVidTwoClass] = (0,react.useState)('');
@@ -1837,9 +1836,6 @@ const Main = () => {
       easing: 'linear'
     });
   };
-  const onLoadWindow = () => {
-    setIsLoaded(true);
-  };
   const handleButton = () => {
     setPlayState(!playState);
   };
@@ -1851,9 +1847,6 @@ const Main = () => {
   };
   (0,react.useEffect)(() => {
     if (typeof window !== undefined) {
-      window.addEventListener('load', () => {
-        onLoadWindow();
-      });
       window.addEventListener('mousemove', event => {
         setLeft(event.pageX + 4 + 'px');
         setTop(event.pageY + 4 + 'px');
@@ -1880,7 +1873,7 @@ const Main = () => {
   }, [playState]);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
     ref: mainRef,
-    children: [isLoaded && /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
       className: "gooeys",
       style: {
         position: 'absolute',
