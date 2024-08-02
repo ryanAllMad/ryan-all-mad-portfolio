@@ -286,12 +286,15 @@ header .contact.first {
 .clickme {
     grid-column: 2 / span 1;
 	min-height: 50px;
+	text-align: center;
 }
 .clickme button {
 	background-color: transparent;
 	border: none;
 	padding: 14px;
 	font-size: 18px;
+	min-height: 112px;
+	letter-spacing: 0.1em;
 }
 @container (max-width: 140px) {
 	.group h2 {
@@ -377,6 +380,7 @@ header .contact.first {
 		grid-template-columns: repeat(11, 1fr);
 		grid-template-rows: repeat(8, 0.5fr);
 		gap: 1em;
+		padding: 1em 0;
 	}
 
 	main {
