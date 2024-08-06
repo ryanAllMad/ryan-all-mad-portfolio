@@ -725,76 +725,29 @@ const ToProjectButtons = props => {
   const {
     projectLink,
     githubLink,
-    projectTitle,
-    tooltipTitle
+    projectTitle
   } = props;
-  const [showTooltip, setShowTooltip] = react.useState(false);
-  const renderTooltip = bool => {
-    if (projectLink) {
-      return;
-    }
-    setShowTooltip(bool);
-  };
-  const hideToolTip = e => {
-    if (e.key === 'Escape') {
-      setShowTooltip(false);
-    }
-  };
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     className: "js-vid-caption",
-    children: [!projectLink && showTooltip && /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-      id: "button-tool-tip",
-      className: "button-tool-tip",
-      role: "tooltip",
-      children: tooltipTitle
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-      onKeyDown: e => hideToolTip(e),
-      onFocus: () => renderTooltip(true),
-      onBlur: () => renderTooltip(false),
-      onMouseOver: () => renderTooltip(true),
-      onMouseLeave: () => renderTooltip(false),
-      onClick: e => {
-        if (!projectLink) {
-          e.preventDefault();
-        }
-      },
-      className: `btn${projectLink ? '' : ' disabled'}`,
+    children: [projectLink && /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
+      className: `btn ${projectLink}`,
       href: projectLink,
-      tabIndex: !projectLink ? '-1' : '0',
-      target: projectLink && '_blank',
-      "aria-describedby": "button-tool-tip",
-      children: projectLink ? /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-          className: "screen-reader-text",
-          children: "to project"
-        }), projectTitle]
-      }) : /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-          className: "screen-reader-text",
-          children: "This link is disabled."
-        }), projectTitle]
-      })
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-      className: `btn ${!githubLink && 'disabled'}`,
-      href: githubLink,
-      tabIndex: !githubLink ? '-1' : '0',
-      onClick: e => {
-        if (!githubLink) {
-          e.preventDefault();
-        }
-      },
+      tabIndex: "0",
       target: "_blank",
-      children: githubLink ? /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-        children: [`See the code`, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-          className: "screen-reader-text",
-          children: "on Github"
-        })]
-      }) : /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-        children: [githubLink ? projectTitle : '', /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-          className: "screen-reader-text",
-          children: "This link is disabled"
-        })]
-      })
+      "aria-describedby": "button-tool-tip",
+      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+        className: "screen-reader-text",
+        children: "to project"
+      }), projectTitle]
+    }), githubLink && /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
+      className: `btn ${!githubLink}`,
+      href: githubLink,
+      tabIndex: "0",
+      target: "_blank",
+      children: ["See the code", /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+        className: "screen-reader-text",
+        children: "on Github"
+      })]
     })]
   });
 };
@@ -866,11 +819,6 @@ const Group = props => {
 /* harmony default export */ const js_job_helper = (__webpack_require__.p + "js-job-helper.mp4");
 ;// CONCATENATED MODULE: ./assets/images/a11y-vid.mp4
 /* harmony default export */ const a11y_vid = (__webpack_require__.p + "a11y-vid.mp4");
-;// CONCATENATED MODULE: ./views/helpers/helpers.js
-const triggerAnimations = (el, animationFrames, animationTiming) => {
-  el.animate(animationFrames, animationTiming);
-  el.classList.add('show');
-};
 ;// CONCATENATED MODULE: ./node_modules/canvas-confetti/dist/confetti.module.mjs
 // canvas-confetti v1.9.3 built on 2024-04-30T22:19:17.794Z
 var confetti_module_module = {};
@@ -1769,72 +1717,22 @@ var create = confetti_module_module.exports.create;
 
 
 
-
 const Main = () => {
   const [playState, setPlayState] = (0,react.useState)(false);
   const [vidOneClass, setVidOneClass] = (0,react.useState)('');
   const [vidTwoClass, setVidTwoClass] = (0,react.useState)('');
-  const [left, setLeft] = (0,react.useState)();
-  const [top, setTop] = (0,react.useState)();
-  const [fill, setFill] = (0,react.useState)('rgb(246 4 4)');
   const [clickMe, setClickMe] = (0,react.useState)('Click to Start Videos');
   const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
   const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
   const blogSkills = ['SEO', 'Technical Writing', 'Mentoring', 'Front end', 'Javascript'];
-  const mainRef = (0,react.useRef)();
   const vidRef = (0,react.useRef)();
   const a11yVidRef = (0,react.useRef)();
-  const svgRef = (0,react.useRef)();
-  const otherSvgRef = (0,react.useRef)();
   const playVid = el => {
     el.play();
   };
   const pauseVid = el => {
     el.pause();
-  };
-  const gooeyAnimation = [{
-    filter: 'blur(0rem)',
-    opacity: 0
-  }, {
-    filter: 'blur(0.1rem)',
-    opacity: 1
-  }, {
-    filter: 'blur(0.25rem)'
-  }, {
-    filter: 'blur(0.1rem)'
-  }, {
-    filter: 'blur(0rem)'
-  }];
-  const otherGooeyAnimation = [{
-    filter: 'blur(0rem)',
-    transform: 'translateX(-40px)',
-    opacity: 0
-  }, {
-    filter: 'blur(0.1rem)',
-    transform: 'translateX(-20px)',
-    opacity: 1
-  }, {
-    filter: 'blur(0.25rem)',
-    transform: 'translateX(0)'
-  }, {
-    filter: 'blur(0.1rem)',
-    transform: 'translateX(-20px)'
-  }, {
-    filter: 'blur(0rem)',
-    transform: 'translateX(-40px)'
-  }];
-  const onMouseMove = () => {
-    triggerAnimations(svgRef.current, gooeyAnimation, {
-      duration: 2500,
-      iterations: Infinity,
-      easing: 'linear'
-    });
-    triggerAnimations(otherSvgRef.current, otherGooeyAnimation, {
-      duration: 2500,
-      iterations: Infinity,
-      easing: 'linear'
-    });
   };
   const handleButton = () => {
     setPlayState(!playState);
@@ -1847,15 +1745,8 @@ const Main = () => {
   };
   (0,react.useEffect)(() => {
     if (typeof window !== undefined) {
-      window.addEventListener('mousemove', event => {
-        setLeft(event.pageX + 4 + 'px');
-        setTop(event.pageY + 4 + 'px');
-      });
       window.addEventListener('mouseleave', () => {
         setIsLoaded(false);
-      });
-      mainRef.current.addEventListener('mouseenter', () => {
-        onMouseMove();
       });
     }
   }, [window]);
@@ -1872,93 +1763,16 @@ const Main = () => {
     }
   }, [playState]);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
-    ref: mainRef,
-    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-      className: "gooeys",
-      style: {
-        position: 'absolute',
-        top: top,
-        left: left
-      },
-      children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-        style: {
-          position: 'relative'
-        },
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
-          ref: svgRef,
-          width: "25",
-          height: "25",
-          style: {
-            position: 'absolute',
-            top: '0px',
-            fill: fill
-          },
-          class: "dot gooey",
-          viewBox: "0 0 100 100",
-          xmlns: "http://www.w3.org/2000/svg",
-          children: /*#__PURE__*/(0,jsx_runtime.jsx)("circle", {
-            cx: "50",
-            cy: "50",
-            r: "50"
-          })
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
-          width: "25",
-          height: "25",
-          style: {
-            position: 'absolute',
-            top: '5px',
-            left: '0px',
-            fill: fill
-          },
-          ref: otherSvgRef,
-          class: "dot gooey",
-          viewBox: "0 0 100 100",
-          xmlns: "http://www.w3.org/2000/svg",
-          children: /*#__PURE__*/(0,jsx_runtime.jsx)("circle", {
-            cx: "50",
-            cy: "50",
-            r: "50"
-          })
-        })]
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)("svg", {
-        xmlns: "http://www.w3.org/2000/svg",
-        version: "1.1",
-        children: /*#__PURE__*/(0,jsx_runtime.jsx)("defs", {
-          children: /*#__PURE__*/(0,jsx_runtime.jsxs)("filter", {
-            id: "gooey-filter",
-            children: [/*#__PURE__*/(0,jsx_runtime.jsx)("feGaussianBlur", {
-              in: "SourceGraphic",
-              stdDeviation: "9",
-              result: "blur"
-            }), /*#__PURE__*/(0,jsx_runtime.jsx)("feColorMatrix", {
-              in: "blur",
-              mode: "matrix",
-              values: "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9",
-              result: "goo"
-            }), /*#__PURE__*/(0,jsx_runtime.jsx)("feComposite", {
-              in: "SourceGraphic",
-              in2: "goo",
-              operator: "atop"
-            })]
-          })
-        })
-      })]
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       class: "clickme",
       children: clickMe !== '' && /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
         onClick: handleButton,
         children: clickMe
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      onMouseEnter: () => setFill('#fff'),
-      onMouseLeave: () => setFill('rgb(246 4 4)'),
       className: "mobile-hidden logo"
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
-      onMouseEnter: () => {
-        setFill('transparent');
-        setVidOneClass('show-vids');
-      },
-      onMouseLeave: () => setFill('rgb(246 4 4)'),
+      onMouseEnter: () => setVidOneClass('show-vids'),
       className: `project one ${vidOneClass}`,
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
         tabIndex: 0,
@@ -1984,11 +1798,7 @@ const Main = () => {
         tooltipTitle: "Open source project for dev's"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
-      onMouseEnter: () => {
-        setFill('transparent');
-        setVidTwoClass('show-vids');
-      },
-      onMouseLeave: () => setFill('rgb(246 4 4)'),
+      onMouseEnter: () => setVidTwoClass('show-vids'),
       className: `project two ${vidTwoClass}`,
       children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
         tabIndex: 0,

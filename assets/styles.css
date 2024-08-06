@@ -190,29 +190,19 @@ header .header-hide {
 	margin: 0.5em 0.5em 0 0;
     font-size: 0.75em;
 }
-.btn:not(.disabled):hover,
-.btn:not(.disabled):focus {
+.btn:hover,
+.btn:focus {
     color: #fff;
 	background-color: transparent;
     border-color: transparent;
 }
-.btn:not(.disabled):hover,
-.btn:not(.disabled):focus, 
+.btn:hover,
+.btn:focus, 
 .clickme button:hover,
 .clickme button:focus {
 	text-shadow:#0ff -1.60012px 0px 0, red 1.60012px 0px 0;
 }
-.btn.disabled {
-	color:#fff;
-	border-color: transparent;
-	cursor: not-allowed;
-}
-.btn.disabled:hover,
-.btn.disabled:focus {
-	color: rgb(50, 49, 50);
-	background-color:transparent;
-	border-color: transparent;
-}
+
 .one, .two {
 	display: flex;
     flex-flow: column;
@@ -259,23 +249,6 @@ header .contact.first {
 	position: relative;
 	flex-grow: 1;
 	vertical-align: middle;
-}
-.button-tool-tip {
-	position: absolute;
-	margin-top: -20px;
-	top:0%;
-	left: 50%;
-	transform: translate(-50%, -70%);
-	border: 1px solid #000;
-	background-color: black;
-	box-shadow: -1.60012px 1px 0px rgb(255, 0, 0), 1.60012px 2px 0px rgb(0, 255, 255);
-	color:#fff;
-    padding: 0.25em;
-	opacity: 0;
-	transition: opacity 2s;
-}
-.js-vid-caption:hover .button-tool-tip {
-    opacity: 1;
 }
 
 #js-vid {
@@ -349,12 +322,6 @@ header .contact.first {
 	.contact.third >* {
 		max-width: calc(100% / 3);
 	}
-	*:not(:has(>a)) {
-		cursor: none;
-	}
-	video:hover, a:hover, button:hover {
-		cursor:default;
-	}
 	.contact.third a {
 		display: block;
 		height: 40px;
@@ -362,18 +329,6 @@ header .contact.first {
 	}
 	.contact a:hover, aside a:hover {
 		outline: 2px solid #bc1823;
-	}
-	.dot {
-		display: block;
-		width:100px;
-		z-index: 25;
-		transition: fill ease-out 0.5s, transform linear 200ms;
-		clip-path: content-box;
-
-	}
-	.gooeys {
-		filter: url('#gooey-filter');
-		z-index: 50;
 	}
 	.wrapper {
 		display: grid;
