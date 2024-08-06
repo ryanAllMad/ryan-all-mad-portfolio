@@ -35,8 +35,13 @@
 	clip-path: circle(117.7% at 84% 18%) !important;
 	opacity: 1 !important;
 }
-.show-vids {
-	clip-path: circle(70.7% at 50% 50%) !important;
+.show-vids #js-vid, .show-vids #a11y-vid {
+    width: 300px;
+    transform: translate(0px, 0px);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
 }
 .drawer {
 	animation: drawer ease-in 0.5s;
@@ -144,7 +149,7 @@ header .header-hide {
 }
 
 .project .group {
-	padding-left: 1em;
+	padding: 0 0.5em;
 	container-type: inline-size;
 	width: calc(100% - 1em);
     height: 100%;
@@ -153,6 +158,7 @@ header .header-hide {
 	clip-path: circle(36.8% at 84% 18%);
 	opacity: 0.5;
 	transition: all 1.5s ease;
+	font-size: 16px;
 }
 
 .group h2, 
@@ -196,20 +202,11 @@ header .header-hide {
 	background-color: transparent;
     border-color: transparent;
 }
-.btn:hover,
-.btn:focus, 
-.clickme button:hover,
-.clickme button:focus {
-	text-shadow:#0ff -1.60012px 0px 0, red 1.60012px 0px 0;
-}
 
 .one, .two {
 	display: flex;
     flex-flow: column;
     justify-content: center;
-	box-shadow: 1px 1px 1px #444, 1px 1px #444;
-	clip-path: circle(49.0% at 50% 50%);
-	transition: clip-path 1.5s ease;
 }
 .one, .two, .three, .four, .five, .six {
 	grid-column: 1 / span 3;
@@ -251,35 +248,45 @@ header .contact.first {
 	vertical-align: middle;
 }
 
-#js-vid {
+#a11y-vid, #js-vid {
 	width: 100%;
 	max-height: 418px;
 	margin: auto;
+	transition: all 1s;
 }
+
 .clickme {
     grid-column: 2 / span 1;
 	min-height: 50px;
 	text-align: center;
 }
 .clickme button {
-	background-color: transparent;
-	border: none;
+	background-color: #bc1923;
+	color: #fff;
+	border: 2px solid #000;
+	box-shadow: 2px 2px 1px;
 	padding: 14px;
 	font-size: 18px;
 	min-height: 112px;
 	letter-spacing: 0.1em;
+	display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
 }
-@container (max-width: 140px) {
-	.group h2 {
-		font-size: 20px;
-	}
-    .group > *, .group ul {
-        margin-left: -14px;
-    }
+.clickme button[aria-pressed="true"] {
+	box-shadow: 0px 0px 0px;
+	background-color: transparent;
+	color: #000;
 }
+
 @container (max-width: 279px) {
+	.group h2 {
+		font-size: 18px;
+        overflow-wrap: break-word
+	}
 	.group p, .group ul, .group .btn {
-		font-size: 0.65em;
+		font-size: .55em;
 	}
 	.group ul li {
 		padding-left: 0em;
@@ -327,9 +334,6 @@ header .contact.first {
 		height: 40px;
 		width: 40px;
 	}
-	.contact a:hover, aside a:hover {
-		outline: 2px solid #bc1823;
-	}
 	.wrapper {
 		display: grid;
 		grid-template-columns: repeat(11, 1fr);
@@ -351,9 +355,6 @@ header .contact.first {
 	}
 	.project .group {
 		container-type: size;
-	}
-	*:focus {
-		outline: 2px solid rgba(188, 24, 35, 1);
 	}
 	.logo {
 		grid-row: 4 / span 3;

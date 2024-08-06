@@ -11,11 +11,11 @@ const Footer = () => {
 					href='https://developer.linkedin.com/documents/branding-guidelines'
 				>
 					{' '}
-					https://developer.linkedin.com/documents/branding-guidelines{' '}
+					https://developer.linkedin.com/documents/branding-guidelines{' '}⍈
 				</a>{' '}
 				Public Domain,{' '}
 				<a href='https://commons.wikimedia.org/w/index.php?curid=30784763'>
-					Link
+					Link ⍈
 				</a>
 			</aside>
 		</footer>

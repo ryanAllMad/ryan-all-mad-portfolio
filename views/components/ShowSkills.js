@@ -14,7 +14,6 @@ const ShowSkills = (props) => {
 		`CircleCI`,
 		`Demo's`,
 		`Technical Writing`,
-		`Collab`
 	];
 	return (
 		<div
@@ -31,7 +30,7 @@ const ShowSkills = (props) => {
 					href='https://codepen.io/all-mad-designs'
 					target='_blank'
 				>
-					See my CSS portfolio here
+					See my CSS portfolio here ⍈
 				</a>
 			</ul>
 			<button

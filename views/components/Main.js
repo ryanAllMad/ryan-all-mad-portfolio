@@ -9,6 +9,7 @@ const Main = () => {
 	const [playState, setPlayState] = useState(false);
 	const [vidOneClass, setVidOneClass] = useState('')
 	const [vidTwoClass, setVidTwoClass] = useState('')
+	const [icon, setIcon] = useState('▶')
 	const [clickMe, setClickMe] = useState('Click to Start Videos');
 	const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
@@ -43,6 +44,7 @@ const Main = () => {
 	const handlePlayState = (ref) => {
 		if(playState) {
 			playVid(ref)
+			setIcon('▣')
 			setClickMe('Stop videos');
 		}
 	}
@@ -56,10 +58,12 @@ const Main = () => {
 	useEffect(() => {
 		if(playState) {
 			confetti.default();
+			setIcon('▣')
 			setClickMe('Stop videos');
 			playVid(vidRef.current);
 			playVid(a11yVidRef.current);
 		} else {
+			setIcon('▶')
 			setClickMe('Click to Start Videos');
 			pauseVid(vidRef.current);
 			pauseVid(a11yVidRef.current);
@@ -68,27 +72,37 @@ const Main = () => {
 	return (
 		<main>
 			<section class='clickme'>
-				{clickMe !== '' && (
-					<button onClick={handleButton}>{clickMe}</button>
-				)}
+				<button aria-pressed={icon === '▣'} onClick={handleButton}><span className='click-icon'>{icon}</span>{clickMe}</button>
 			</section>
 			<section
 				className='mobile-hidden logo'
 			></section>
 			<section
-				onMouseEnter={() => setVidOneClass('show-vids')}
-				className={`project one ${vidOneClass}`}
-			>
-				<video
 				tabIndex={0}
-				onFocus={() => handlePlayState(vidRef.current)}
-				onMouseEnter={() => handlePlayState(vidRef.current)}
-				onMouseLeave={() => {
-					pauseVid(vidRef.current)
+				onMouseEnter={() => {
+					handlePlayState(vidRef.current)
+					setVidOneClass('show-vids')
+				}}
+				onFocus={() => {
+					handlePlayState(vidRef.current)
+					setVidOneClass('show-vids')
 				}}
 				onBlur={() => {
+					setVidOneClass('')
 					pauseVid(vidRef.current)
 				}}
+				onMouseLeave={() => {
+					setVidOneClass('')
+					pauseVid(vidRef.current)
+				}}
+				className={`project one ${vidOneClass}`}
+			>
+				{vidOneClass === 'show-vids' &&<div>
+					<h2>JS Job Helper: React App</h2>
+					<p>This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch.</p>
+					<p>I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy.</p>
+					</div>}
+				<video
 					ref={vidRef}
 					id='js-vid'
 					loop
@@ -103,24 +117,35 @@ const Main = () => {
 				<ToProjectButtons
 					githubLink='https://github.com/ryanAllMad/js-job-helper'
 					projectLink=''
-					projectTitle='JS Job Helper: Resume Builder App'
-					tooltipTitle="Open source project for dev's"
+					projectTitle='JS Job Helper: Open Source Project'
 				/>
 			</section>
 			<section
-				onMouseEnter={() => setVidTwoClass('show-vids')}
-				className={`project two ${vidTwoClass}`}
-			>
-				<video
 				tabIndex={0}
-				onFocus={() => handlePlayState(a11yVidRef.current)}
-				onMouseOver={() => handlePlayState(a11yVidRef.current)}
+				onMouseEnter={() => {
+					setVidTwoClass('show-vids')
+					handlePlayState(a11yVidRef.current)
+				}}
+				onFocus={() => {
+					setVidTwoClass('show-vids')
+					handlePlayState(a11yVidRef.current)
+				}}
 				onBlur={() => {
-					pauseVid(a11yVidRef.current)
-					}}
-				onMouseOut={() => {
+					setVidTwoClass('')
 					pauseVid(a11yVidRef.current)
 				}}
+				onMouseLeave={() => {
+					setVidTwoClass('')
+					pauseVid(a11yVidRef.current)
+				}}
+				className={`project two ${vidTwoClass}`}
+			>
+				{vidTwoClass === 'show-vids' &&<div>
+					<h2>Vitest Test Suite</h2>
+					<p>This project was built with Deque's React component library 'Cauldron', and Vite with Vitest.</p>
+					<p>I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development.</p>
+					</div>}
+				<video
 					ref={a11yVidRef}
 					id='a11y-vid'
 					loop
@@ -135,8 +160,7 @@ const Main = () => {
 				<ToProjectButtons
 					githubLink='https://github.com/ryanAllMad/a11y-react'
 					projectLink=''
-					projectTitle='WAI-ARIA Authoring Patterns'
-					tooltipTitle='Test suite in vitest'
+					projectTitle='WAI-ARIA Authoring Patterns Test Suite'
 				/>
 			</section>
 			<section
@@ -144,9 +168,8 @@ const Main = () => {
 			>
 				<Group
 					id='portfolio'
-					title='My Portfolio on Azure'
+					title='Portfolio: allmaddev.com'
 					skills={portfolioSkills}
-					tooltipTitle='You are here!'
 					githubLink='https://github.com/ryanAllMad/ryan-all-mad-portfolio'
 					projectTitle='My portfolio'
 				/>
@@ -156,11 +179,11 @@ const Main = () => {
 			>
 				<Group
 					id='dnd'
-					title='DnD Character sheet'
+					title='DnD Character sheet NextJS App'
 					skills={dndSkills}
 					projectLink='https://yong-character-sheet.vercel.app/'
 					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
-					projectTitle='DnD Character Sheet'
+					projectTitle='DnD Character sheet'
 				/>
 			</section>
 			<section
@@ -168,10 +191,9 @@ const Main = () => {
 			>
 				<Group
 					id='ally'
-					title='A11y Check Plugin'
+					title='A11y Check: WordPress Plugin'
 					skills={allySkills}
 					projectLink=''
-					tooltipTitle='Plugin available on Github'
 					githubLink='https://github.com/ryanAllMad/a11y-checker'
 					projectTitle='A11y Check'
 				/>

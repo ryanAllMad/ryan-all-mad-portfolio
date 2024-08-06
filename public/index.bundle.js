@@ -571,14 +571,11 @@ var jsx_runtime = __webpack_require__(848);
 
 const Contact = () => {
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
+    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "contact first",
-      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
         children: "Software Engineer"
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-        className: "header-hide",
-        children: "2 Years Experience"
-      })]
+      })
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
       className: "contact second",
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
@@ -589,7 +586,7 @@ const Contact = () => {
         children: ["JavaScript | React | Typescript | Redux | Node | SCSS/CSS | PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg ", /*#__PURE__*/(0,jsx_runtime.jsx)("br", {}), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
           href: "https://codepen.io/all-mad-designs",
           target: "_blank",
-          children: "See my CSS portfolio here"
+          children: "See my CSS portfolio here \u2348"
         })]
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
@@ -633,7 +630,7 @@ const ShowSkills = props => {
     onClick,
     classes
   } = props;
-  const skillsArr = [`JavaScript`, `React`, `Typescript`, `Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `WCAG`, `NPM`, `CircleCI`, `Demo's`, `Technical Writing`, `Collab`];
+  const skillsArr = [`JavaScript`, `React`, `Typescript`, `Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `WCAG`, `NPM`, `CircleCI`, `Demo's`, `Technical Writing`];
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     id: "skills-menu",
     className: `show-skills ${classes}`,
@@ -646,7 +643,7 @@ const ShowSkills = props => {
       }, sk.toLowerCase())), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
         href: "https://codepen.io/all-mad-designs",
         target: "_blank",
-        children: "See my CSS portfolio here"
+        children: "See my CSS portfolio here \u2348"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
       class: "close-skills",
@@ -734,17 +731,16 @@ const ToProjectButtons = props => {
       href: projectLink,
       tabIndex: "0",
       target: "_blank",
-      "aria-describedby": "button-tool-tip",
-      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+      children: [`${projectTitle} ⍈`, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
         className: "screen-reader-text",
-        children: "to project"
-      }), projectTitle]
+        children: "to published project"
+      })]
     }), githubLink && /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
       className: `btn ${!githubLink}`,
       href: githubLink,
       tabIndex: "0",
       target: "_blank",
-      children: ["See the code", /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+      children: [`${projectTitle}: See the code ⍈`, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
         className: "screen-reader-text",
         children: "on Github"
       })]
@@ -1721,6 +1717,7 @@ const Main = () => {
   const [playState, setPlayState] = (0,react.useState)(false);
   const [vidOneClass, setVidOneClass] = (0,react.useState)('');
   const [vidTwoClass, setVidTwoClass] = (0,react.useState)('');
+  const [icon, setIcon] = (0,react.useState)('▶');
   const [clickMe, setClickMe] = (0,react.useState)('Click to Start Videos');
   const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
@@ -1740,6 +1737,7 @@ const Main = () => {
   const handlePlayState = ref => {
     if (playState) {
       playVid(ref);
+      setIcon('▣');
       setClickMe('Stop videos');
     }
   };
@@ -1753,10 +1751,12 @@ const Main = () => {
   (0,react.useEffect)(() => {
     if (playState) {
       confetti_module();
+      setIcon('▣');
       setClickMe('Stop videos');
       playVid(vidRef.current);
       playVid(a11yVidRef.current);
     } else {
+      setIcon('▶');
       setClickMe('Click to Start Videos');
       pauseVid(vidRef.current);
       pauseVid(a11yVidRef.current);
@@ -1765,25 +1765,44 @@ const Main = () => {
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       class: "clickme",
-      children: clickMe !== '' && /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
+      children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
+        "aria-pressed": icon === '▣',
         onClick: handleButton,
-        children: clickMe
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+          className: "click-icon",
+          children: icon
+        }), clickMe]
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "mobile-hidden logo"
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
-      onMouseEnter: () => setVidOneClass('show-vids'),
+      tabIndex: 0,
+      onMouseEnter: () => {
+        handlePlayState(vidRef.current);
+        setVidOneClass('show-vids');
+      },
+      onFocus: () => {
+        handlePlayState(vidRef.current);
+        setVidOneClass('show-vids');
+      },
+      onBlur: () => {
+        setVidOneClass('');
+        pauseVid(vidRef.current);
+      },
+      onMouseLeave: () => {
+        setVidOneClass('');
+        pauseVid(vidRef.current);
+      },
       className: `project one ${vidOneClass}`,
-      children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        tabIndex: 0,
-        onFocus: () => handlePlayState(vidRef.current),
-        onMouseEnter: () => handlePlayState(vidRef.current),
-        onMouseLeave: () => {
-          pauseVid(vidRef.current);
-        },
-        onBlur: () => {
-          pauseVid(vidRef.current);
-        },
+      children: [vidOneClass === 'show-vids' && /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+          children: "JS Job Helper: React App"
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+          children: "This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch."
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+          children: "I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy."
+        })]
+      }), /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
         ref: vidRef,
         id: "js-vid",
         loop: true,
@@ -1794,22 +1813,36 @@ const Main = () => {
       }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
         githubLink: "https://github.com/ryanAllMad/js-job-helper",
         projectLink: "",
-        projectTitle: "JS Job Helper: Resume Builder App",
-        tooltipTitle: "Open source project for dev's"
+        projectTitle: "JS Job Helper: Open Source Project"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
-      onMouseEnter: () => setVidTwoClass('show-vids'),
+      tabIndex: 0,
+      onMouseEnter: () => {
+        setVidTwoClass('show-vids');
+        handlePlayState(a11yVidRef.current);
+      },
+      onFocus: () => {
+        setVidTwoClass('show-vids');
+        handlePlayState(a11yVidRef.current);
+      },
+      onBlur: () => {
+        setVidTwoClass('');
+        pauseVid(a11yVidRef.current);
+      },
+      onMouseLeave: () => {
+        setVidTwoClass('');
+        pauseVid(a11yVidRef.current);
+      },
       className: `project two ${vidTwoClass}`,
-      children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        tabIndex: 0,
-        onFocus: () => handlePlayState(a11yVidRef.current),
-        onMouseOver: () => handlePlayState(a11yVidRef.current),
-        onBlur: () => {
-          pauseVid(a11yVidRef.current);
-        },
-        onMouseOut: () => {
-          pauseVid(a11yVidRef.current);
-        },
+      children: [vidTwoClass === 'show-vids' && /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+          children: "Vitest Test Suite"
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+          children: "This project was built with Deque's React component library 'Cauldron', and Vite with Vitest."
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+          children: "I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development."
+        })]
+      }), /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
         ref: a11yVidRef,
         id: "a11y-vid",
         loop: true,
@@ -1821,16 +1854,14 @@ const Main = () => {
       }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
         githubLink: "https://github.com/ryanAllMad/a11y-react",
         projectLink: "",
-        projectTitle: "WAI-ARIA Authoring Patterns",
-        tooltipTitle: "Test suite in vitest"
+        projectTitle: "WAI-ARIA Authoring Patterns Test Suite"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project three",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "portfolio",
-        title: "My Portfolio on Azure",
+        title: "Portfolio: allmaddev.com",
         skills: portfolioSkills,
-        tooltipTitle: "You are here!",
         githubLink: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
         projectTitle: "My portfolio"
       })
@@ -1838,20 +1869,19 @@ const Main = () => {
       className: "project four",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "dnd",
-        title: "DnD Character sheet",
+        title: "DnD Character sheet NextJS App",
         skills: dndSkills,
         projectLink: "https://yong-character-sheet.vercel.app/",
         githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
-        projectTitle: "DnD Character Sheet"
+        projectTitle: "DnD Character sheet"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project five",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "ally",
-        title: "A11y Check Plugin",
+        title: "A11y Check: WordPress Plugin",
         skills: allySkills,
         projectLink: "",
-        tooltipTitle: "Plugin available on Github",
         githubLink: "https://github.com/ryanAllMad/a11y-checker",
         projectTitle: "A11y Check"
       })
@@ -1880,10 +1910,10 @@ const Footer = () => {
       children: ["Images By LinkedIn -", ' ', /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
         rel: "nofollow",
         href: "https://developer.linkedin.com/documents/branding-guidelines",
-        children: [' ', "https://developer.linkedin.com/documents/branding-guidelines", ' ']
+        children: [' ', "https://developer.linkedin.com/documents/branding-guidelines", ' ', "\u2348"]
       }), ' ', "Public Domain,", ' ', /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
         href: "https://commons.wikimedia.org/w/index.php?curid=30784763",
-        children: "Link"
+        children: "Link \u2348"
       })]
     })]
   });

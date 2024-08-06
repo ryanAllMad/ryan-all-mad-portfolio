@@ -3,8 +3,6 @@ const Contact = () => {
 		<>
 			<section className="contact first">
 				<h1>Software Engineer</h1>
-				
-				<p className="header-hide">2 Years Experience</p>
 			</section>
 			<section className="contact second">
 			<h2 className="header-hide">Skills</h2>
@@ -15,7 +13,7 @@ const Contact = () => {
 					href='https://codepen.io/all-mad-designs'
 					target='_blank'
 				>
-					See my CSS portfolio here
+					See my CSS portfolio here ⍈
 				</a>
 				</p>
 			</section>

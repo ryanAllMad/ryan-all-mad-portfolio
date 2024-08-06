@@ -14,9 +14,8 @@ const ToProjectButtons = (props) => {
 				href={projectLink}
 				tabIndex='0'
 				target='_blank'
-				aria-describedby='button-tool-tip'
 			>
-				<span className='screen-reader-text'>to project</span>{projectTitle}
+				{`${projectTitle} ⍈`}<span className='screen-reader-text'>to published project</span>
 			</a>}
 			{githubLink && <a
 				className={`btn ${!githubLink}`}
@@ -24,7 +23,7 @@ const ToProjectButtons = (props) => {
 				tabIndex='0'
 				target='_blank'
 			>
-			See the code
+			{`${projectTitle}: See the code ⍈`}
 						<span className='screen-reader-text'>on Github</span>
 			</a>}
 		</div>
