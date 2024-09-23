@@ -31,6 +31,17 @@
 		transform: translateY(-600px);
 	}
 }
+@keyframes wave {
+	0% {
+		clip-path: polygon(0% 87%, 27% 82%, 54% 86%, 81% 81%, 100% 87%, 100% 0%, 0% 0%);
+	}
+	50% {
+		clip-path: polygon(0% 76%, 27% 87%, 54% 79%, 81% 87%, 100% 79%, 100% 0%, 0% 0%);
+	}
+	100% {
+		clip-path: polygon(0% 87%, 27% 82%, 54% 86%, 81% 81%, 100% 87%, 100% 0%, 0% 0%);
+	}
+}
 .polygon {
 	clip-path: circle(117.7% at 84% 18%) !important;
 	opacity: 1 !important;
@@ -70,7 +81,15 @@ a {
 	padding: 7px;
 	color: #b71a1a;
 }
-
+h1 {
+    font-size: 3rem;
+}
+h2 {
+	font-size: 2.45rem;
+}
+h3 {
+	font-size: 1.98rem;
+}
 header {
 	display: flex;
 }
@@ -146,25 +165,74 @@ header .header-hide {
     height: 100vh;
     padding: 2rem;
 }
+.me {
+	align-items: flex-end;
+	background: url(images/alice-bg.png) 0 0 no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+	padding-bottom: 0;
+}
+.bio {
+    max-width: 50%;
+	color:#252424;
+    background: #fff;
+    border-radius: 30px;
+    padding: 2rem;
+	box-shadow: 2px 2px 20px #777;
+}
+.profile.img img {
+    max-width: 100%;
+    border-radius: 30px;
+}
+section.heading {
+	position: relative;
+}
+section.heading .heading-wave {
+    text-align: center;
+    color: #fff;
+    padding: 2rem;
+	position: absolute;
+	width: 100%;
+    height: 180px;
+}
+.heading-wave.sec {
+	background: #000;
+	animation: wave 2s ease-in-out infinite;
+
+}
 .one {
-	background: #252424;
+	background-color: rgba(188, 24, 35, 1);
 	color: #fff;
+	margin-top: 180px;
 }
 .two {
-	background: rgba(188, 24, 35, 1);
+	background-color: #252424;
+	background-image: url('./images/allmadbg.png');
+	background-position: 0 0;
+	background-size: cover;
+	background-attachment: fixed;
 	color: #fff;
 }
 .three {
-	background: #4a4949;
+	
+	background-color: #bc1923;
 }
 .four {
-	background-color: #bc1923;
+	background: #4a4949;
+	background-image: url('./images/alice-bg-2.png');
+	background-position: 0 0;
+	background-size: cover;
+	background-attachment: fixed;
 }
 .five {
 	background-color: #252424;
 }
 .six {
 	background-color: #4a4949;
+	background-image: url('./images/allmadbg.png');
+	background-position: 0 0;
+	background-size: cover;
+	background-attachment: fixed;
 }
 .project .group {
 	padding: 0 0.5em;

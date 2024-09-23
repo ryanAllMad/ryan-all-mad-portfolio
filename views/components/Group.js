@@ -46,21 +46,23 @@ const Group = (props) => {
 			className={`group ${clipClass}`}
 			tabIndex={0}
 		>
-			<h2>{title}</h2>
-			<p>{description}</p>
-			<p>Built with:</p>
-			<ul>
-				{skills.map((sk) => (
-					<li key={sk.toLowerCase()}>{sk}</li>
-				))}
-			</ul>
-			<div className='buttons'>
-				<ToProjectButtons
-					githubLink={githubLink}
-					projectLink={projectLink}
-					projectTitle={projectTitle}
-					tooltipTitle={tooltipTitle}
-				/>
+			<div className='bio'>
+				<h3>{title}</h3>
+				<p>{description}</p>
+				<p>Built with:</p>
+				<ul>
+					{skills.map((sk) => (
+						<li key={sk.toLowerCase()}>{sk}</li>
+					))}
+				</ul>
+				<div className='buttons'>
+					<ToProjectButtons
+						githubLink={githubLink}
+						projectLink={projectLink}
+						projectTitle={projectTitle}
+						tooltipTitle={tooltipTitle}
+					/>
+				</div>
 			</div>
 		</div>
 	);

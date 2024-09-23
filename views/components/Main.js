@@ -10,6 +10,7 @@ const Main = () => {
 	const [vidOneClass, setVidOneClass] = useState('')
 	const [vidTwoClass, setVidTwoClass] = useState('')
 	const [icon, setIcon] = useState('▶')
+	const [eatDrink, setEatDrink] = useState('748px')
 	const [clickMe, setClickMe] = useState('Click to Start Videos');
 	const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
@@ -53,6 +54,11 @@ const Main = () => {
 			window.addEventListener('mouseleave', () => {
 				setIsLoaded(false);
 			});
+			window.addEventListener('scroll', () => {
+				const scrollVal = window.scrollY
+				const newVal = 748 - scrollVal
+				setEatDrink(`${newVal}px`)
+			})
 		}
 	}, [window]);
 	useEffect(() => {
@@ -72,7 +78,9 @@ const Main = () => {
 	return (
 		<main>
 			<section className='project me'>
-				<div className='profile img' style={{width: '400px', height: '400px', background: '#777'}}></div>
+				<div className='profile img' style={{width: eatDrink}}>
+					<img alt="white woman, red hair, smiling." src="/images/me.png" />
+				</div>
 				<div className='bio'>
 					<h1>Ryan Duer: Software Engineer</h1>
 					<p>
@@ -99,6 +107,14 @@ const Main = () => {
 					</ul>
 				</div>
 			</section>
+			<section className='heading'>
+				<div className='heading-wave first'>
+				<h2>Projects</h2>
+				</div>
+				<div className='heading-wave sec'>
+				<h2>Projects</h2>
+				</div>
+			</section>
 			<section
 				tabIndex={0}
 				onMouseEnter={() => {
@@ -120,8 +136,8 @@ const Main = () => {
 				className={`project one ${vidOneClass}`}
 			>
 				<div className='one-wrappper'>
-					<div>
-						<h2>JS Job Helper: React App</h2>
+					<div className='bio'>
+						<h3>JS Job Helper: React App</h3>
 						<p>This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch.</p>
 						<p>I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy.</p>
 						</div>
@@ -167,8 +183,8 @@ const Main = () => {
 				className={`project two ${vidTwoClass}`}
 			>
 				<div className='two-wrapper'>
-					<div>
-						<h2>Vitest Test Suite</h2>
+					<div className='bio'>
+						<h3>Vitest Test Suite</h3>
 						<p>This project was built with Deque's React component library 'Cauldron', and Vite with Vitest.</p>
 						<p>I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development.</p>
 					</div>

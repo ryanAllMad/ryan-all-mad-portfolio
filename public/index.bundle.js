@@ -573,7 +573,7 @@ const Contact = () => {
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "contact first",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
         children: "Software Engineer"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
@@ -784,32 +784,35 @@ const Group = props => {
       }
     }
   }, [window]);
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     ref: groupRef,
     onFocus: handleMouseOver,
     onMouseOver: handleMouseOver,
     id: id,
     className: `group ${clipClass}`,
     tabIndex: 0,
-    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
-      children: title
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-      children: description
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-      children: "Built with:"
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
-      children: skills.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
-        children: sk
-      }, sk.toLowerCase()))
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-      className: "buttons",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
-        githubLink: githubLink,
-        projectLink: projectLink,
-        projectTitle: projectTitle,
-        tooltipTitle: tooltipTitle
-      })
-    })]
+    children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+      className: "bio",
+      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h3", {
+        children: title
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+        children: description
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+        children: "Built with:"
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
+        children: skills.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+          children: sk
+        }, sk.toLowerCase()))
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        className: "buttons",
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
+          githubLink: githubLink,
+          projectLink: projectLink,
+          projectTitle: projectTitle,
+          tooltipTitle: tooltipTitle
+        })
+      })]
+    })
   });
 };
 /* harmony default export */ const components_Group = (Group);
@@ -1720,6 +1723,7 @@ const Main = () => {
   const [vidOneClass, setVidOneClass] = (0,react.useState)('');
   const [vidTwoClass, setVidTwoClass] = (0,react.useState)('');
   const [icon, setIcon] = (0,react.useState)('▶');
+  const [eatDrink, setEatDrink] = (0,react.useState)('748px');
   const [clickMe, setClickMe] = (0,react.useState)('Click to Start Videos');
   const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
@@ -1748,6 +1752,11 @@ const Main = () => {
       window.addEventListener('mouseleave', () => {
         setIsLoaded(false);
       });
+      window.addEventListener('scroll', () => {
+        const scrollVal = window.scrollY;
+        const newVal = 748 - scrollVal;
+        setEatDrink(`${newVal}px`);
+      });
     }
   }, [window]);
   (0,react.useEffect)(() => {
@@ -1770,10 +1779,12 @@ const Main = () => {
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
         className: "profile img",
         style: {
-          width: '400px',
-          height: '400px',
-          background: '#777'
-        }
+          width: eatDrink
+        },
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)("img", {
+          alt: "white woman, red hair, smiling.",
+          src: "/images/me.png"
+        })
       }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "bio",
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
@@ -1803,6 +1814,19 @@ const Main = () => {
           })]
         })]
       })]
+    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
+      className: "heading",
+      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        className: "heading-wave first",
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+          children: "Projects"
+        })
+      }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        className: "heading-wave sec",
+        children: /*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+          children: "Projects"
+        })
+      })]
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       tabIndex: 0,
       onMouseEnter: () => {
@@ -1825,7 +1849,8 @@ const Main = () => {
       children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "one-wrappper",
         children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+          className: "bio",
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h3", {
             children: "JS Job Helper: React App"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch."
@@ -1878,7 +1903,8 @@ const Main = () => {
       children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "two-wrapper",
         children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+          className: "bio",
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h3", {
             children: "Vitest Test Suite"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "This project was built with Deque's React component library 'Cauldron', and Vite with Vitest."
