@@ -684,7 +684,6 @@ const Header = () => {
   }, []);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("header", {
-      className: "desktop-hidden",
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
         "aria-expanded": showSkills,
         "aria-controls": "skills-menu",
@@ -757,6 +756,7 @@ const Group = props => {
     id,
     title,
     skills,
+    description,
     projectLink,
     githubLink,
     projectTitle,
@@ -793,6 +793,8 @@ const Group = props => {
     tabIndex: 0,
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
       children: title
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+      children: description
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
       children: "Built with:"
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("ul", {
@@ -1763,27 +1765,53 @@ const Main = () => {
     }
   }, [playState]);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
-    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      class: "clickme",
-      children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
-        "aria-pressed": icon === '▣',
-        onClick: handleButton,
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-          className: "click-icon",
-          children: icon
-        }), clickMe]
-      })
+    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
+      className: "project me",
+      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        className: "profile img",
+        style: {
+          width: '400px',
+          height: '400px',
+          background: '#777'
+        }
+      }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+        className: "bio",
+        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
+          children: "Ryan Duer: Software Engineer"
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+          children: "Hey! Thanks for stopping by! I've gathered together my most complete and recent work for you to check out!"
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+          children: "I'm a Software Engineer, with a long background in Support Engineering. I develop with a core focus on user experience and have a wealth of hands on experience understanding user needs. I pride myself on my collaborative and positive spirit and am always working to better myself and help those around me."
+        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("p", {
+          children: ["Feel free to check me out ", /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+            href: "https://www.linkedin.com/in/ryan-duer",
+            children: "on LinkedIn"
+          }), "Don't forget to take a look at some of my relevant skills in the header menu or the footer!"]
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+          children: "Top Skills"
+        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("ul", {
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+            children: "React"
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+            children: "Typescript"
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+            children: "Javascript"
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+            children: "Cross team collab"
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+            children: "Always learning new skills!"
+          })]
+        })]
+      })]
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "mobile-hidden logo"
-    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
       tabIndex: 0,
       onMouseEnter: () => {
         handlePlayState(vidRef.current);
-        setVidOneClass('show-vids');
+        //setVidOneClass('show-vids')
       },
       onFocus: () => {
         handlePlayState(vidRef.current);
-        setVidOneClass('show-vids');
+        //setVidOneClass('show-vids')
       },
       onBlur: () => {
         setVidOneClass('');
@@ -1794,35 +1822,48 @@ const Main = () => {
         pauseVid(vidRef.current);
       },
       className: `project one ${vidOneClass}`,
-      children: [vidOneClass === 'show-vids' && /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
-          children: "JS Job Helper: React App"
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-          children: "This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch."
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-          children: "I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy."
+      children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+        className: "one-wrappper",
+        children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+            children: "JS Job Helper: React App"
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+            children: "This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch."
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+            children: "I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy."
+          })]
+        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+          ref: vidRef,
+          id: "js-vid",
+          loop: true,
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+            src: "/js-job-helper.mp4",
+            type: "video/mp4"
+          }), "Your browser does not support the video tag."]
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+          class: "clickme",
+          children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
+            "aria-pressed": icon === '▣',
+            onClick: handleButton,
+            children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+              className: "click-icon",
+              children: icon
+            }), clickMe]
+          })
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
+          githubLink: "https://github.com/ryanAllMad/js-job-helper",
+          projectLink: "",
+          projectTitle: "JS Job Helper: Open Source Project"
         })]
-      }), /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        ref: vidRef,
-        id: "js-vid",
-        loop: true,
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
-          src: "/js-job-helper.mp4",
-          type: "video/mp4"
-        }), "Your browser does not support the video tag."]
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
-        githubLink: "https://github.com/ryanAllMad/js-job-helper",
-        projectLink: "",
-        projectTitle: "JS Job Helper: Open Source Project"
-      })]
-    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       tabIndex: 0,
       onMouseEnter: () => {
-        setVidTwoClass('show-vids');
+        //setVidTwoClass('show-vids')
         handlePlayState(a11yVidRef.current);
       },
       onFocus: () => {
-        setVidTwoClass('show-vids');
+        //setVidTwoClass('show-vids')
         handlePlayState(a11yVidRef.current);
       },
       onBlur: () => {
@@ -1834,32 +1875,40 @@ const Main = () => {
         pauseVid(a11yVidRef.current);
       },
       className: `project two ${vidTwoClass}`,
-      children: [vidTwoClass === 'show-vids' && /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
-          children: "Vitest Test Suite"
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-          children: "This project was built with Deque's React component library 'Cauldron', and Vite with Vitest."
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-          children: "I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development."
-        })]
-      }), /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-        ref: a11yVidRef,
-        id: "a11y-vid",
-        loop: true,
-        children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+      children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+        className: "two-wrapper",
+        children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
+            children: "Vitest Test Suite"
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+            children: "This project was built with Deque's React component library 'Cauldron', and Vite with Vitest."
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
+            children: "I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development."
+          })]
+        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+          ref: a11yVidRef,
+          id: "a11y-vid",
           loop: true,
-          src: "/a11y-vid.mp4",
-          type: "video/mp4"
-        }), "Your browser does not support the video tag."]
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
-        githubLink: "https://github.com/ryanAllMad/a11y-react",
-        projectLink: "",
-        projectTitle: "WAI-ARIA Authoring Patterns Test Suite"
-      })]
+          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+            loop: true,
+            src: "/a11y-vid.mp4",
+            type: "video/mp4"
+          }), "Your browser does not support the video tag."]
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
+          githubLink: "https://github.com/ryanAllMad/a11y-react",
+          projectLink: "",
+          projectTitle: "WAI-ARIA Authoring Patterns Test Suite"
+        })]
+      })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project three",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "portfolio",
+        description: `
+						My portfolio is designed with CSS3 features like container queries and performant animations. 
+						I build this with a Node backend, React on the Server and on the Front End, and launchd it on Azure.
+						It took me about a week for the initial version to complete this project, though I've gone through several iterations now.
+						`,
         title: "Portfolio: allmaddev.com",
         skills: portfolioSkills,
         githubLink: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
@@ -1870,6 +1919,11 @@ const Main = () => {
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "dnd",
         title: "DnD Character sheet NextJS App",
+        description: `
+						My DnD Character sheet was build with accessibility in mind and features screen reader access to all features,
+						keyboard acccess to all features, skip blocks for easeir screen reader navigation, user prefers reduced motion assist, 
+						and passes color contrast minimums. This project was build with Next JS, Material UI, and published to Vercel. 
+						`,
         skills: dndSkills,
         projectLink: "https://yong-character-sheet.vercel.app/",
         githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
@@ -1880,6 +1934,10 @@ const Main = () => {
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "ally",
         title: "A11y Check: WordPress Plugin",
+        description: `
+						This WIP, is a plugin developed for Content Creators that use WordPress as a live checklist
+						that alerts the author of common accessibility pitfalls as they write. It's akin to a linter for content creators.
+						`,
         skills: allySkills,
         projectLink: "",
         githubLink: "https://github.com/ryanAllMad/a11y-checker",
@@ -1890,6 +1948,10 @@ const Main = () => {
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "blog",
         title: "All Mad Designs Blog",
+        description: `
+						My blog is where I use my passion for helping others, and educating engineers to resolve
+						issues related to front end, WordPress, or Accessibility Engineering. 
+						`,
         skills: blogSkills,
         projectLink: "https://allmaddesigns.com",
         projectTitle: "My Tech Blog"

@@ -6,6 +6,7 @@ const Group = (props) => {
 		id,
 		title,
 		skills,
+		description,
 		projectLink,
 		githubLink,
 		projectTitle,
@@ -46,6 +47,7 @@ const Group = (props) => {
 			tabIndex={0}
 		>
 			<h2>{title}</h2>
+			<p>{description}</p>
 			<p>Built with:</p>
 			<ul>
 				{skills.map((sk) => (
