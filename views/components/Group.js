@@ -59,7 +59,7 @@ const Group = (props) => {
 				</div>
 			</div>
 			<div className='pic-wrapper'>
-				<img src={`/images/${imageFile}`} alt={`${imageAlt}`} />
+				<img loading='lazy' src={`/images/${imageFile}`} alt={`${imageAlt}`} />
 			</div>
 		</div>
 	);

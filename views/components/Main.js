@@ -80,7 +80,7 @@ const Main = () => {
 		<main>
 			<section className='project me'>
 				<div className='profile img' style={{width: eatDrink}}>
-					<img alt="white woman, red hair, smiling." src="/images/me.png" />
+					<img loading='eager' alt="white woman, red hair, smiling." src="/images/me.png" />
 				</div>
 				<div className='bio'>
 					<h1>Ryan Duer: Software Engineer</h1>
@@ -103,8 +103,9 @@ const Main = () => {
 						<li>React</li>
 						<li>Typescript</li>
 						<li>Javascript</li>
+						<li>WCAG</li>
+						<li>CSS3</li>
 						<li>Cross team collab</li>
-						<li>Always learning new skills!</li>
 					</ul>
 				</div>
 			</section>

@@ -809,6 +809,7 @@ const Group = props => {
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
       className: "pic-wrapper",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)("img", {
+        loading: "lazy",
         src: `/images/${imageFile}`,
         alt: `${imageAlt}`
       })
@@ -1782,6 +1783,7 @@ const Main = () => {
           width: eatDrink
         },
         children: /*#__PURE__*/(0,jsx_runtime.jsx)("img", {
+          loading: "eager",
           alt: "white woman, red hair, smiling.",
           src: "/images/me.png"
         })
@@ -1808,9 +1810,11 @@ const Main = () => {
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
             children: "Javascript"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
-            children: "Cross team collab"
+            children: "WCAG"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
-            children: "Always learning new skills!"
+            children: "CSS3"
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+            children: "Cross team collab"
           })]
         })]
       })]
