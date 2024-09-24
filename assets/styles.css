@@ -42,10 +42,7 @@
 		clip-path: polygon(0% 87%, 27% 82%, 54% 86%, 81% 81%, 100% 87%, 100% 0%, 0% 0%);
 	}
 }
-.polygon {
-	clip-path: circle(117.7% at 84% 18%) !important;
-	opacity: 1 !important;
-}
+
 .show-vids #js-vid, .show-vids #a11y-vid {
     width: 300px;
     transform: translate(0px, 0px);
@@ -79,7 +76,7 @@ body {
 }
 a {
 	padding: 7px;
-	color: #b71a1a;
+	color: #234b9b;
 }
 h1 {
     font-size: 3rem;
@@ -102,7 +99,7 @@ svg:has(defs) {
     bottom: 0;
     transform:translate(-50%, 35px);
 	font-size: 30px;
-    color: #bc1823;
+    color: #234b9b;
 }
 main {
 	padding: 1em;
@@ -123,15 +120,15 @@ header .header-hide {
 	display: block;
 	background: url('./images/R.png') 0 0 no-repeat;
 	background-size: cover;
-	width: 70px;
-	height: 100px;
+	width: 114px;
+	height: 114px;
 	position: relative;
 }
 .show-skills {
     top: 0;
     left: 0;
     padding-left: 4rem;
-    margin-top: 100px;
+	margin-top: 114px;
     background: #fff;
     width: calc(100% - 1em);
     position: fixed;
@@ -156,7 +153,7 @@ header .header-hide {
     top: 0;
 	background-color: transparent;
 	border: none;
-	color:rgba(188, 24, 35, 1);
+	color:#234b9b;
 	transform: rotate(180deg) translate(10px, 10px);
 	transition: transform 2s;
 }
@@ -171,6 +168,7 @@ header .header-hide {
     background-attachment: fixed;
     background-size: cover;
 	padding-bottom: 0;
+	height: 85vh;
 }
 .bio {
     max-width: 50%;
@@ -178,6 +176,7 @@ header .header-hide {
     background: #fff;
     border-radius: 30px;
     padding: 2rem;
+	margin: 2rem;
 	box-shadow: 2px 2px 20px #777;
 }
 .profile.img img {
@@ -201,9 +200,14 @@ section.heading .heading-wave {
 
 }
 .one {
-	background-color: rgba(188, 24, 35, 1);
+	background-color: #c2d0ed;
 	color: #fff;
-	margin-top: 180px;
+	padding-top: 200px;
+    height: calc(100vh + 200px);
+}
+.one .bio, 
+.two .bio {
+	max-width: 35%;
 }
 .two {
 	background-color: #252424;
@@ -215,7 +219,7 @@ section.heading .heading-wave {
 }
 .three {
 	
-	background-color: #bc1923;
+	background-color: #c2d0ed;
 }
 .four {
 	background: #4a4949;
@@ -240,12 +244,15 @@ section.heading .heading-wave {
 	width: calc(100% - 1em);
     height: 100%;
 	color: #fff;
-	/*clip-path: circle(36.8% at 84% 18%);*/
-	/*opacity: 0.5;*/
+	opacity: 0;
+	filter:blur(5px);
 	transition: all 1.5s ease;
 	font-size: 16px;
 }
-
+.group.animate {
+	opacity: 1;
+	filter:blur(0px);
+}
 .group h2, 
 .group ul {
 	margin: 0;
@@ -319,36 +326,40 @@ header .contact.first {
 .one-wrappper {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 .js-vid-caption {
     padding: .65em;
     position: relative;
     max-width: 100%;
 }
+.video-box {
+	width: 50%;
+	align-content: center;
+}
 
 #a11y-vid, #js-vid {
-    max-width: calc(100% / 2);
+	border-radius: 30px;
+	max-width: 100%;
     transition: all 1s;
 }
 
 .clickme {
-    width: calc(100% / 5);
-    text-align: center;
+	display: flex;
+    width: 100%;
 }
 .clickme button {
-	background-color: #bc1923;
-	color: #fff;
-	padding: 14px;
-	font-size: 18px;
-	letter-spacing: 0.1em;
-	display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
+    background-color: #c2d0ed;
+    color: #000;
+    margin: auto;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: .1em;
+    padding: 14px;
+	border-radius: 4px;
+	border: 1px solid black;
 }
 .clickme button[aria-pressed="true"] {
-	box-shadow: 0px 0px 0px;
 	background-color: transparent;
 	color: #252424;
 }

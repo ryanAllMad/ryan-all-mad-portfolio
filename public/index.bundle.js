@@ -763,15 +763,14 @@ const Group = props => {
     tooltipTitle
   } = props;
   const groupRef = (0,react.useRef)();
-  const [clipClass, setClipClass] = (0,react.useState)('');
-  const handleMouseOver = () => {
-    setClipClass('polygon');
-  };
   const handleOnScroll = () => {
     const observe = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setClipClass('polygon');
+          entry.target.classList.add('animate');
+          console.log(entry);
+        } else {
+          entry.target.classList.remove('animate');
         }
       });
     });
@@ -779,17 +778,13 @@ const Group = props => {
   };
   (0,react.useEffect)(() => {
     if (typeof window !== undefined) {
-      if (window.innerWidth <= 800) {
-        handleOnScroll();
-      }
+      window.addEventListener('scroll', handleOnScroll());
     }
   }, [window]);
   return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     ref: groupRef,
-    onFocus: handleMouseOver,
-    onMouseOver: handleMouseOver,
     id: id,
-    className: `group ${clipClass}`,
+    className: "group",
     tabIndex: 0,
     children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
       className: "bio",
@@ -1851,20 +1846,23 @@ const Main = () => {
         children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
           className: "bio",
           children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h3", {
-            children: "JS Job Helper: React App"
+            children: "JS Job Helper: Node App"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch."
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy."
           })]
-        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-          ref: vidRef,
-          id: "js-vid",
-          loop: true,
-          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
-            src: "/js-job-helper.mp4",
-            type: "video/mp4"
-          }), "Your browser does not support the video tag."]
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+          className: "video-box",
+          children: /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+            ref: vidRef,
+            id: "js-vid",
+            loop: true,
+            children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+              src: "/js-job-helper.mp4",
+              type: "video/mp4"
+            }), "Your browser does not support the video tag."]
+          })
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
           class: "clickme",
           children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
@@ -1905,21 +1903,24 @@ const Main = () => {
         children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
           className: "bio",
           children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h3", {
-            children: "Vitest Test Suite"
+            children: "Vitest Accessibility Test Suite"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "This project was built with Deque's React component library 'Cauldron', and Vite with Vitest."
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development."
           })]
-        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
-          ref: a11yVidRef,
-          id: "a11y-vid",
-          loop: true,
-          children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+          className: "video-box",
+          children: /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+            ref: a11yVidRef,
+            id: "a11y-vid",
             loop: true,
-            src: "/a11y-vid.mp4",
-            type: "video/mp4"
-          }), "Your browser does not support the video tag."]
+            children: [/*#__PURE__*/(0,jsx_runtime.jsx)("source", {
+              loop: true,
+              src: "/a11y-vid.mp4",
+              type: "video/mp4"
+            }), "Your browser does not support the video tag."]
+          })
         }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
           githubLink: "https://github.com/ryanAllMad/a11y-react",
           projectLink: "",

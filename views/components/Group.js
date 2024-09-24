@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import ToProjectButtons from './ToProjectButtons.js';
 
 const Group = (props) => {
@@ -13,16 +13,15 @@ const Group = (props) => {
 		tooltipTitle,
 	} = props;
 	const groupRef = useRef();
-	const [clipClass, setClipClass] = useState('');
 
-	const handleMouseOver = () => {
-		setClipClass('polygon');
-	};
 	const handleOnScroll = () => {
 		const observe = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
-					setClipClass('polygon');
+					entry.target.classList.add('animate')
+					console.log(entry)
+				} else {
+					entry.target.classList.remove('animate')
 				}
 			});
 		});
@@ -31,19 +30,15 @@ const Group = (props) => {
 
 	useEffect(() => {
 		if (typeof window !== undefined) {
-			if (window.innerWidth <= 800) {
-				handleOnScroll();
-			}
+			window.addEventListener('scroll', handleOnScroll())
 		}
 	}, [window]);
 
 	return (
 		<div
 			ref={groupRef}
-			onFocus={handleMouseOver}
-			onMouseOver={handleMouseOver}
 			id={id}
-			className={`group ${clipClass}`}
+			className="group"
 			tabIndex={0}
 		>
 			<div className='bio'>

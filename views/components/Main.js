@@ -137,10 +137,11 @@ const Main = () => {
 			>
 				<div className='one-wrappper'>
 					<div className='bio'>
-						<h3>JS Job Helper: React App</h3>
+						<h3>JS Job Helper: Node App</h3>
 						<p>This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch.</p>
 						<p>I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy.</p>
 						</div>
+					<div className='video-box'>
 					<video
 						ref={vidRef}
 						id='js-vid'
@@ -152,6 +153,7 @@ const Main = () => {
 						/>
 						Your browser does not support the video tag.
 					</video>
+					</div>
 					<div class='clickme'>
 						<button aria-pressed={icon === '▣'} onClick={handleButton}><span className='click-icon'>{icon}</span>{clickMe}</button>
 					</div>
@@ -184,10 +186,11 @@ const Main = () => {
 			>
 				<div className='two-wrapper'>
 					<div className='bio'>
-						<h3>Vitest Test Suite</h3>
+						<h3>Vitest Accessibility Test Suite</h3>
 						<p>This project was built with Deque's React component library 'Cauldron', and Vite with Vitest.</p>
 						<p>I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development.</p>
 					</div>
+					<div className='video-box'>
 					<video
 						ref={a11yVidRef}
 						id='a11y-vid'
@@ -200,6 +203,7 @@ const Main = () => {
 						/>
 						Your browser does not support the video tag.
 					</video>
+					</div>
 					<ToProjectButtons
 						githubLink='https://github.com/ryanAllMad/a11y-react'
 						projectLink=''
