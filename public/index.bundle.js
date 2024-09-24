@@ -760,7 +760,8 @@ const Group = props => {
     projectLink,
     githubLink,
     projectTitle,
-    tooltipTitle
+    imageFile,
+    imageAlt
   } = props;
   const groupRef = (0,react.useRef)();
   const handleOnScroll = () => {
@@ -768,7 +769,6 @@ const Group = props => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate');
-          console.log(entry);
         } else {
           entry.target.classList.remove('animate');
         }
@@ -781,12 +781,12 @@ const Group = props => {
       window.addEventListener('scroll', handleOnScroll());
     }
   }, [window]);
-  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     ref: groupRef,
     id: id,
     className: "group",
     tabIndex: 0,
-    children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
       className: "bio",
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h3", {
         children: title
@@ -803,11 +803,16 @@ const Group = props => {
         children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
           githubLink: githubLink,
           projectLink: projectLink,
-          projectTitle: projectTitle,
-          tooltipTitle: tooltipTitle
+          projectTitle: projectTitle
         })
       })]
-    })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      className: "pic-wrapper",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)("img", {
+        src: `/images/${imageFile}`,
+        alt: `${imageAlt}`
+      })
+    })]
   });
 };
 /* harmony default export */ const components_Group = (Group);
@@ -1714,12 +1719,11 @@ var create = confetti_module_module.exports.create;
 
 
 const Main = () => {
-  const [playState, setPlayState] = (0,react.useState)(false);
-  const [vidOneClass, setVidOneClass] = (0,react.useState)('');
-  const [vidTwoClass, setVidTwoClass] = (0,react.useState)('');
   const [icon, setIcon] = (0,react.useState)('▶');
+  const [a11yIcon, setA11yIcon] = (0,react.useState)('▶');
+  const [clickMe, setClickMe] = (0,react.useState)('Click to Play');
+  const [clickA11yMe, setClickA11yMe] = (0,react.useState)('Click to Play');
   const [eatDrink, setEatDrink] = (0,react.useState)('748px');
-  const [clickMe, setClickMe] = (0,react.useState)('Click to Start Videos');
   const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
   const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
@@ -1728,46 +1732,47 @@ const Main = () => {
   const a11yVidRef = (0,react.useRef)();
   const playVid = el => {
     el.play();
+    el.style.opacity = '1';
   };
   const pauseVid = el => {
     el.pause();
+    el.style.opacity = '0.5';
   };
-  const handleButton = () => {
-    setPlayState(!playState);
-  };
-  const handlePlayState = ref => {
-    if (playState) {
-      playVid(ref);
+  const handleVidPlayState = () => {
+    if (icon === '▶') {
+      playVid(vidRef.current);
       setIcon('▣');
-      setClickMe('Stop videos');
+      setClickMe('Click to Stop');
+      confetti_module();
+    } else {
+      pauseVid(vidRef.current);
+      setIcon('▶');
+      setClickMe('Click to Play');
+    }
+  };
+  const handleA11yPlayState = () => {
+    if (a11yIcon === '▶') {
+      playVid(a11yVidRef.current);
+      setA11yIcon('▣');
+      setClickA11yMe('Click to Stop');
+      confetti_module();
+    } else {
+      pauseVid(a11yVidRef.current);
+      setA11yIcon('▶');
+      setClickA11yMe('Click to Play');
     }
   };
   (0,react.useEffect)(() => {
     if (typeof window !== undefined) {
-      window.addEventListener('mouseleave', () => {
-        setIsLoaded(false);
-      });
       window.addEventListener('scroll', () => {
         const scrollVal = window.scrollY;
         const newVal = 748 - scrollVal;
-        setEatDrink(`${newVal}px`);
+        if (newVal >= 0) {
+          setEatDrink(`${newVal}px`);
+        }
       });
     }
   }, [window]);
-  (0,react.useEffect)(() => {
-    if (playState) {
-      confetti_module();
-      setIcon('▣');
-      setClickMe('Stop videos');
-      playVid(vidRef.current);
-      playVid(a11yVidRef.current);
-    } else {
-      setIcon('▶');
-      setClickMe('Click to Start Videos');
-      pauseVid(vidRef.current);
-      pauseVid(a11yVidRef.current);
-    }
-  }, [playState]);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
     children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
       className: "project me",
@@ -1824,23 +1829,7 @@ const Main = () => {
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       tabIndex: 0,
-      onMouseEnter: () => {
-        handlePlayState(vidRef.current);
-        //setVidOneClass('show-vids')
-      },
-      onFocus: () => {
-        handlePlayState(vidRef.current);
-        //setVidOneClass('show-vids')
-      },
-      onBlur: () => {
-        setVidOneClass('');
-        pauseVid(vidRef.current);
-      },
-      onMouseLeave: () => {
-        setVidOneClass('');
-        pauseVid(vidRef.current);
-      },
-      className: `project one ${vidOneClass}`,
+      className: `project one`,
       children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "one-wrappper",
         children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
@@ -1848,13 +1837,13 @@ const Main = () => {
           children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h3", {
             children: "JS Job Helper: Node App"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-            children: "This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch."
+            children: "This project was built with Node, Express, Mongoose, MongoDB, React, Vite, Vitest, CSS3, and uses CircleCI to run Vitests in the Continuous Integration Pipeline."
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy."
           })]
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
           className: "video-box",
-          children: /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+          children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
             ref: vidRef,
             id: "js-vid",
             loop: true,
@@ -1862,17 +1851,17 @@ const Main = () => {
               src: "/js-job-helper.mp4",
               type: "video/mp4"
             }), "Your browser does not support the video tag."]
-          })
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-          class: "clickme",
-          children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
-            "aria-pressed": icon === '▣',
-            onClick: handleButton,
-            children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-              className: "click-icon",
-              children: icon
-            }), clickMe]
-          })
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+            class: "clickme",
+            children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
+              "aria-pressed": icon === '▣',
+              onClick: handleVidPlayState,
+              children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+                className: "click-icon",
+                children: icon
+              }), clickMe]
+            })
+          })]
         }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
           githubLink: "https://github.com/ryanAllMad/js-job-helper",
           projectLink: "",
@@ -1881,23 +1870,7 @@ const Main = () => {
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       tabIndex: 0,
-      onMouseEnter: () => {
-        //setVidTwoClass('show-vids')
-        handlePlayState(a11yVidRef.current);
-      },
-      onFocus: () => {
-        //setVidTwoClass('show-vids')
-        handlePlayState(a11yVidRef.current);
-      },
-      onBlur: () => {
-        setVidTwoClass('');
-        pauseVid(a11yVidRef.current);
-      },
-      onMouseLeave: () => {
-        setVidTwoClass('');
-        pauseVid(a11yVidRef.current);
-      },
-      className: `project two ${vidTwoClass}`,
+      className: `project two`,
       children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "two-wrapper",
         children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
@@ -1909,9 +1882,9 @@ const Main = () => {
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development."
           })]
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+        }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
           className: "video-box",
-          children: /*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
+          children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("video", {
             ref: a11yVidRef,
             id: "a11y-vid",
             loop: true,
@@ -1920,7 +1893,17 @@ const Main = () => {
               src: "/a11y-vid.mp4",
               type: "video/mp4"
             }), "Your browser does not support the video tag."]
-          })
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+            class: "clickme",
+            children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
+              "aria-pressed": a11yIcon === '▣',
+              onClick: handleA11yPlayState,
+              children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+                className: "click-icon",
+                children: a11yIcon
+              }), clickA11yMe]
+            })
+          })]
         }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
           githubLink: "https://github.com/ryanAllMad/a11y-react",
           projectLink: "",
@@ -1929,6 +1912,23 @@ const Main = () => {
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project three",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
+        id: "dnd",
+        title: "DnD Character sheet NextJS App",
+        description: `
+						My DnD Character sheet was build with accessibility in mind and features screen reader access to all features,
+						keyboard acccess to all features, skip blocks for easeir screen reader navigation, user prefers reduced motion assist, 
+						and passes color contrast minimums. This project was build with Next JS, Material UI, and published to Vercel. 
+						`,
+        imageFile: "yong-cell.png",
+        imageAlt: "mobile view of purple and grey dnd character sheet with female profile pic",
+        skills: dndSkills,
+        projectLink: "https://yong-character-sheet.vercel.app/",
+        githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
+        projectTitle: "DnD Character sheet"
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      className: "project four",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "portfolio",
         description: `
@@ -1942,21 +1942,6 @@ const Main = () => {
         projectTitle: "My portfolio"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "project four",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "dnd",
-        title: "DnD Character sheet NextJS App",
-        description: `
-						My DnD Character sheet was build with accessibility in mind and features screen reader access to all features,
-						keyboard acccess to all features, skip blocks for easeir screen reader navigation, user prefers reduced motion assist, 
-						and passes color contrast minimums. This project was build with Next JS, Material UI, and published to Vercel. 
-						`,
-        skills: dndSkills,
-        projectLink: "https://yong-character-sheet.vercel.app/",
-        githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
-        projectTitle: "DnD Character sheet"
-      })
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project five",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "ally",
@@ -1965,6 +1950,8 @@ const Main = () => {
 						This WIP, is a plugin developed for Content Creators that use WordPress as a live checklist
 						that alerts the author of common accessibility pitfalls as they write. It's akin to a linter for content creators.
 						`,
+        imageAlt: "plugin sidebar in wordress editor shows images that are missing alt and one click ability to remedy it.",
+        imageFile: "a11ycheckgif.gif",
         skills: allySkills,
         projectLink: "",
         githubLink: "https://github.com/ryanAllMad/a11y-checker",
@@ -1979,6 +1966,8 @@ const Main = () => {
 						My blog is where I use my passion for helping others, and educating engineers to resolve
 						issues related to front end, WordPress, or Accessibility Engineering. 
 						`,
+        imageAlt: "black pyramid with A M D, all mad designs logo on desktop screen.",
+        imageFile: "amd-desktop.png",
         skills: blogSkills,
         projectLink: "https://allmaddesigns.com",
         projectTitle: "My Tech Blog"

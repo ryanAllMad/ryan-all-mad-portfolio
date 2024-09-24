@@ -10,7 +10,8 @@ const Group = (props) => {
 		projectLink,
 		githubLink,
 		projectTitle,
-		tooltipTitle,
+		imageFile,
+		imageAlt
 	} = props;
 	const groupRef = useRef();
 
@@ -19,7 +20,6 @@ const Group = (props) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add('animate')
-					console.log(entry)
 				} else {
 					entry.target.classList.remove('animate')
 				}
@@ -55,9 +55,11 @@ const Group = (props) => {
 						githubLink={githubLink}
 						projectLink={projectLink}
 						projectTitle={projectTitle}
-						tooltipTitle={tooltipTitle}
 					/>
 				</div>
+			</div>
+			<div className='pic-wrapper'>
+				<img src={`/images/${imageFile}`} alt={`${imageAlt}`} />
 			</div>
 		</div>
 	);

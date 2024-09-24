@@ -6,12 +6,12 @@ import '../../assets/images/a11y-vid.mp4';
 import * as confetti from 'canvas-confetti';
 
 const Main = () => {
-	const [playState, setPlayState] = useState(false);
-	const [vidOneClass, setVidOneClass] = useState('')
-	const [vidTwoClass, setVidTwoClass] = useState('')
 	const [icon, setIcon] = useState('▶')
+	const [a11yIcon, setA11yIcon] = useState('▶')
+	const [clickMe, setClickMe] = useState('Click to Play');
+	const [clickA11yMe, setClickA11yMe] = useState('Click to Play');
 	const [eatDrink, setEatDrink] = useState('748px')
-	const [clickMe, setClickMe] = useState('Click to Start Videos');
+
 	const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
 	const allySkills = [
@@ -34,47 +34,48 @@ const Main = () => {
 	const a11yVidRef = useRef();
 	const playVid = (el) => {
 		el.play();
+		el.style.opacity = '1'
 	};
 	const pauseVid = (el) => {
 		el.pause();
+		el.style.opacity = '0.5'
 	};
 
-	const handleButton = () => {	
-		setPlayState(!playState)
-	};
-	const handlePlayState = (ref) => {
-		if(playState) {
-			playVid(ref)
+	const handleVidPlayState = () => {
+		if (icon === '▶') {
+			playVid(vidRef.current)
 			setIcon('▣')
-			setClickMe('Stop videos');
+			setClickMe('Click to Stop');
+			confetti.default();
+		} else {
+			pauseVid(vidRef.current)
+			setIcon('▶')
+			setClickMe('Click to Play');
+		}
+	}
+	const handleA11yPlayState = () => {
+		if (a11yIcon === '▶') {
+			playVid(a11yVidRef.current)
+			setA11yIcon('▣')
+			setClickA11yMe('Click to Stop');
+			confetti.default();
+		} else {
+			pauseVid(a11yVidRef.current)
+			setA11yIcon('▶')
+			setClickA11yMe('Click to Play');
 		}
 	}
 	useEffect(() => {
 		if (typeof window !== undefined) {
-			window.addEventListener('mouseleave', () => {
-				setIsLoaded(false);
-			});
 			window.addEventListener('scroll', () => {
 				const scrollVal = window.scrollY
 				const newVal = 748 - scrollVal
-				setEatDrink(`${newVal}px`)
+				if(newVal >= 0) {
+					setEatDrink(`${newVal}px`)
+				}
 			})
 		}
 	}, [window]);
-	useEffect(() => {
-		if(playState) {
-			confetti.default();
-			setIcon('▣')
-			setClickMe('Stop videos');
-			playVid(vidRef.current);
-			playVid(a11yVidRef.current);
-		} else {
-			setIcon('▶')
-			setClickMe('Click to Start Videos');
-			pauseVid(vidRef.current);
-			pauseVid(a11yVidRef.current);
-		}
-	}, [playState])
 	return (
 		<main>
 			<section className='project me'>
@@ -117,29 +118,19 @@ const Main = () => {
 			</section>
 			<section
 				tabIndex={0}
-				onMouseEnter={() => {
-					handlePlayState(vidRef.current)
-					//setVidOneClass('show-vids')
-				}}
-				onFocus={() => {
-					handlePlayState(vidRef.current)
-					//setVidOneClass('show-vids')
-				}}
-				onBlur={() => {
-					setVidOneClass('')
-					pauseVid(vidRef.current)
-				}}
-				onMouseLeave={() => {
-					setVidOneClass('')
-					pauseVid(vidRef.current)
-				}}
-				className={`project one ${vidOneClass}`}
+				className={`project one`}
 			>
 				<div className='one-wrappper'>
 					<div className='bio'>
 						<h3>JS Job Helper: Node App</h3>
-						<p>This project was built with Node, MongoDB, React, Webpack, Babel, and CSS from scratch.</p>
-						<p>I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy.</p>
+						<p>
+							This project was built with Node, Express, Mongoose, MongoDB, React, Vite, Vitest, CSS3, and uses CircleCI 
+							to run Vitests in the Continuous Integration Pipeline.
+						</p>
+						<p>
+							I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor
+							their resume's and save them precious time and energy.
+						</p>
 						</div>
 					<div className='video-box'>
 					<video
@@ -153,9 +144,9 @@ const Main = () => {
 						/>
 						Your browser does not support the video tag.
 					</video>
-					</div>
 					<div class='clickme'>
-						<button aria-pressed={icon === '▣'} onClick={handleButton}><span className='click-icon'>{icon}</span>{clickMe}</button>
+						<button aria-pressed={icon === '▣'} onClick={handleVidPlayState}><span className='click-icon'>{icon}</span>{clickMe}</button>
+					</div>
 					</div>
 					<ToProjectButtons
 						githubLink='https://github.com/ryanAllMad/js-job-helper'
@@ -166,23 +157,7 @@ const Main = () => {
 			</section>
 			<section
 				tabIndex={0}
-				onMouseEnter={() => {
-					//setVidTwoClass('show-vids')
-					handlePlayState(a11yVidRef.current)
-				}}
-				onFocus={() => {
-					//setVidTwoClass('show-vids')
-					handlePlayState(a11yVidRef.current)
-				}}
-				onBlur={() => {
-					setVidTwoClass('')
-					pauseVid(a11yVidRef.current)
-				}}
-				onMouseLeave={() => {
-					setVidTwoClass('')
-					pauseVid(a11yVidRef.current)
-				}}
-				className={`project two ${vidTwoClass}`}
+				className={`project two`}
 			>
 				<div className='two-wrapper'>
 					<div className='bio'>
@@ -203,6 +178,9 @@ const Main = () => {
 						/>
 						Your browser does not support the video tag.
 					</video>
+					<div class='clickme'>
+						<button aria-pressed={a11yIcon === '▣'} onClick={handleA11yPlayState}><span className='click-icon'>{a11yIcon}</span>{clickA11yMe}</button>
+					</div>
 					</div>
 					<ToProjectButtons
 						githubLink='https://github.com/ryanAllMad/a11y-react'
@@ -213,6 +191,25 @@ const Main = () => {
 			</section>
 			<section
 				className='project three'
+			>
+				<Group
+					id='dnd'
+					title='DnD Character sheet NextJS App'
+					description={`
+						My DnD Character sheet was build with accessibility in mind and features screen reader access to all features,
+						keyboard acccess to all features, skip blocks for easeir screen reader navigation, user prefers reduced motion assist, 
+						and passes color contrast minimums. This project was build with Next JS, Material UI, and published to Vercel. 
+						`}
+					imageFile="yong-cell.png"
+					imageAlt="mobile view of purple and grey dnd character sheet with female profile pic"
+					skills={dndSkills}
+					projectLink='https://yong-character-sheet.vercel.app/'
+					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
+					projectTitle='DnD Character sheet'
+				/>
+			</section>
+			<section
+				className='project four'
 			>
 				<Group
 					id='portfolio'
@@ -228,23 +225,6 @@ const Main = () => {
 				/>
 			</section>
 			<section
-				className='project four'
-			>
-				<Group
-					id='dnd'
-					title='DnD Character sheet NextJS App'
-					description={`
-						My DnD Character sheet was build with accessibility in mind and features screen reader access to all features,
-						keyboard acccess to all features, skip blocks for easeir screen reader navigation, user prefers reduced motion assist, 
-						and passes color contrast minimums. This project was build with Next JS, Material UI, and published to Vercel. 
-						`}
-					skills={dndSkills}
-					projectLink='https://yong-character-sheet.vercel.app/'
-					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
-					projectTitle='DnD Character sheet'
-				/>
-			</section>
-			<section
 				className='project five'
 			>
 				<Group
@@ -254,6 +234,8 @@ const Main = () => {
 						This WIP, is a plugin developed for Content Creators that use WordPress as a live checklist
 						that alerts the author of common accessibility pitfalls as they write. It's akin to a linter for content creators.
 						`}
+					imageAlt="plugin sidebar in wordress editor shows images that are missing alt and one click ability to remedy it."
+					imageFile="a11ycheckgif.gif"
 					skills={allySkills}
 					projectLink=''
 					githubLink='https://github.com/ryanAllMad/a11y-checker'
@@ -270,6 +252,8 @@ const Main = () => {
 						My blog is where I use my passion for helping others, and educating engineers to resolve
 						issues related to front end, WordPress, or Accessibility Engineering. 
 						`}
+					imageAlt="black pyramid with A M D, all mad designs logo on desktop screen."
+					imageFile="amd-desktop.png"
 					skills={blogSkills}
 					projectLink='https://allmaddesigns.com'
 					projectTitle='My Tech Blog'
