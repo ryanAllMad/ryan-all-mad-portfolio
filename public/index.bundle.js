@@ -725,24 +725,30 @@ const ToProjectButtons = props => {
   } = props;
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     className: "js-vid-caption",
-    children: [projectLink && /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
-      className: `btn ${projectLink}`,
-      href: projectLink,
-      tabIndex: "0",
-      target: "_blank",
-      children: [`${projectTitle} ⍈`, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-        className: "screen-reader-text",
-        children: "to published project"
-      })]
-    }), githubLink && /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
-      className: `btn ${!githubLink}`,
-      href: githubLink,
-      tabIndex: "0",
-      target: "_blank",
-      children: [`${projectTitle}: See the code ⍈`, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-        className: "screen-reader-text",
-        children: "on Github"
-      })]
+    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      className: "btn",
+      children: projectLink && /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
+        className: `${projectLink}`,
+        href: projectLink,
+        tabIndex: "0",
+        target: "_blank",
+        children: [`${projectTitle} ⍈`, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+          className: "screen-reader-text",
+          children: "to published project"
+        })]
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+      className: "btn",
+      children: githubLink && /*#__PURE__*/(0,jsx_runtime.jsxs)("a", {
+        className: `${!githubLink}`,
+        href: githubLink,
+        tabIndex: "0",
+        target: "_blank",
+        children: [`See the code ⍈`, /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+          className: "screen-reader-text",
+          children: "on Github"
+        })]
+      })
     })]
   });
 };
@@ -1720,6 +1726,7 @@ var create = confetti_module_module.exports.create;
 
 
 const Main = () => {
+  const [mePic, setMePic] = (0,react.useState)('me-smile.png');
   const [icon, setIcon] = (0,react.useState)('▶');
   const [a11yIcon, setA11yIcon] = (0,react.useState)('▶');
   const [clickMe, setClickMe] = (0,react.useState)('Click to Play');
@@ -1768,10 +1775,32 @@ const Main = () => {
       window.addEventListener('scroll', () => {
         const scrollVal = window.scrollY;
         const newVal = 748 - scrollVal;
+        const windowPercentageScrolled = Math.round(scrollVal / window.innerHeight * 100);
+        if (windowPercentageScrolled >= 20) {
+          setMePic('me-oop.png');
+        } else {
+          setMePic('me-smile.png');
+        }
         if (newVal >= 0) {
           setEatDrink(`${newVal}px`);
         }
       });
+      if (window.innerWidth <= 999) {
+        setEatDrink(`300px`);
+        window.addEventListener('scroll', () => {
+          const scrollVal = window.scrollY;
+          const newMobileVal = 300 - scrollVal;
+          const mobilePercentageScrolled = Math.round(scrollVal / window.innerHeight * 100);
+          if (newMobileVal >= 0) {
+            setEatDrink(`${newMobileVal}px`);
+          }
+          if (mobilePercentageScrolled >= 1) {
+            setMePic('me-oop.png');
+          } else {
+            setMePic('me-smile.png');
+          }
+        });
+      }
     }
   }, [window]);
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("main", {
@@ -1785,7 +1814,7 @@ const Main = () => {
         children: /*#__PURE__*/(0,jsx_runtime.jsx)("img", {
           loading: "eager",
           alt: "white woman, red hair, smiling.",
-          src: "/images/me.png"
+          src: `/images/${mePic}`
         })
       }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "bio",
@@ -1844,6 +1873,8 @@ const Main = () => {
             children: "This project was built with Node, Express, Mongoose, MongoDB, React, Vite, Vitest, CSS3, and uses CircleCI to run Vitests in the Continuous Integration Pipeline."
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy."
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
+            githubLink: "https://github.com/ryanAllMad/js-job-helper"
           })]
         }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
           className: "video-box",
@@ -1866,10 +1897,6 @@ const Main = () => {
               }), clickMe]
             })
           })]
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
-          githubLink: "https://github.com/ryanAllMad/js-job-helper",
-          projectLink: "",
-          projectTitle: "JS Job Helper: Open Source Project"
         })]
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
@@ -1885,6 +1912,8 @@ const Main = () => {
             children: "This project was built with Deque's React component library 'Cauldron', and Vite with Vitest."
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
             children: "I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development."
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
+            githubLink: "https://github.com/ryanAllMad/a11y-react"
           })]
         }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
           className: "video-box",
@@ -1908,10 +1937,6 @@ const Main = () => {
               }), clickA11yMe]
             })
           })]
-        }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_ToProjectButtons, {
-          githubLink: "https://github.com/ryanAllMad/a11y-react",
-          projectLink: "",
-          projectTitle: "WAI-ARIA Authoring Patterns Test Suite"
         })]
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {

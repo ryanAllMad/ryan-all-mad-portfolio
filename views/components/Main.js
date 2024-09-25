@@ -6,6 +6,7 @@ import '../../assets/images/a11y-vid.mp4';
 import * as confetti from 'canvas-confetti';
 
 const Main = () => {
+	const [mePic, setMePic] = useState('me-smile.png')
 	const [icon, setIcon] = useState('▶')
 	const [a11yIcon, setA11yIcon] = useState('▶')
 	const [clickMe, setClickMe] = useState('Click to Play');
@@ -70,17 +71,41 @@ const Main = () => {
 			window.addEventListener('scroll', () => {
 				const scrollVal = window.scrollY
 				const newVal = 748 - scrollVal
+				const windowPercentageScrolled = Math.round((scrollVal / window.innerHeight) * 100)
+				if(windowPercentageScrolled >= 20) {
+					setMePic('me-oop.png')
+				} else {
+					setMePic('me-smile.png')
+				}
 				if(newVal >= 0) {
 					setEatDrink(`${newVal}px`)
 				}
 			})
+			if(window.innerWidth <= 999) {
+				setEatDrink(`300px`)
+				window.addEventListener('scroll', () => {
+					const scrollVal = window.scrollY
+					const newMobileVal = 300 - scrollVal
+					const mobilePercentageScrolled = Math.round((scrollVal / window.innerHeight) * 100)
+					if(newMobileVal >= 0) {
+						setEatDrink(`${newMobileVal}px`)
+					}
+					if(mobilePercentageScrolled >= 1) {
+						setMePic('me-oop.png')
+					} else {
+						setMePic('me-smile.png')
+					}
+				})
+				
+				
+			}
 		}
 	}, [window]);
 	return (
 		<main>
 			<section className='project me'>
 				<div className='profile img' style={{width: eatDrink}}>
-					<img loading='eager' alt="white woman, red hair, smiling." src="/images/me.png" />
+					<img loading='eager' alt="white woman, red hair, smiling." src={`/images/${mePic}`} />
 				</div>
 				<div className='bio'>
 					<h1>Ryan Duer: Software Engineer</h1>
@@ -132,6 +157,9 @@ const Main = () => {
 							I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor
 							their resume's and save them precious time and energy.
 						</p>
+						<ToProjectButtons
+							githubLink='https://github.com/ryanAllMad/js-job-helper'
+						/>
 						</div>
 					<div className='video-box'>
 					<video
@@ -149,11 +177,6 @@ const Main = () => {
 						<button aria-pressed={icon === '▣'} onClick={handleVidPlayState}><span className='click-icon'>{icon}</span>{clickMe}</button>
 					</div>
 					</div>
-					<ToProjectButtons
-						githubLink='https://github.com/ryanAllMad/js-job-helper'
-						projectLink=''
-						projectTitle='JS Job Helper: Open Source Project'
-					/>
 				</div>
 			</section>
 			<section
@@ -165,6 +188,9 @@ const Main = () => {
 						<h3>Vitest Accessibility Test Suite</h3>
 						<p>This project was built with Deque's React component library 'Cauldron', and Vite with Vitest.</p>
 						<p>I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development.</p>
+						<ToProjectButtons
+							githubLink='https://github.com/ryanAllMad/a11y-react'
+						/>
 					</div>
 					<div className='video-box'>
 					<video
@@ -183,11 +209,6 @@ const Main = () => {
 						<button aria-pressed={a11yIcon === '▣'} onClick={handleA11yPlayState}><span className='click-icon'>{a11yIcon}</span>{clickA11yMe}</button>
 					</div>
 					</div>
-					<ToProjectButtons
-						githubLink='https://github.com/ryanAllMad/a11y-react'
-						projectLink=''
-						projectTitle='WAI-ARIA Authoring Patterns Test Suite'
-					/>
 				</div>
 			</section>
 			<section

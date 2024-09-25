@@ -9,23 +9,28 @@ const ToProjectButtons = (props) => {
 
 	return (
 		<div className='js-vid-caption'>
-			{projectLink && <a
-				className={`btn ${projectLink}`}
-				href={projectLink}
-				tabIndex='0'
-				target='_blank'
-			>
-				{`${projectTitle} ⍈`}<span className='screen-reader-text'>to published project</span>
-			</a>}
-			{githubLink && <a
-				className={`btn ${!githubLink}`}
-				href={githubLink}
-				tabIndex='0'
-				target='_blank'
-			>
-			{`${projectTitle}: See the code ⍈`}
-						<span className='screen-reader-text'>on Github</span>
-			</a>}
+			<div className='btn'>
+				{projectLink && <a
+					className={`${projectLink}`}
+					href={projectLink}
+					tabIndex='0'
+					target='_blank'
+				>
+					{`${projectTitle} ⍈`}<span className='screen-reader-text'>to published project</span>
+				</a>}
+			</div>
+			<div className='btn'>
+				{githubLink && <a
+					className={`${!githubLink}`}
+					href={githubLink}
+					tabIndex='0'
+					target='_blank'
+				>
+				{`See the code ⍈`}
+							<span className='screen-reader-text'>on Github</span>
+				</a>}
+			</div>
+			
 		</div>
 	);
 };
