@@ -72,7 +72,7 @@ const Main = () => {
 				const scrollVal = window.scrollY
 				const newVal = 748 - scrollVal
 				const windowPercentageScrolled = Math.round((scrollVal / window.innerHeight) * 100)
-				if(windowPercentageScrolled >= 20) {
+				if(windowPercentageScrolled >= 15) {
 					setMePic('me-oop.png')
 				} else {
 					setMePic('me-smile.png')
@@ -173,8 +173,10 @@ const Main = () => {
 						/>
 						Your browser does not support the video tag.
 					</video>
-					<div class='clickme'>
-						<button aria-pressed={icon === '▣'} onClick={handleVidPlayState}><span className='click-icon'>{icon}</span>{clickMe}</button>
+					<div className='clickme'>
+						<div class='btn'>
+							<button aria-pressed={icon === '▣'} onClick={handleVidPlayState}><span className='click-icon'>{icon}</span>{clickMe}</button>
+						</div>
 					</div>
 					</div>
 				</div>
@@ -183,33 +185,18 @@ const Main = () => {
 				tabIndex={0}
 				className={`project two`}
 			>
-				<div className='two-wrapper'>
-					<div className='bio'>
-						<h3>Vitest Accessibility Test Suite</h3>
-						<p>This project was built with Deque's React component library 'Cauldron', and Vite with Vitest.</p>
-						<p>I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development.</p>
-						<ToProjectButtons
-							githubLink='https://github.com/ryanAllMad/a11y-react'
-						/>
-					</div>
-					<div className='video-box'>
-					<video
-						ref={a11yVidRef}
-						id='a11y-vid'
-						loop
-					>
-						<source
-							loop
-							src='/a11y-vid.mp4'
-							type='video/mp4'
-						/>
-						Your browser does not support the video tag.
-					</video>
-					<div class='clickme'>
-						<button aria-pressed={a11yIcon === '▣'} onClick={handleA11yPlayState}><span className='click-icon'>{a11yIcon}</span>{clickA11yMe}</button>
-					</div>
-					</div>
-				</div>
+				<Group
+					id='portfolio'
+					description={`
+						My portfolio is designed with CSS3 features like container queries and performant animations. 
+						I build this with a Node backend, React on the Server and on the Front End, and launchd it on Azure.
+						It took me about a week for the initial version to complete this project, though I've gone through several iterations now.
+						`}
+					title='Portfolio: Node App'
+					skills={portfolioSkills}
+					githubLink='https://github.com/ryanAllMad/ryan-all-mad-portfolio'
+					projectTitle='My portfolio'
+				/>
 			</section>
 			<section
 				className='project three'
@@ -233,18 +220,35 @@ const Main = () => {
 			<section
 				className='project four'
 			>
-				<Group
-					id='portfolio'
-					description={`
-						My portfolio is designed with CSS3 features like container queries and performant animations. 
-						I build this with a Node backend, React on the Server and on the Front End, and launchd it on Azure.
-						It took me about a week for the initial version to complete this project, though I've gone through several iterations now.
-						`}
-					title='Portfolio: allmaddev.com'
-					skills={portfolioSkills}
-					githubLink='https://github.com/ryanAllMad/ryan-all-mad-portfolio'
-					projectTitle='My portfolio'
-				/>
+				<div className='two-wrapper'>
+					<div className='bio'>
+						<h3>Vitest Accessibility Test Suite</h3>
+						<p>This project was built with Deque's React component library 'Cauldron', and Vite with Vitest.</p>
+						<p>I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development.</p>
+						<ToProjectButtons
+							githubLink='https://github.com/ryanAllMad/a11y-react'
+						/>
+					</div>
+					<div className='video-box'>
+					<video
+						ref={a11yVidRef}
+						id='a11y-vid'
+						loop
+					>
+						<source
+							loop
+							src='/a11y-vid.mp4'
+							type='video/mp4'
+						/>
+						Your browser does not support the video tag.
+					</video>
+					<div className='clickme'>
+						<div class='btn'>
+							<button aria-pressed={a11yIcon === '▣'} onClick={handleA11yPlayState}><span className='click-icon'>{a11yIcon}</span>{clickA11yMe}</button>
+						</div>
+					</div>
+					</div>
+				</div>
 			</section>
 			<section
 				className='project five'

@@ -1776,7 +1776,7 @@ const Main = () => {
         const scrollVal = window.scrollY;
         const newVal = 748 - scrollVal;
         const windowPercentageScrolled = Math.round(scrollVal / window.innerHeight * 100);
-        if (windowPercentageScrolled >= 20) {
+        if (windowPercentageScrolled >= 15) {
           setMePic('me-oop.png');
         } else {
           setMePic('me-smile.png');
@@ -1887,14 +1887,17 @@ const Main = () => {
               type: "video/mp4"
             }), "Your browser does not support the video tag."]
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-            class: "clickme",
-            children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
-              "aria-pressed": icon === '▣',
-              onClick: handleVidPlayState,
-              children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-                className: "click-icon",
-                children: icon
-              }), clickMe]
+            className: "clickme",
+            children: /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+              class: "btn",
+              children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
+                "aria-pressed": icon === '▣',
+                onClick: handleVidPlayState,
+                children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+                  className: "click-icon",
+                  children: icon
+                }), clickMe]
+              })
             })
           })]
         })]
@@ -1902,6 +1905,37 @@ const Main = () => {
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       tabIndex: 0,
       className: `project two`,
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
+        id: "portfolio",
+        description: `
+						My portfolio is designed with CSS3 features like container queries and performant animations. 
+						I build this with a Node backend, React on the Server and on the Front End, and launchd it on Azure.
+						It took me about a week for the initial version to complete this project, though I've gone through several iterations now.
+						`,
+        title: "Portfolio: Node App",
+        skills: portfolioSkills,
+        githubLink: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
+        projectTitle: "My portfolio"
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      className: "project three",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
+        id: "dnd",
+        title: "DnD Character sheet NextJS App",
+        description: `
+						My DnD Character sheet was build with accessibility in mind and features screen reader access to all features,
+						keyboard acccess to all features, skip blocks for easeir screen reader navigation, user prefers reduced motion assist, 
+						and passes color contrast minimums. This project was build with Next JS, Material UI, and published to Vercel. 
+						`,
+        imageFile: "yong-cell.png",
+        imageAlt: "mobile view of purple and grey dnd character sheet with female profile pic",
+        skills: dndSkills,
+        projectLink: "https://yong-character-sheet.vercel.app/",
+        githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
+        projectTitle: "DnD Character sheet"
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      className: "project four",
       children: /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "two-wrapper",
         children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
@@ -1927,48 +1961,20 @@ const Main = () => {
               type: "video/mp4"
             }), "Your browser does not support the video tag."]
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-            class: "clickme",
-            children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
-              "aria-pressed": a11yIcon === '▣',
-              onClick: handleA11yPlayState,
-              children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-                className: "click-icon",
-                children: a11yIcon
-              }), clickA11yMe]
+            className: "clickme",
+            children: /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+              class: "btn",
+              children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
+                "aria-pressed": a11yIcon === '▣',
+                onClick: handleA11yPlayState,
+                children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+                  className: "click-icon",
+                  children: a11yIcon
+                }), clickA11yMe]
+              })
             })
           })]
         })]
-      })
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "project three",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "dnd",
-        title: "DnD Character sheet NextJS App",
-        description: `
-						My DnD Character sheet was build with accessibility in mind and features screen reader access to all features,
-						keyboard acccess to all features, skip blocks for easeir screen reader navigation, user prefers reduced motion assist, 
-						and passes color contrast minimums. This project was build with Next JS, Material UI, and published to Vercel. 
-						`,
-        imageFile: "yong-cell.png",
-        imageAlt: "mobile view of purple and grey dnd character sheet with female profile pic",
-        skills: dndSkills,
-        projectLink: "https://yong-character-sheet.vercel.app/",
-        githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
-        projectTitle: "DnD Character sheet"
-      })
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "project four",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "portfolio",
-        description: `
-						My portfolio is designed with CSS3 features like container queries and performant animations. 
-						I build this with a Node backend, React on the Server and on the Front End, and launchd it on Azure.
-						It took me about a week for the initial version to complete this project, though I've gone through several iterations now.
-						`,
-        title: "Portfolio: allmaddev.com",
-        skills: portfolioSkills,
-        githubLink: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
-        projectTitle: "My portfolio"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project five",

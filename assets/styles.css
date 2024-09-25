@@ -47,8 +47,11 @@ footer {
     justify-content: space-between;
     align-items: flex-start;
     flex-flow: row wrap;
-	background-color: #CB5338;
+	background-color: #a93e27;
 	color: #fff;
+}
+footer a {
+    color: #dce5f7;
 }
 footer > * {
     padding: 0 1rem 0 1rem;
@@ -125,7 +128,7 @@ header {
 	background-color: #fff;
 	top: 0;
 	align-items: flex-end;
-	z-index: 2;
+	z-index: 12;
 	height: 140px;
 }
 header .header-hide {
@@ -238,7 +241,7 @@ section.heading .heading-wave {
 	background-color: #c2d0ed;
 }
 .four {
-	background: #4a4949;
+	background: #d4d2d2;
 }
 .five {
 	background-color: #252424;
@@ -251,15 +254,17 @@ section.heading .heading-wave {
 	width: calc(100% - 1em);
     height: auto;
 	color: #fff;
-	opacity: 0;
-	filter:blur(5px);
 	font-size: 16px;
 	display: flex;
 	justify-content: space-around;
     align-items: center;
 	flex-flow: column nowrap;
 }
-.group.animate {
+.group > * {
+	opacity: 0;
+	filter:blur(5px);
+}
+.group.animate > * {
 	opacity: 1;
 	filter:blur(0px);
 }
@@ -282,18 +287,18 @@ section.heading .heading-wave {
 .project.three .group.animate > *:last-child {
     transform: translateY(0);
 }
-.project.four .group > *:first-child {
+.project.two .group > *:first-child {
     transform: translateX(-100%);
 	transition: all 1.4s ease-in-out 0.75s;
 }
-.project.four .group.animate > *:first-child {
+.project.two .group.animate > *:first-child {
     transform: translateX(0);
 }
-.project.four .group > *:last-child {
+.project.two .group > *:last-child {
     transform: translateY(-50%);
 	transition: all 1.4s ease-in-out 0.75s;
 }
-.project.four .group.animate > *:last-child {
+.project.two .group.animate > *:last-child {
     transform: translateY(0);
 }
 .project.five .group > *:first-child {
@@ -328,6 +333,24 @@ section.heading .heading-wave {
 .buttons {
     margin-top: 0.5em;
 }
+.clickme {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	transition: all 1s ease-in-out;
+}
+.clickme button {
+	background-color: transparent;
+	border: none;
+	font-weight: 700;
+    font-size: 18px;
+}
+.clickme:has(button[aria-pressed=true]) {
+    top: 10px;
+    left: 0;
+    transform: translate(10px, -10px);
+}
 .btn {
 	display: inline-flex;
     font-weight: 700;
@@ -336,10 +359,10 @@ section.heading .heading-wave {
     position: relative;
     margin-right: 2em;
 }
-.btn:not(:has( a)) {
+.btn:not(:has( a), :has( button)) {
     display: none;
 }
-.btn a {
+.btn > * {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -351,8 +374,7 @@ section.heading .heading-wave {
 	background-color: rgba(225,225,225, 0.0532);
 	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 	border-radius: 30px;
-	border-top: 1px solid rgba(250, 52, 52, 0.15);
-	border-bottom: 1px solid rgba(255,255,255, 0.05);
+	border: 1px solid rgba(255,255,255, 0.05);
 	z-index: 10;
 	color:#000;
 	cursor: pointer;
@@ -366,24 +388,26 @@ section.heading .heading-wave {
 	overflow: hidden;
 	backdrop-filter: blur(15px);
 }
-.btn:hover a, 
-.btn:focus a {
+.btn:hover > *, 
+.btn:focus > *,
+.clickme button[aria-pressed="true"] {
 	letter-spacing: 1px;
 	color: #fff;
 }
-.btn a::before {
+.btn > *::before {
 	content: "";
 	position: absolute;
 	top:0;
 	left:0;
 	width: 50%;
 	height: 100%;
-	background: linear-gradient(to left, rgba(255, 255, 255, 0.149), transparent);
+	background: linear-gradient(270deg, #07205059, transparent);
 	transform: skewX(45deg);
 	transition: 0.5s;
 	transition-delay: 0s;
 }
-.btn a:hover::before {
+.btn > *:hover::before,
+.btn button[aria-pressed=true]::before {
 	transform: skewX(45deg) translateX(200%);
 	transition-delay: 0s;
 }
@@ -400,7 +424,11 @@ section.heading .heading-wave {
 	transition: 0.5s;
 	transition-delay: 0s;
 }
-.btn:hover::before {
+.clickme .btn::before {
+    bottom: -7px;
+}
+.btn:hover::before,
+.btn:has( button[aria-pressed=true])::before {
 	bottom: -5px;
 	height: 50%;
 	width: 80%;
@@ -419,7 +447,8 @@ section.heading .heading-wave {
 	transition: 0.5s;
 	transition-delay: 0s;
 }
-.btn:hover::after {
+.btn:hover::after,
+.btn:has( button[aria-pressed=true])::after {
 	top: 0;
 	height: 50%;
 	width: 80%;
@@ -489,30 +518,8 @@ header .contact.first {
 #a11y-vid, #js-vid {
 	border-radius: 30px;
 	max-width: 100%;
-    transition: all 1s;
 	opacity: 0.5;
-}
-
-.clickme {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.clickme button {
-    background-color: #c2d0ed;
-    color: #000;
-    margin: auto;
-    text-align: center;
-    font-size: 18px;
-    letter-spacing: .1em;
-    padding: 14px;
-	border-radius: 4px;
-	border: 1px solid black;
-}
-.clickme button[aria-pressed="true"] {
-	background-color: transparent;
-	color: #252424;
+    transition: all 1s;
 }
 
 @media screen and (min-width: 1000px) {
@@ -608,6 +615,8 @@ header .contact.first {
 @container (max-width: 640px) {
 	.js-vid-caption {
 		flex-wrap: wrap;
+		min-height: 200px;
+        align-items: start;
 	}
 
 }
