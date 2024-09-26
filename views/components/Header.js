@@ -24,7 +24,7 @@ const Header = () => {
 
 	return (
 		<>
-			<header className='desktop-hidden'>
+			<header>
 				<div
 					aria-expanded={showSkills}
 					aria-controls='skills-menu'

@@ -1,3 +1,5 @@
+import CrossOffLink from "./CrossOffLink.js";
+
 const ShowSkills = (props) => {
 	const { onClick, classes } = props;
 	const skillsArr = [
@@ -26,12 +28,7 @@ const ShowSkills = (props) => {
 				{skillsArr.map((sk) => (
 					<li key={sk.toLowerCase()}>{sk}</li>
 				))}
-				<a
-					href='https://codepen.io/all-mad-designs'
-					target='_blank'
-				>
-					See my CSS portfolio here ⍈
-				</a>
+				<CrossOffLink href="https://codepen.io/all-mad-designs" dataText="See my CSS portfolio here ⍈" />
 			</ul>
 			<button
 				class='close-skills'

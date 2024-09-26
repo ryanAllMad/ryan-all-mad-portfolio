@@ -1,20 +1,17 @@
+import CrossOffLink from "./CrossOffLink.js";
+
 const Contact = () => {
 	return (
 		<>
 			<section className="contact first">
-				<h1>Software Engineer</h1>
+				<h2>Software Engineer</h2>
 			</section>
 			<section className="contact second">
 			<h2 className="header-hide">Skills</h2>
 				<p className="header-hide">
 					JavaScript | React | Typescript | Redux | Node | SCSS/CSS |
 					PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg <br />
-					<a
-					href='https://codepen.io/all-mad-designs'
-					target='_blank'
-				>
-					See my CSS portfolio here ⍈
-				</a>
+					<CrossOffLink href='https://codepen.io/all-mad-designs' dataText="See my CSS portfolio here ⍈" />
 				</p>
 			</section>
 			<section className="contact third">
