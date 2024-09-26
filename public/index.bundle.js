@@ -567,7 +567,27 @@ var client = __webpack_require__(338);
 var react = __webpack_require__(540);
 // EXTERNAL MODULE: ./node_modules/react/jsx-runtime.js
 var jsx_runtime = __webpack_require__(848);
+;// CONCATENATED MODULE: ./views/components/CrossOffLink.js
+
+const CrossOffLink = _ref => {
+  let {
+    href,
+    dataText
+  } = _ref;
+  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+    className: "link-wrapper",
+    children: /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+      "data-text": dataText,
+      className: "link",
+      target: "_blank",
+      href: href,
+      children: dataText
+    })
+  });
+};
+/* harmony default export */ const components_CrossOffLink = (CrossOffLink);
 ;// CONCATENATED MODULE: ./views/components/Contact.js
+
 
 const Contact = () => {
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
@@ -583,10 +603,9 @@ const Contact = () => {
         children: "Skills"
       }), /*#__PURE__*/(0,jsx_runtime.jsxs)("p", {
         className: "header-hide",
-        children: ["JavaScript | React | Typescript | Redux | Node | SCSS/CSS | PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg ", /*#__PURE__*/(0,jsx_runtime.jsx)("br", {}), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+        children: ["JavaScript | React | Typescript | Redux | Node | SCSS/CSS | PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg ", /*#__PURE__*/(0,jsx_runtime.jsx)("br", {}), /*#__PURE__*/(0,jsx_runtime.jsx)(components_CrossOffLink, {
           href: "https://codepen.io/all-mad-designs",
-          target: "_blank",
-          children: "See my CSS portfolio here \u2348"
+          dataText: "See my CSS portfolio here \u2348"
         })]
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("section", {
@@ -625,6 +644,7 @@ const Contact = () => {
 /* harmony default export */ const components_Contact = (Contact);
 ;// CONCATENATED MODULE: ./views/components/ShowSkills.js
 
+
 const ShowSkills = props => {
   const {
     onClick,
@@ -640,10 +660,9 @@ const ShowSkills = props => {
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("ul", {
       children: [skillsArr.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
         children: sk
-      }, sk.toLowerCase())), /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+      }, sk.toLowerCase())), /*#__PURE__*/(0,jsx_runtime.jsx)(components_CrossOffLink, {
         href: "https://codepen.io/all-mad-designs",
-        target: "_blank",
-        children: "See my CSS portfolio here \u2348"
+        dataText: "See my CSS portfolio here \u2348"
       })]
     }), /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
       class: "close-skills",
@@ -1822,6 +1841,7 @@ const VideoGroup = _ref => {
 
 
 
+
 const Main = () => {
   const [mePic, setMePic] = (0,react.useState)('me-smile.png');
   const [eatDrink, setEatDrink] = (0,react.useState)('748px');
@@ -1833,19 +1853,21 @@ const Main = () => {
   const vitestSkills = ['Vite', 'React', 'WCAG', 'Vitest', 'CI/CD', 'CircleCI'];
   (0,react.useEffect)(() => {
     if (typeof window !== undefined) {
-      window.addEventListener('scroll', () => {
-        const scrollVal = window.scrollY;
-        const newVal = 748 - scrollVal;
-        const windowPercentageScrolled = Math.round(scrollVal / window.innerHeight * 100);
-        if (windowPercentageScrolled >= 15) {
-          setMePic('me-oop.png');
-        } else {
-          setMePic('me-smile.png');
-        }
-        if (newVal >= 0) {
-          setEatDrink(`${newVal}px`);
-        }
-      });
+      if (window.innerWidth > 999) {
+        window.addEventListener('scroll', () => {
+          const scrollVal = window.scrollY;
+          const newVal = 748 - scrollVal;
+          const windowPercentageScrolled = Math.round(scrollVal / window.innerHeight * 100);
+          if (windowPercentageScrolled >= 20) {
+            setMePic('me-oop.png');
+          } else {
+            setMePic('me-smile.png');
+          }
+          if (newVal >= 0) {
+            setEatDrink(`${newVal}px`);
+          }
+        });
+      }
       if (window.innerWidth <= 999) {
         setEatDrink(`300px`);
         window.addEventListener('scroll', () => {
@@ -1884,11 +1906,11 @@ const Main = () => {
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
           children: "Hey! Thanks for stopping by! I've gathered together my most complete and recent work for you to check out!"
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-          children: "I'm a Software Engineer, with a long background in Support Engineering. I develop with a core focus on user experience and have a wealth of hands on experience understanding user needs. I pride myself on my collaborative and positive spirit and am always working to better myself and help those around me."
+          children: "I'm a Software Engineer, with a long background in Support Engineering. I develop with a core focus on user experience and have a wealth of hands-on experience understanding user needs. I pride myself on my collaborative and positive spirit and am always working to better myself and help those around me."
         }), /*#__PURE__*/(0,jsx_runtime.jsxs)("p", {
-          children: ["Feel free to check me out ", /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+          children: ["Feel free to check me out", /*#__PURE__*/(0,jsx_runtime.jsx)(components_CrossOffLink, {
             href: "https://www.linkedin.com/in/ryan-duer",
-            children: "on LinkedIn"
+            dataText: "on LinkedIn"
           }), "Don't forget to take a look at some of my relevant skills in the header menu or the footer!"]
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
           children: "Top Skills"
@@ -1930,9 +1952,9 @@ const Main = () => {
         githubLink: "https://github.com/ryanAllMad/js-job-helper",
         videoSrc: "/js-job-helper.mp4",
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-          children: "This project was built with Node, Express, Mongoose, MongoDB, React, Vite, Vitest, CSS3, and uses CircleCI to run Vitests in the Continuous Integration Pipeline."
+          children: "This project was built with a MERN stack using Node, Express, Mongoose, MongoDB, React, Vite, Vitest, CSS3, and uses CircleCI to run Vitests in the Continuous Integration Pipeline."
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-          children: "I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume's and save them precious time and energy."
+          children: "I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor their resume and save them precious time and energy."
         })]
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
@@ -1942,9 +1964,12 @@ const Main = () => {
         id: "portfolio",
         description: `
 						My portfolio is designed with CSS3 features like container queries and performant animations. 
-						I build this with a Node backend, React on the Server and on the Front End, and launchd it on Azure.
-						It took me about a week for the initial version to complete this project, though I've gone through several iterations now.
-						`,
+						I built this with a Node backend, React on the Server and on the Front End, and launched it on 
+						Azure. It took me about a week for the initial version to complete this project, though I've gone 
+						through several iterations now.
+					`,
+        imageFile: "portfolio-mobile.png",
+        imageAlt: "mobile view of this web page",
         title: "Portfolio: Node App",
         skills: portfolioSkills,
         githubLink: "https://github.com/ryanAllMad/ryan-all-mad-portfolio",
@@ -1956,10 +1981,11 @@ const Main = () => {
         id: "dnd",
         title: "DnD Character sheet NextJS App",
         description: `
-						My DnD Character sheet was build with accessibility in mind and features screen reader access to all features,
-						keyboard acccess to all features, skip blocks for easeir screen reader navigation, user prefers reduced motion assist, 
-						and passes color contrast minimums. This project was build with Next JS, Material UI, and published to Vercel. 
-						`,
+						My DnD Character sheet was built with accessibility in mind and features screen 
+						reader access to all features, keyboard access to all features, skip blocks for 
+						easier screen reader navigation, user prefers reduced motion assist, and passes 
+						color contrast minimums. This project was built with Next JS, Material UI, and published to Vercel.
+					`,
         imageFile: "yong-cell.png",
         imageAlt: "mobile view of purple and grey dnd character sheet with female profile pic",
         skills: dndSkills,
@@ -2002,9 +2028,10 @@ const Main = () => {
         id: "blog",
         title: "All Mad Designs Blog",
         description: `
-						My blog is where I use my passion for helping others, and educating engineers to resolve
-						issues related to front end, WordPress, or Accessibility Engineering. 
-						`,
+						My blog is where I use my passion for helping others, and educating 
+						engineers to resolve issues related to front end, Javascript, WordPress, 
+						or Accessibility Engineering. 
+					`,
         imageAlt: "black pyramid with A M D, all mad designs logo on desktop screen.",
         imageFile: "amd-desktop.png",
         skills: blogSkills,

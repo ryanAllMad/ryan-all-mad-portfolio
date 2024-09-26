@@ -1,3 +1,5 @@
+import CrossOffLink from "./CrossOffLink.js";
+
 const Contact = () => {
 	return (
 		<>
@@ -9,12 +11,7 @@ const Contact = () => {
 				<p className="header-hide">
 					JavaScript | React | Typescript | Redux | Node | SCSS/CSS |
 					PHP | WCAG | NPM | CircleCI | WordPress | Gutenberg <br />
-					<a
-					href='https://codepen.io/all-mad-designs'
-					target='_blank'
-				>
-					See my CSS portfolio here ⍈
-				</a>
+					<CrossOffLink href='https://codepen.io/all-mad-designs' dataText="See my CSS portfolio here ⍈" />
 				</p>
 			</section>
 			<section className="contact third">

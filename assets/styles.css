@@ -86,13 +86,14 @@ aside {
 }
 body {
     margin: 0;
+	font-size: 20px;
 }
 .wrapper {
 	display: block;
 	position: relative;
 	margin: 0;
 	font-family: "Readex Pro", Arial, Helvetica, sans-serif;
-	font-size: 18px;
+	overflow: hidden;
 }
 a {
 	padding: 7px;
@@ -129,7 +130,7 @@ header {
 	flex-direction: row;
 	justify-content: space-between;
 	position: sticky;
-	background-color: #fff;
+	background-color: #e8e9ea;
 	top: 0;
 	align-items: flex-end;
 	z-index: 12;
@@ -196,7 +197,7 @@ header .header-hide {
 	width: 100%;
     max-width: calc(100% - 6rem);
 	color:#252424;
-    background: #fff;
+    background: #e8e9ea;
     border-radius: 30px;
     padding: 2rem;
 	margin: 2rem 0;
@@ -258,7 +259,6 @@ section.heading .heading-wave {
 	width: calc(100% - 1em);
     height: auto;
 	color: #fff;
-	font-size: 16px;
 	display: flex;
 	justify-content: space-around;
     align-items: center;
@@ -276,6 +276,59 @@ section.heading .heading-wave {
 .group ul {
 	margin: 0;
 }
+/** Link styles **/
+a.link {
+    position: relative;
+    transition: 0.5s;
+    font-weight: 700;
+    text-decoration: none;
+	padding: 5px 0;
+	color: transparent;
+}
+.link-wrapper {
+    position: relative;
+	display: inline-block;
+	padding: 0 2.5px;
+}
+a.link::before {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 5px 0px;
+	color:#234b9b;
+	box-sizing: border-box;
+	transition: 0.5s;
+	clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+
+}
+a.link:hover::before {
+	color:#a93e27;
+	transform: translate(10px, -3px);
+}
+footer a.link:hover::before {
+	color: #fff;
+}
+footer a.link:hover::after {
+	color: #fff;
+}
+a.link::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 5px 0px;
+	color:#234b9b;
+	box-sizing: border-box;
+	transition: 0.5s;
+	clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%);
+}
+a.link:hover::after {
+	color:#a93e27;
+	transform: translate(-10px, 3px);
+}
 /** scroll transforms */
 .project.one .bio > * {
 	transform: scale(0);
@@ -288,7 +341,7 @@ section.heading .heading-wave {
 }
 .project.four .bio > * {
 	transform: scale(2);
-	transition: all 1.4s ease-in-out 1.75s;
+	transition: all 1.4s ease-in-out 1s;
 	opacity: 0;
 }
 .project.four .bio.animate > * {
@@ -480,10 +533,6 @@ section.heading .heading-wave {
 .mobile-hidden {
 	display: none;
 }
-header h1 {
-    padding-left: 0.25em;
-	font-size: 18px;
-}
 
 .contact.third {
 	display: flex;
@@ -542,7 +591,21 @@ header .contact.first {
 	opacity: 0.5;
     transition: all 1s;
 }
-
+@media screen and (max-width: 600px) {
+	.project {
+		padding: 10px;
+	}
+	.project.one {
+		padding-top: 200px;
+	}
+	.project.me {
+		align-items: center;
+	}
+	.bio {
+		max-width: calc(100% - 40px);
+	}
+	
+}
 @media screen and (min-width: 1000px) {
 	svg:has(defs) {
 		display: block;
