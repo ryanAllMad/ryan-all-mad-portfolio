@@ -1,19 +1,15 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Group from './Group.js';
-import ToProjectButtons from './ToProjectButtons.js';
+import VideoGroup from './VideoGroup.js';
 import '../../assets/images/js-job-helper.mp4';
 import '../../assets/images/a11y-vid.mp4';
-import * as confetti from 'canvas-confetti';
+
 
 const Main = () => {
 	const [mePic, setMePic] = useState('me-smile.png')
-	const [icon, setIcon] = useState('▶')
-	const [a11yIcon, setA11yIcon] = useState('▶')
-	const [clickMe, setClickMe] = useState('Click to Play');
-	const [clickA11yMe, setClickA11yMe] = useState('Click to Play');
 	const [eatDrink, setEatDrink] = useState('748px')
 
-	const portfolioSkills = ['React SSR', 'React', 'CSS3', 'Node', 'Azure'];
+	const portfolioSkills = ['Node', 'Express', 'React', 'CSS3', 'Azure'];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
 	const allySkills = [
 		'React',
@@ -25,47 +21,16 @@ const Main = () => {
 		'Webpack',
 	];
 	const blogSkills = [
-		'SEO',
 		'Technical Writing',
 		'Mentoring',
 		'Front end',
 		'Javascript',
+		'SEO',
+		'CWV'
 	];
-	const vidRef = useRef();
-	const a11yVidRef = useRef();
-	const playVid = (el) => {
-		el.play();
-		el.style.opacity = '1'
-	};
-	const pauseVid = (el) => {
-		el.pause();
-		el.style.opacity = '0.5'
-	};
+	const jobHelperSkills = ['MongoDB', 'Express', 'React', 'Node', 'CSS3', 'Vite', 'CI/CD', 'CircleCI', 'Vitest'];
+	const vitestSkills = ['Vite', 'React', 'WCAG', 'Vitest', 'CI/CD', 'CircleCI'];
 
-	const handleVidPlayState = () => {
-		if (icon === '▶') {
-			playVid(vidRef.current)
-			setIcon('▣')
-			setClickMe('Click to Stop');
-			confetti.default();
-		} else {
-			pauseVid(vidRef.current)
-			setIcon('▶')
-			setClickMe('Click to Play');
-		}
-	}
-	const handleA11yPlayState = () => {
-		if (a11yIcon === '▶') {
-			playVid(a11yVidRef.current)
-			setA11yIcon('▣')
-			setClickA11yMe('Click to Stop');
-			confetti.default();
-		} else {
-			pauseVid(a11yVidRef.current)
-			setA11yIcon('▶')
-			setClickA11yMe('Click to Play');
-		}
-	}
 	useEffect(() => {
 		if (typeof window !== undefined) {
 			window.addEventListener('scroll', () => {
@@ -146,40 +111,21 @@ const Main = () => {
 				tabIndex={0}
 				className={`project one`}
 			>
-				<div className='one-wrappper'>
-					<div className='bio'>
-						<h3>JS Job Helper: Node App</h3>
-						<p>
-							This project was built with Node, Express, Mongoose, MongoDB, React, Vite, Vitest, CSS3, and uses CircleCI 
-							to run Vitests in the Continuous Integration Pipeline.
-						</p>
-						<p>
-							I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor
-							their resume's and save them precious time and energy.
-						</p>
-						<ToProjectButtons
-							githubLink='https://github.com/ryanAllMad/js-job-helper'
-						/>
-						</div>
-					<div className='video-box'>
-					<video
-						ref={vidRef}
-						id='js-vid'
-						loop
-					>
-						<source
-							src='/js-job-helper.mp4'
-							type='video/mp4'
-						/>
-						Your browser does not support the video tag.
-					</video>
-					<div className='clickme'>
-						<div class='btn'>
-							<button aria-pressed={icon === '▣'} onClick={handleVidPlayState}><span className='click-icon'>{icon}</span>{clickMe}</button>
-						</div>
-					</div>
-					</div>
-				</div>
+				<VideoGroup
+					title="JS Job Helper: Node App"
+					skills={jobHelperSkills}
+					githubLink="https://github.com/ryanAllMad/js-job-helper"
+					videoSrc='/js-job-helper.mp4'
+				>
+					<p>
+						This project was built with Node, Express, Mongoose, MongoDB, React, Vite, Vitest, CSS3, and uses CircleCI 
+						to run Vitests in the Continuous Integration Pipeline.
+					</p>
+					<p>
+						I built this completely on my own for myself and other Javascrpt Engineers looking for a free tool to help them tailor
+						their resume's and save them precious time and energy.
+					</p>
+				</VideoGroup>
 			</section>
 			<section
 				tabIndex={0}
@@ -220,35 +166,21 @@ const Main = () => {
 			<section
 				className='project four'
 			>
-				<div className='two-wrapper'>
-					<div className='bio'>
-						<h3>Vitest Accessibility Test Suite</h3>
-						<p>This project was built with Deque's React component library 'Cauldron', and Vite with Vitest.</p>
-						<p>I built this completely on my own for myself and other React Engineers looking to build their React widgets with accessibility from test driven development.</p>
-						<ToProjectButtons
-							githubLink='https://github.com/ryanAllMad/a11y-react'
-						/>
-					</div>
-					<div className='video-box'>
-					<video
-						ref={a11yVidRef}
-						id='a11y-vid'
-						loop
-					>
-						<source
-							loop
-							src='/a11y-vid.mp4'
-							type='video/mp4'
-						/>
-						Your browser does not support the video tag.
-					</video>
-					<div className='clickme'>
-						<div class='btn'>
-							<button aria-pressed={a11yIcon === '▣'} onClick={handleA11yPlayState}><span className='click-icon'>{a11yIcon}</span>{clickA11yMe}</button>
-						</div>
-					</div>
-					</div>
-				</div>
+				<VideoGroup
+					title="Vitest Accessibility Test Suite"
+					skills={vitestSkills}
+					githubLink="https://github.com/ryanAllMad/a11y-react"
+					videoSrc="/a11y-vid.mp4"
+				>
+				<p>
+					This project was built with Deque's React component library 'Cauldron', 
+					and Vite with Vitest.
+				</p>
+				<p>
+					I built this completely on my own for myself and other React Engineers 
+					looking to build their React widgets with accessibility from test driven development.
+				</p>
+				</VideoGroup>
 			</section>
 			<section
 				className='project five'

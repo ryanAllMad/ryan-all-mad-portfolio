@@ -61,6 +61,7 @@ footer section.contact {
 }
 aside {
 	width: 100%;
+	padding: 2rem;
 }
 .show-vids #js-vid, .show-vids #a11y-vid {
     width: 300px;
@@ -105,6 +106,9 @@ h2 {
 }
 h3 {
 	font-size: 1.8rem;
+}
+h4 {
+	font-size: 1.45rem;
 }
 header {
 	display: flex;
@@ -273,6 +277,24 @@ section.heading .heading-wave {
 	margin: 0;
 }
 /** scroll transforms */
+.project.one .bio > * {
+	transform: scale(0);
+	transition: all 1.4s ease-in-out 0.75s;
+	opacity: 0;
+}
+.project.one .bio.animate > * {
+	transform: scale(1);
+	opacity: 1;
+}
+.project.four .bio > * {
+	transform: scale(2);
+	transition: all 1.4s ease-in-out 1.75s;
+	opacity: 0;
+}
+.project.four .bio.animate > * {
+	transform: scale(1);
+	opacity: 1;
+}
 .project.three .group > *:first-child {
     transform: translateX(100%);
 	transition: all 1.4s ease-in-out 0.75s;
@@ -480,8 +502,7 @@ header .contact.first {
 	text-align: center;
     flex-grow: 1;
 }
-.one-wrappper,
-.two-wrapper,
+.video-group-wrappper,
 .pic-wrapper {
     display: flex;
     flex-flow: row wrap;
@@ -549,6 +570,9 @@ header .contact.first {
 	h3 {
 		font-size: 2.65rem;
 	}
+	h4 {
+		font-size: 2.25rem;
+	}
 	.pic-wrapper {
 		max-width: 35%;
 	}
@@ -562,15 +586,13 @@ header .contact.first {
         min-height: 100vh;
     }
 	.project .group,
-	.one-wrappper, 
-	.pic-wrapper, 
-	.two-wrapper {
+	.video-group-wrappper, 
+	.pic-wrapper {
 		flex-flow: row nowrap;
 	}
 	.me {
 		flex-flow: row nowrap;
-		min-height: 85vh;
-        height: 85vh;
+		min-height: calc(100vh - 200px);
 	}
 	.project .bio {
 		flex-flow: row wrap;
@@ -612,6 +634,7 @@ header .contact.first {
 	}
 
 }
+
 @container (max-width: 640px) {
 	.js-vid-caption {
 		flex-wrap: wrap;

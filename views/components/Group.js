@@ -44,7 +44,7 @@ const Group = (props) => {
 			<div className='bio'>
 				<h3>{title}</h3>
 				<p>{description}</p>
-				<p>Built with:</p>
+				<h4>Built with:</h4>
 				<ul>
 					{skills.map((sk) => (
 						<li key={sk.toLowerCase()}>{sk}</li>
