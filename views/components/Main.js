@@ -2,13 +2,18 @@ import { useEffect, useState } from 'react';
 import Group from './Group.js';
 import VideoGroup from './VideoGroup.js';
 import CrossOffLink from './CrossOffLink.js';
+import ShowSkills from './ShowSkills.js';
 import '../../assets/images/js-job-helper.mp4';
 import '../../assets/images/a11y-vid.mp4';
 
-
 const Main = () => {
-	const [mePic, setMePic] = useState('me-smile.png')
-	const [eatDrink, setEatDrink] = useState('748px')
+	const [showSkills, setShowSkills] = useState(false);
+
+	const handleShowSkills = () => {
+		setShowSkills((prev) => (!prev ? true : false));
+	};
+	const [mePic, setMePic] = useState('me-smile.png');
+	const [eatDrink, setEatDrink] = useState('748px');
 
 	const portfolioSkills = ['Node', 'Express', 'React', 'CSS3', 'Azure'];
 	const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
@@ -27,72 +32,105 @@ const Main = () => {
 		'Front end',
 		'Javascript',
 		'SEO',
-		'CWV'
+		'CWV',
 	];
-	const jobHelperSkills = ['MongoDB', 'Express', 'React', 'Node', 'CSS3', 'Vite', 'CI/CD', 'CircleCI', 'Vitest'];
-	const vitestSkills = ['Vite', 'React', 'WCAG', 'Vitest', 'CI/CD', 'CircleCI'];
+	const jobHelperSkills = [
+		'MongoDB',
+		'Express',
+		'React',
+		'Node',
+		'CSS3',
+		'Vite',
+		'CI/CD',
+		'CircleCI',
+		'Vitest',
+	];
+	const vitestSkills = [
+		'Vite',
+		'React',
+		'WCAG',
+		'Vitest',
+		'CI/CD',
+		'CircleCI',
+	];
 
 	useEffect(() => {
 		if (typeof window !== undefined) {
-			if(window.innerWidth > 999) {
+			if (window.innerWidth > 999) {
 				window.addEventListener('scroll', () => {
-					const scrollVal = window.scrollY
-					const newVal = 748 - scrollVal
-					const windowPercentageScrolled = Math.round((scrollVal / window.innerHeight) * 100)
-					if(windowPercentageScrolled >= 20) {
-						setMePic('me-oop.png')
+					const scrollVal = window.scrollY;
+					const newVal = 900 - scrollVal;
+					const windowPercentageScrolled = Math.round(
+						(scrollVal / window.innerHeight) * 100
+					);
+					if (windowPercentageScrolled >= 30) {
+						setMePic('me-oop.png');
 					} else {
-						setMePic('me-smile.png')
+						setMePic('me-smile.png');
 					}
-					if(newVal >= 0) {
-						setEatDrink(`${newVal}px`)
+					if (newVal >= 0) {
+						setEatDrink(`${newVal}px`);
 					}
-				})
+				});
 			}
-			if(window.innerWidth <= 999) {
-				setEatDrink(`300px`)
+			if (window.innerWidth <= 999) {
+				setEatDrink(`300px`);
 				window.addEventListener('scroll', () => {
-					const scrollVal = window.scrollY
-					const newMobileVal = 300 - scrollVal
-					const mobilePercentageScrolled = Math.round((scrollVal / window.innerHeight) * 100)
-					if(newMobileVal >= 0) {
-						setEatDrink(`${newMobileVal}px`)
+					const scrollVal = window.scrollY;
+					const newMobileVal = 300 - scrollVal;
+					const mobilePercentageScrolled = Math.round(
+						(scrollVal / window.innerHeight) * 100
+					);
+					if (newMobileVal >= 0) {
+						setEatDrink(`${newMobileVal}px`);
 					}
-					if(mobilePercentageScrolled >= 1) {
-						setMePic('me-oop.png')
+					if (mobilePercentageScrolled >= 1) {
+						setMePic('me-oop.png');
 					} else {
-						setMePic('me-smile.png')
+						setMePic('me-smile.png');
 					}
-				})
-				
-				
+				});
 			}
 		}
 	}, [window]);
 	return (
 		<main>
 			<section className='project me'>
-				<div className='profile img' style={{width: eatDrink}}>
-					<img loading='eager' alt="white woman, red hair, smiling." src={`/images/${mePic}`} />
+				<div
+					className='profile img'
+					style={{ width: eatDrink }}
+				>
+					<img
+						loading='eager'
+						alt='white woman, red hair, smiling.'
+						src={`/images/${mePic}`}
+					/>
 				</div>
 				<div className='bio'>
-					<h1>Ryan Duer: Software Engineer</h1>
+					<h1>Hello! I'm Ryan.</h1>
 					<p>
-						Hey! Thanks for stopping by! I've gathered together my most complete
-						and recent work for you to check out! 
+						Thanks for stopping by! I've gathered together my
+						most complete and recent work for you to check out!
 					</p>
 					<p>
-						I'm a Software Engineer, with a long background in Support Engineering. 
-						I develop with a core focus on user experience and have a wealth of hands-on experience 
-						understanding user needs. I pride myself on my collaborative 
-						and positive spirit and am always working to better myself and help those around me.
+						I'm a Software Engineer, with a long background in
+						Support Engineering. I develop with a core focus on user
+						experience and have a wealth of hands-on experience
+						understanding user needs. I pride myself on my
+						collaborative and positive spirit and am always working
+						to better myself and help those around me.
 					</p>
 					<p>
-						Feel free to check me out 
-						<CrossOffLink href="https://www.linkedin.com/in/ryan-duer" dataText="on LinkedIn" />
-						Don't forget to take a look at some of my relevant skills in the header menu or the footer!
+						Feel free to check me out
+						<CrossOffLink
+							href='https://www.linkedin.com/in/ryan-duer'
+							dataText='on LinkedIn'
+						/>
 					</p>
-					
+					<CrossOffLink
+						href='https://codepen.io/all-mad-designs'
+						dataText='See my CSS portfolio here ⍈'
+					/>
 					<h2>Top Skills</h2>
 					<ul>
 						<li>React</li>
@@ -101,15 +139,40 @@ const Main = () => {
 						<li>WCAG</li>
 						<li>CSS3</li>
 						<li>Cross team collab</li>
+						<div className='accordion'>
+							<h3>
+								<button
+									aria-expanded={showSkills}
+									aria-controls='skills-menu'
+									id='accordion-heading'
+									aria-label='see skills'
+									onClick={handleShowSkills}
+								>
+									Show More Skills ...
+									<span
+										className={`arrow ${!showSkills ? '' : 'rotate'}`}
+									>
+										&#9661;
+									</span>
+								</button>
+							</h3>
+							{showSkills && (
+								<ShowSkills
+									onClick={() => {
+										setShowSkills(false);
+									}}
+								/>
+							)}
+						</div>
 					</ul>
 				</div>
 			</section>
 			<section className='heading'>
 				<div className='heading-wave first'>
-				<h2>Projects</h2>
+					<h2>Projects</h2>
 				</div>
 				<div className='heading-wave sec'>
-				<h2>Projects</h2>
+					<h2>Projects</h2>
 				</div>
 			</section>
 			<section
@@ -117,19 +180,22 @@ const Main = () => {
 				className={`project one`}
 			>
 				<VideoGroup
-					title="JS Job Helper: Node App"
+					title='JS Job Helper: Node App'
 					skills={jobHelperSkills}
-					githubLink="https://github.com/ryanAllMad/js-job-helper"
+					githubLink='https://github.com/ryanAllMad/js-job-helper'
 					videoSrc='/js-job-helper.mp4'
 				>
 					<p>
-						This project was built with a MERN stack using Node, Express, Mongoose, MongoDB, 
-						React, Vite, Vitest, CSS3, and uses CircleCI to run Vitests in the Continuous 
+						This project was built with a MERN stack using Node,
+						Express, Mongoose, MongoDB, React, Vite, Vitest, CSS3,
+						and uses CircleCI to run Vitests in the Continuous
 						Integration Pipeline.
 					</p>
 					<p>
-						I built this completely on my own for myself and other Javascrpt Engineers looking 
-						for a free tool to help them tailor their resume and save them precious time and energy.
+						I built this completely on my own for myself and other
+						Javascrpt Engineers looking for a free tool to help them
+						tailor their resume and save them precious time and
+						energy.
 					</p>
 				</VideoGroup>
 			</section>
@@ -145,17 +211,15 @@ const Main = () => {
 						Azure. It took me about a week for the initial version to complete this project, though I've gone 
 						through several iterations now.
 					`}
-					imageFile="portfolio-mobile.png"
-					imageAlt="mobile view of this web page"
+					imageFile='portfolio-mobile.png'
+					imageAlt='mobile view of this web page'
 					title='Portfolio: Node App'
 					skills={portfolioSkills}
 					githubLink='https://github.com/ryanAllMad/ryan-all-mad-portfolio'
 					projectTitle='My portfolio'
 				/>
 			</section>
-			<section
-				className='project three'
-			>
+			<section className='project three'>
 				<Group
 					id='dnd'
 					title='DnD Character sheet NextJS App'
@@ -165,36 +229,33 @@ const Main = () => {
 						easier screen reader navigation, user prefers reduced motion assist, and passes 
 						color contrast minimums. This project was built with Next JS, Material UI, and published to Vercel.
 					`}
-					imageFile="yong-cell.png"
-					imageAlt="mobile view of purple and grey dnd character sheet with female profile pic"
+					imageFile='yong-cell.png'
+					imageAlt='mobile view of purple and grey dnd character sheet with female profile pic'
 					skills={dndSkills}
 					projectLink='https://yong-character-sheet.vercel.app/'
 					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
 					projectTitle='DnD Character sheet'
 				/>
 			</section>
-			<section
-				className='project four'
-			>
+			<section className='project four'>
 				<VideoGroup
-					title="Vitest Accessibility Test Suite"
+					title='Vitest Accessibility Test Suite'
 					skills={vitestSkills}
-					githubLink="https://github.com/ryanAllMad/a11y-react"
-					videoSrc="/a11y-vid.mp4"
+					githubLink='https://github.com/ryanAllMad/a11y-react'
+					videoSrc='/a11y-vid.mp4'
 				>
-				<p>
-					This project was built with Deque's React component library 'Cauldron', 
-					and Vite with Vitest.
-				</p>
-				<p>
-					I built this completely on my own for myself and other React Engineers 
-					looking to build their React widgets with accessibility from test driven development.
-				</p>
+					<p>
+						This project was built with Deque's React component
+						library 'Cauldron', and Vite with Vitest.
+					</p>
+					<p>
+						I built this completely on my own for myself and other
+						React Engineers looking to build their React widgets
+						with accessibility from test driven development.
+					</p>
 				</VideoGroup>
 			</section>
-			<section
-				className='project five'
-			>
+			<section className='project five'>
 				<Group
 					id='ally'
 					title='A11y Check: WordPress Plugin'
@@ -202,17 +263,15 @@ const Main = () => {
 						This WIP, is a plugin developed for Content Creators that use WordPress as a live checklist
 						that alerts the author of common accessibility pitfalls as they write. It's akin to a linter for content creators.
 						`}
-					imageAlt="plugin sidebar in wordress editor shows images that are missing alt and one click ability to remedy it."
-					imageFile="a11ycheckgif.gif"
+					imageAlt='plugin sidebar in wordress editor shows images that are missing alt and one click ability to remedy it.'
+					imageFile='a11ycheckgif.gif'
 					skills={allySkills}
 					projectLink=''
 					githubLink='https://github.com/ryanAllMad/a11y-checker'
 					projectTitle='A11y Check'
 				/>
 			</section>
-			<section
-				className='project six'
-			>
+			<section className='project six'>
 				<Group
 					id='blog'
 					title='All Mad Designs Blog'
@@ -221,8 +280,8 @@ const Main = () => {
 						engineers to resolve issues related to front end, Javascript, WordPress, 
 						or Accessibility Engineering. 
 					`}
-					imageAlt="black pyramid with A M D, all mad designs logo on desktop screen."
-					imageFile="amd-desktop.png"
+					imageAlt='black pyramid with A M D, all mad designs logo on desktop screen.'
+					imageFile='amd-desktop.png'
 					skills={blogSkills}
 					projectLink='https://allmaddesigns.com'
 					projectTitle='My Tech Blog'
