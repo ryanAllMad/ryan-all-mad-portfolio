@@ -572,13 +572,11 @@ var jsx_runtime = __webpack_require__(848);
 const CrossOffLink = _ref => {
   let {
     href,
-    dataText,
-    onFocus
+    dataText
   } = _ref;
   return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     className: "link-wrapper",
     children: /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
-      onFocus: onFocus,
       "data-text": dataText,
       className: "link",
       target: "_blank",
@@ -1787,15 +1785,6 @@ const Main = () => {
   const handleShowSkills = () => {
     setShowSkills(prev => !prev ? true : false);
   };
-  const handleKeyDown = e => {
-    if (e.code !== 'Enter' && e.code !== 'Space') {
-      return;
-    }
-    if (e.code !== 'Tab') {
-      e.preventDefault();
-    }
-    handleShowSkills();
-  };
   const [mePic, setMePic] = (0,react.useState)('me-smile.png');
   const [eatDrink, setEatDrink] = (0,react.useState)('748px');
   const portfolioSkills = ['Node', 'Express', 'React', 'CSS3', 'Azure'];
@@ -1891,7 +1880,6 @@ const Main = () => {
                 "aria-controls": "skills-menu",
                 id: "accordion-heading",
                 "aria-label": "see skills",
-                onKeyDown: e => handleKeyDown(e),
                 onClick: handleShowSkills,
                 children: ["Show More Skills ...", /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
                   className: `arrow ${!showSkills ? '' : 'rotate'}`,

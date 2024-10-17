@@ -12,15 +12,6 @@ const Main = () => {
 	const handleShowSkills = () => {
 		setShowSkills((prev) => (!prev ? true : false));
 	};
-	const handleKeyDown = (e) => {
-		if (e.code !== 'Enter' && e.code !== 'Space') {
-			return;
-		}
-		if (e.code !== 'Tab') {
-			e.preventDefault();
-		}
-		handleShowSkills();
-	};
 	const [mePic, setMePic] = useState('me-smile.png');
 	const [eatDrink, setEatDrink] = useState('748px');
 
@@ -155,7 +146,6 @@ const Main = () => {
 									aria-controls='skills-menu'
 									id='accordion-heading'
 									aria-label='see skills'
-									onKeyDown={(e) => handleKeyDown(e)}
 									onClick={handleShowSkills}
 								>
 									Show More Skills ...
