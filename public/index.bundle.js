@@ -572,11 +572,13 @@ var jsx_runtime = __webpack_require__(848);
 const CrossOffLink = _ref => {
   let {
     href,
-    dataText
+    dataText,
+    onFocus
   } = _ref;
   return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     className: "link-wrapper",
     children: /*#__PURE__*/(0,jsx_runtime.jsx)("a", {
+      onFocus: onFocus,
       "data-text": dataText,
       className: "link",
       target: "_blank",
@@ -642,94 +644,16 @@ const Contact = () => {
   });
 };
 /* harmony default export */ const components_Contact = (Contact);
-;// CONCATENATED MODULE: ./views/components/ShowSkills.js
-
-
-const ShowSkills = props => {
-  const {
-    onClick,
-    classes
-  } = props;
-  const skillsArr = [`JavaScript`, `React`, `Typescript`, `Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `WCAG`, `NPM`, `CircleCI`, `Demo's`, `Technical Writing`];
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-    id: "skills-menu",
-    className: `show-skills ${classes}`,
-    tabIndex: 0,
-    children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
-      children: "Skills"
-    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("ul", {
-      children: [skillsArr.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
-        children: sk
-      }, sk.toLowerCase())), /*#__PURE__*/(0,jsx_runtime.jsx)(components_CrossOffLink, {
-        href: "https://codepen.io/all-mad-designs",
-        dataText: "See my CSS portfolio here \u2348"
-      })]
-    }), /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
-      class: "close-skills",
-      onClick: onClick,
-      children: [/*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-        children: "\u25BD"
-      }), /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-        className: "screen-reader-text",
-        children: "close skills menu"
-      })]
-    })]
-  });
-};
-/* harmony default export */ const components_ShowSkills = (ShowSkills);
 ;// CONCATENATED MODULE: ./views/components/Header.js
 
 
-
-
 const Header = () => {
-  const [showSkills, setShowSkills] = (0,react.useState)(false);
-  const [animateClass, setAnimateClass] = (0,react.useState)('');
-  const handleShowSkills = () => {
-    setShowSkills(prev => !prev ? true : false);
-    setAnimateClass('drawer');
-  };
-  const handleKeyDown = e => {
-    if (e.code !== 'Enter' && e.code !== 'Space') {
-      return;
-    }
-    if (e.code !== 'Tab') {
-      e.preventDefault();
-    }
-    handleShowSkills();
-  };
-  (0,react.useEffect)(() => {
-    window.addEventListener('scroll', () => setShowSkills(false));
-  }, []);
-  return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-    children: [/*#__PURE__*/(0,jsx_runtime.jsxs)("header", {
+  return /*#__PURE__*/(0,jsx_runtime.jsx)(jsx_runtime.Fragment, {
+    children: /*#__PURE__*/(0,jsx_runtime.jsxs)("header", {
       children: [/*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-        "aria-expanded": showSkills,
-        "aria-controls": "skills-menu",
-        tabIndex: 0,
-        "aria-label": "see skills",
-        onKeyDown: e => handleKeyDown(e),
-        role: "button",
-        onClick: handleShowSkills,
-        className: "logo",
-        children: !showSkills && /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
-          className: "arrow",
-          children: "\u25BD"
-        })
+        className: "logo"
       }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_Contact, {})]
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
-      className: "skills-container",
-      style: {
-        position: 'relative'
-      },
-      children: showSkills && /*#__PURE__*/(0,jsx_runtime.jsx)(components_ShowSkills, {
-        classes: animateClass,
-        onClick: () => {
-          setShowSkills(false);
-          setAnimateClass('drawer-close');
-        }
-      })
-    })]
+    })
   });
 };
 /* harmony default export */ const components_Header = (Header);
@@ -1830,6 +1754,21 @@ const VideoGroup = _ref => {
   });
 };
 /* harmony default export */ const components_VideoGroup = (VideoGroup);
+;// CONCATENATED MODULE: ./views/components/ShowSkills.js
+
+const ShowSkills = props => {
+  const skillsArr = [`Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `NPM`, `CircleCI`, `Demo's`, `Technical Writing`];
+  return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
+    role: "region",
+    id: "skills-menu",
+    "aria-labelledby": "accordion-heading",
+    className: "skills-container",
+    children: skillsArr.map(sk => /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+      children: sk
+    }, sk.toLowerCase()))
+  });
+};
+/* harmony default export */ const components_ShowSkills = (ShowSkills);
 ;// CONCATENATED MODULE: ./assets/images/js-job-helper.mp4
 /* harmony default export */ const js_job_helper = (__webpack_require__.p + "js-job-helper.mp4");
 ;// CONCATENATED MODULE: ./assets/images/a11y-vid.mp4
@@ -1842,7 +1781,21 @@ const VideoGroup = _ref => {
 
 
 
+
 const Main = () => {
+  const [showSkills, setShowSkills] = (0,react.useState)(false);
+  const handleShowSkills = () => {
+    setShowSkills(prev => !prev ? true : false);
+  };
+  const handleKeyDown = e => {
+    if (e.code !== 'Enter' && e.code !== 'Space') {
+      return;
+    }
+    if (e.code !== 'Tab') {
+      e.preventDefault();
+    }
+    handleShowSkills();
+  };
   const [mePic, setMePic] = (0,react.useState)('me-smile.png');
   const [eatDrink, setEatDrink] = (0,react.useState)('748px');
   const portfolioSkills = ['Node', 'Express', 'React', 'CSS3', 'Azure'];
@@ -1856,9 +1809,9 @@ const Main = () => {
       if (window.innerWidth > 999) {
         window.addEventListener('scroll', () => {
           const scrollVal = window.scrollY;
-          const newVal = 748 - scrollVal;
+          const newVal = 900 - scrollVal;
           const windowPercentageScrolled = Math.round(scrollVal / window.innerHeight * 100);
-          if (windowPercentageScrolled >= 20) {
+          if (windowPercentageScrolled >= 30) {
             setMePic('me-oop.png');
           } else {
             setMePic('me-smile.png');
@@ -1902,16 +1855,19 @@ const Main = () => {
       }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
         className: "bio",
         children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h1", {
-          children: "Ryan Duer: Software Engineer"
+          children: "Hello! I'm Ryan."
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
-          children: "Hey! Thanks for stopping by! I've gathered together my most complete and recent work for you to check out!"
+          children: "Thanks for stopping by! I've gathered together my most complete and recent work for you to check out!"
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("p", {
           children: "I'm a Software Engineer, with a long background in Support Engineering. I develop with a core focus on user experience and have a wealth of hands-on experience understanding user needs. I pride myself on my collaborative and positive spirit and am always working to better myself and help those around me."
         }), /*#__PURE__*/(0,jsx_runtime.jsxs)("p", {
           children: ["Feel free to check me out", /*#__PURE__*/(0,jsx_runtime.jsx)(components_CrossOffLink, {
             href: "https://www.linkedin.com/in/ryan-duer",
             dataText: "on LinkedIn"
-          }), "Don't forget to take a look at some of my relevant skills in the header menu or the footer!"]
+          })]
+        }), /*#__PURE__*/(0,jsx_runtime.jsx)(components_CrossOffLink, {
+          href: "https://codepen.io/all-mad-designs",
+          dataText: "See my CSS portfolio here \u2348"
         }), /*#__PURE__*/(0,jsx_runtime.jsx)("h2", {
           children: "Top Skills"
         }), /*#__PURE__*/(0,jsx_runtime.jsxs)("ul", {
@@ -1927,6 +1883,26 @@ const Main = () => {
             children: "CSS3"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
             children: "Cross team collab"
+          }), /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
+            className: "accordion",
+            children: [/*#__PURE__*/(0,jsx_runtime.jsx)("h3", {
+              children: /*#__PURE__*/(0,jsx_runtime.jsxs)("button", {
+                "aria-expanded": showSkills,
+                "aria-controls": "skills-menu",
+                id: "accordion-heading",
+                "aria-label": "see skills",
+                onKeyDown: e => handleKeyDown(e),
+                onClick: handleShowSkills,
+                children: ["Show More Skills ...", /*#__PURE__*/(0,jsx_runtime.jsx)("span", {
+                  className: `arrow ${!showSkills ? '' : 'rotate'}`,
+                  children: "\u25BD"
+                })]
+              })
+            }), showSkills && /*#__PURE__*/(0,jsx_runtime.jsx)(components_ShowSkills, {
+              onClick: () => {
+                setShowSkills(false);
+              }
+            })]
           })]
         })]
       })]

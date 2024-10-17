@@ -1,7 +1,7 @@
-const CrossOffLink = ({href, dataText}) => {
+const CrossOffLink = ({href, dataText, onFocus}) => {
 	return (
 		<div className="link-wrapper"> 
-			<a data-text={dataText} className='link' target="_blank" href={href}>
+			<a onFocus={onFocus} data-text={dataText} className='link' target="_blank" href={href}>
 				{dataText}
 			</a>
 		</div>

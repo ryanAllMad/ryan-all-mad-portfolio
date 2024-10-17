@@ -118,14 +118,14 @@ svg:has(defs) {
 	display: none;
 }
 .arrow {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform:translate(-50%, 35px);
-	font-size: 30px;
-    color: #fff;
+	font-size: 18px;
+    color: #a93e27;
+	display: inline-block;
+	transition: all 0.5s ease-in;
 }
-
+.arrow.rotate {
+    transform: rotate(180deg);
+}
 header {
 	flex-direction: row;
 	justify-content: space-between;
@@ -134,7 +134,7 @@ header {
 	top: 0;
 	align-items: flex-end;
 	z-index: 12;
-	height: 140px;
+	height: 162px;
 }
 header .header-hide {
 	display: none;
@@ -142,43 +142,34 @@ header .header-hide {
 .logo {
 	display: block;
 	background: url('./images/R.png') 0 0 no-repeat;
+	border-radius: 30px;
 	background-size: cover;
 	width: 140px;
 	height: 140px;
 	position: relative;
+	margin-left: 12px;
+    margin-bottom: 12px;
 }
-.show-skills {
-    top: 0;
-    left: 0;
-    padding-left: 4rem;
-	margin-top: 114px;
-    background: #fff;
-    width: calc(100% - 1em);
-    position: fixed;
-    z-index: 1;
+.accordion h3 button {
+	background: none;
+    border-radius: 5px;
+    color: #072050;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    outline: none;
+    padding: 1em 1.5em;
+    text-align: center;
+    width: 100%;
 }
-.show-skills ul {
-	display: flex;
-    list-style-type: none;
-    flex-direction: column;
-    padding-left: 0;
-    padding-top: 0.25em;
-	padding-bottom: 2rem;
+.accordion h3 button:focus, .accordion h3 button:hover {
+    outline: 2px solid #a93e27;
+    border: 2px solid #e8e9ea;
 }
-.show-skills h2 {
-    padding-top: 2rem;
-}
-.show-skills .close-skills {
-	font-weight: bold;
-	font-size: 30px;
-	position: absolute;
-	left: 55px;
-    top: 30px;
-	background-color: transparent;
-	border: none;
-	color:#234b9b;
-	transform: rotate(180deg) translate(10px, 10px);
-	transition: transform 2s;
+.accordion:has( button[aria-expanded="true"]) {
+    display: flex;
+    flex-flow: column-reverse;
 }
 .project {
     display: flex;
@@ -306,6 +297,10 @@ a.link::before {
 a.link:hover::before {
 	color:#a93e27;
 	transform: translate(10px, -3px);
+}
+footer a.link:before,
+footer a.link::after {
+	color: #c2d0ed;
 }
 footer a.link:hover::before {
 	color: #fff;
@@ -600,6 +595,9 @@ header .contact.first {
 	}
 	.project.me {
 		align-items: center;
+		display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
 	}
 	.bio {
 		max-width: calc(100% - 40px);
