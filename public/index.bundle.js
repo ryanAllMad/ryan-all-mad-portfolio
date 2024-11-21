@@ -1790,7 +1790,7 @@ const Main = () => {
   const portfolioSkills = ['Node', 'Express', 'React', 'CSS3', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
   const allySkills = ['React', 'Typescript', 'Next.JS', 'UX', 'Figma', 'CSS3', 'Design'];
-  const blogSkills = ['Technical Writing', 'Mentoring', 'Front end', 'Javascript', 'SEO', 'CWV'];
+  const blogSkills = ['React Native', 'React', 'CSS', 'REST', 'APIs', 'GCP', 'Javascript'];
   const jobHelperSkills = ['MongoDB', 'Express', 'React', 'Node', 'CSS3', 'Vite', 'CI/CD', 'CircleCI', 'Vitest'];
   const vitestSkills = ['Vite', 'React', 'WCAG', 'Vitest', 'CI/CD', 'CircleCI'];
   (0,react.useEffect)(() => {
@@ -1958,6 +1958,22 @@ const Main = () => {
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project four",
+      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
+        id: "blog",
+        title: `Who Rep's Me?`,
+        description: `
+						This React Native App was developed with the use of 2 API's that provide Civic information from the US Government.
+						This app allows users to find out who their Senators and House Rep's are, how to contact them, and learn what legislation
+						they've sponsored. 
+					`,
+        imageAlt: "mobile view of senator from MD with contact info and button to see sponsored bills.",
+        imageFile: "who-reps-me.png",
+        skills: blogSkills,
+        githubLink: "https://github.com/ryanAllMad/who-reps-me/tree/main",
+        projectTitle: "Who Reps Me?"
+      })
+    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
+      className: "project five",
       children: /*#__PURE__*/(0,jsx_runtime.jsxs)(components_VideoGroup, {
         title: "Vitest Accessibility Test Suite",
         skills: vitestSkills,
@@ -1970,7 +1986,7 @@ const Main = () => {
         })]
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "project five",
+      className: "project six",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
         id: "dnd",
         title: "DnD Character sheet NextJS App",
@@ -1986,22 +2002,6 @@ const Main = () => {
         projectLink: "https://yong-character-sheet.vercel.app/",
         githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
         projectTitle: "DnD Character sheet"
-      })
-    }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
-      className: "project six",
-      children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "blog",
-        title: "All Mad Designs Blog",
-        description: `
-						My blog is where I use my passion for helping others, and educating 
-						engineers to resolve issues related to front end, Javascript, WordPress, 
-						or Accessibility Engineering. 
-					`,
-        imageAlt: "black pyramid with A M D, all mad designs logo on desktop screen.",
-        imageFile: "amd-desktop.png",
-        skills: blogSkills,
-        projectLink: "https://allmaddesigns.com",
-        projectTitle: "My Tech Blog"
       })
     })]
   });

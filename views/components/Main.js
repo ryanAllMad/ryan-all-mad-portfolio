@@ -27,12 +27,13 @@ const Main = () => {
 		'Design',
 	];
 	const blogSkills = [
-		'Technical Writing',
-		'Mentoring',
-		'Front end',
+		'React Native',
+		'React',
+		'CSS',
+		'REST',
+		'APIs',
+		'GCP',
 		'Javascript',
-		'SEO',
-		'CWV',
 	];
 	const jobHelperSkills = [
 		'MongoDB',
@@ -109,8 +110,8 @@ const Main = () => {
 				<div className='bio'>
 					<h1>Hello! I'm Ryan.</h1>
 					<p>
-						Thanks for stopping by! I've gathered together my
-						most complete and recent work for you to check out!
+						Thanks for stopping by! I've gathered together my most
+						complete and recent work for you to check out!
 					</p>
 					<p>
 						I'm a Software Engineer, with a long background in
@@ -221,7 +222,7 @@ const Main = () => {
 				/>
 			</section>
 			<section className='project three'>
-			<Group
+				<Group
 					id='ally'
 					title={`Moody's Speakeasy: Figma to Next App`}
 					description={`
@@ -236,6 +237,22 @@ const Main = () => {
 				/>
 			</section>
 			<section className='project four'>
+				<Group
+					id='blog'
+					title={`Who Rep's Me?`}
+					description={`
+						This React Native App was developed with the use of 2 API's that provide Civic information from the US Government.
+						This app allows users to find out who their Senators and House Rep's are, how to contact them, and learn what legislation
+						they've sponsored. 
+					`}
+					imageAlt='mobile view of senator from MD with contact info and button to see sponsored bills.'
+					imageFile='who-reps-me.png'
+					skills={blogSkills}
+					githubLink='https://github.com/ryanAllMad/who-reps-me/tree/main'
+					projectTitle='Who Reps Me?'
+				/>
+			</section>
+			<section className='project five'>
 				<VideoGroup
 					title='Vitest Accessibility Test Suite'
 					skills={vitestSkills}
@@ -253,8 +270,8 @@ const Main = () => {
 					</p>
 				</VideoGroup>
 			</section>
-			<section className='project five'>
-			<Group
+			<section className='project six'>
+				<Group
 					id='dnd'
 					title='DnD Character sheet NextJS App'
 					description={`
@@ -269,22 +286,6 @@ const Main = () => {
 					projectLink='https://yong-character-sheet.vercel.app/'
 					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
 					projectTitle='DnD Character sheet'
-				/>
-			</section>
-			<section className='project six'>
-				<Group
-					id='blog'
-					title='All Mad Designs Blog'
-					description={`
-						My blog is where I use my passion for helping others, and educating 
-						engineers to resolve issues related to front end, Javascript, WordPress, 
-						or Accessibility Engineering. 
-					`}
-					imageAlt='black pyramid with A M D, all mad designs logo on desktop screen.'
-					imageFile='amd-desktop.png'
-					skills={blogSkills}
-					projectLink='https://allmaddesigns.com'
-					projectTitle='My Tech Blog'
 				/>
 			</section>
 		</main>

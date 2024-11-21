@@ -236,10 +236,10 @@ section.heading .heading-wave {
 	background-color: #c2d0ed;
 }
 .four {
-	background-color: #252424;
+	background: #d4d2d2;
 }
 .five {
-	background: #d4d2d2;
+	background-color: #252424;
 }
 .six {
 	background-color: #c2d0ed;
@@ -333,12 +333,12 @@ a.link:hover::after {
 	transform: scale(1);
 	opacity: 1;
 }
-.project.four .bio > * {
+.project.five .bio > * {
 	transform: scale(2);
 	transition: all 1.4s ease-in-out 1s;
 	opacity: 0;
 }
-.project.four .bio.animate > * {
+.project.five .bio.animate > * {
 	transform: scale(1);
 	opacity: 1;
 }
@@ -355,6 +355,20 @@ a.link:hover::after {
 }
 .project.three .group.animate > *:last-child {
     transform: translateY(0);
+}
+.project.four .group > *:first-child {
+    transform: translateX(100%);
+	transition: all 1.4s ease-in-out 0.75s;
+}
+.project.four .group.animate > *:first-child {
+    transform: translateX(0%);
+}
+.project.four .group > *:last-child {
+    transform: translateY(50%);
+	transition: all 1.4s ease-in-out 0.75s;
+}
+.project.four .group.animate > *:last-child {
+    transform: translateY(0%);
 }
 .project.two .group > *:first-child {
     transform: translateX(-100%);
