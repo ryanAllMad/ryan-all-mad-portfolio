@@ -1,12 +1,12 @@
 const ShowSkills = (props) => {
 	const skillsArr = [
-		`Node`,
-		`Azure`,
-		`Git`,
-		`Github`,
+		`Node/Express`,
+		`REST`,
+		`Git/Github`,
+		`MongoDB`,
 		`SCSS/CSS`,
 		`NPM`,
-		`CircleCI`,
+		`CI/CD`,
 		`Demo's`,
 		`Technical Writing`,
 	];

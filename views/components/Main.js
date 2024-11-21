@@ -20,11 +20,11 @@ const Main = () => {
 	const allySkills = [
 		'React',
 		'Typescript',
-		'Gutenberg',
-		'PHP',
-		'SCSS',
+		'Next.JS',
+		'UX',
+		'Figma',
 		'CSS3',
-		'Webpack',
+		'Design',
 	];
 	const blogSkills = [
 		'Technical Writing',
@@ -134,6 +134,7 @@ const Main = () => {
 					<h2>Top Skills</h2>
 					<ul>
 						<li>React</li>
+						<li>React Native</li>
 						<li>Typescript</li>
 						<li>Javascript</li>
 						<li>WCAG</li>
@@ -180,7 +181,7 @@ const Main = () => {
 				className={`project one`}
 			>
 				<VideoGroup
-					title='JS Job Helper: Node App'
+					title='Resume Builder: Node & React App'
 					skills={jobHelperSkills}
 					githubLink='https://github.com/ryanAllMad/js-job-helper'
 					videoSrc='/js-job-helper.mp4'
@@ -220,21 +221,18 @@ const Main = () => {
 				/>
 			</section>
 			<section className='project three'>
-				<Group
-					id='dnd'
-					title='DnD Character sheet NextJS App'
+			<Group
+					id='ally'
+					title={`Moody's Speakeasy: Figma to Next App`}
 					description={`
-						My DnD Character sheet was built with accessibility in mind and features screen 
-						reader access to all features, keyboard access to all features, skip blocks for 
-						easier screen reader navigation, user prefers reduced motion assist, and passes 
-						color contrast minimums. This project was built with Next JS, Material UI, and published to Vercel.
-					`}
-					imageFile='yong-cell.png'
-					imageAlt='mobile view of purple and grey dnd character sheet with female profile pic'
-					skills={dndSkills}
-					projectLink='https://yong-character-sheet.vercel.app/'
-					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
-					projectTitle='DnD Character sheet'
+						I developed the application by creating a mood board, then a ux design, and then a prototype in Figma. Following that I built the Next.js app and deployed it to Vercel. The entire process took 2 days. The front end application features light and dark mode, CSS Transitions, and scroll animations. The app was built with NextJS, Typescript, React, and CSS3.
+						`}
+					imageAlt='desktop screen of darkly colored floral website design.'
+					imageFile='moodies.png'
+					skills={allySkills}
+					projectLink='https://moodys-speakeasy.vercel.app/'
+					githubLink='https://github.com/ryanAllMad/moodys-speakeasy'
+					projectTitle={`Moody's Speakeasy`}
 				/>
 			</section>
 			<section className='project four'>
@@ -256,19 +254,21 @@ const Main = () => {
 				</VideoGroup>
 			</section>
 			<section className='project five'>
-				<Group
-					id='ally'
-					title='A11y Check: WordPress Plugin'
+			<Group
+					id='dnd'
+					title='DnD Character sheet NextJS App'
 					description={`
-						This WIP, is a plugin developed for Content Creators that use WordPress as a live checklist
-						that alerts the author of common accessibility pitfalls as they write. It's akin to a linter for content creators.
-						`}
-					imageAlt='plugin sidebar in wordress editor shows images that are missing alt and one click ability to remedy it.'
-					imageFile='a11ycheckgif.gif'
-					skills={allySkills}
-					projectLink=''
-					githubLink='https://github.com/ryanAllMad/a11y-checker'
-					projectTitle='A11y Check'
+						My DnD Character sheet was built with accessibility in mind and features screen 
+						reader access to all features, keyboard access to all features, skip blocks for 
+						easier screen reader navigation, user prefers reduced motion assist, and passes 
+						color contrast minimums. This project was built with Next JS, Material UI, and published to Vercel.
+					`}
+					imageFile='yong-cell.png'
+					imageAlt='mobile view of purple and grey dnd character sheet with female profile pic'
+					skills={dndSkills}
+					projectLink='https://yong-character-sheet.vercel.app/'
+					githubLink='https://github.com/ryanAllMad/yong-character-sheet'
+					projectTitle='DnD Character sheet'
 				/>
 			</section>
 			<section className='project six'>

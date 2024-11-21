@@ -233,14 +233,13 @@ section.heading .heading-wave {
 	color: #fff;
 }
 .three {
-	
 	background-color: #c2d0ed;
 }
 .four {
-	background: #d4d2d2;
+	background-color: #252424;
 }
 .five {
-	background-color: #252424;
+	background: #d4d2d2;
 }
 .six {
 	background-color: #c2d0ed;
@@ -427,7 +426,7 @@ a.link:hover::after {
     min-height: 50px;
     min-width: 305px;
     position: relative;
-    margin-right: 2em;
+	margin: 0 auto;
 }
 .btn:not(:has( a), :has( button)) {
     display: none;
@@ -560,13 +559,7 @@ header .contact.first {
 .pic-wrapper img {
     max-width: 100%;
 }
-#ally .pic-wrapper {
-    max-width: 350px;
-	
-}
-#ally .pic-wrapper img {
-	border-radius: 30px;
-}
+
 .js-vid-caption {
     max-width: 100%;
     padding: .65em;

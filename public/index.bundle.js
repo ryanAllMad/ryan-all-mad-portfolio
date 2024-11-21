@@ -1755,7 +1755,7 @@ const VideoGroup = _ref => {
 ;// CONCATENATED MODULE: ./views/components/ShowSkills.js
 
 const ShowSkills = props => {
-  const skillsArr = [`Node`, `Azure`, `Git`, `Github`, `SCSS/CSS`, `NPM`, `CircleCI`, `Demo's`, `Technical Writing`];
+  const skillsArr = [`Node/Express`, `REST`, `Git/Github`, `MongoDB`, `SCSS/CSS`, `NPM`, `CI/CD`, `Demo's`, `Technical Writing`];
   return /*#__PURE__*/(0,jsx_runtime.jsx)("div", {
     role: "region",
     id: "skills-menu",
@@ -1789,7 +1789,7 @@ const Main = () => {
   const [eatDrink, setEatDrink] = (0,react.useState)('748px');
   const portfolioSkills = ['Node', 'Express', 'React', 'CSS3', 'Azure'];
   const dndSkills = ['React', 'Typescript', 'NextJs', 'Material UI', 'CSS3'];
-  const allySkills = ['React', 'Typescript', 'Gutenberg', 'PHP', 'SCSS', 'CSS3', 'Webpack'];
+  const allySkills = ['React', 'Typescript', 'Next.JS', 'UX', 'Figma', 'CSS3', 'Design'];
   const blogSkills = ['Technical Writing', 'Mentoring', 'Front end', 'Javascript', 'SEO', 'CWV'];
   const jobHelperSkills = ['MongoDB', 'Express', 'React', 'Node', 'CSS3', 'Vite', 'CI/CD', 'CircleCI', 'Vitest'];
   const vitestSkills = ['Vite', 'React', 'WCAG', 'Vitest', 'CI/CD', 'CircleCI'];
@@ -1863,6 +1863,8 @@ const Main = () => {
           children: [/*#__PURE__*/(0,jsx_runtime.jsx)("li", {
             children: "React"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
+            children: "React Native"
+          }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
             children: "Typescript"
           }), /*#__PURE__*/(0,jsx_runtime.jsx)("li", {
             children: "Javascript"
@@ -1911,7 +1913,7 @@ const Main = () => {
       tabIndex: 0,
       className: `project one`,
       children: /*#__PURE__*/(0,jsx_runtime.jsxs)(components_VideoGroup, {
-        title: "JS Job Helper: Node App",
+        title: "Resume Builder: Node & React App",
         skills: jobHelperSkills,
         githubLink: "https://github.com/ryanAllMad/js-job-helper",
         videoSrc: "/js-job-helper.mp4",
@@ -1942,20 +1944,17 @@ const Main = () => {
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project three",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "dnd",
-        title: "DnD Character sheet NextJS App",
+        id: "ally",
+        title: `Moody's Speakeasy: Figma to Next App`,
         description: `
-						My DnD Character sheet was built with accessibility in mind and features screen 
-						reader access to all features, keyboard access to all features, skip blocks for 
-						easier screen reader navigation, user prefers reduced motion assist, and passes 
-						color contrast minimums. This project was built with Next JS, Material UI, and published to Vercel.
-					`,
-        imageFile: "yong-cell.png",
-        imageAlt: "mobile view of purple and grey dnd character sheet with female profile pic",
-        skills: dndSkills,
-        projectLink: "https://yong-character-sheet.vercel.app/",
-        githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
-        projectTitle: "DnD Character sheet"
+						I developed the application by creating a mood board, then a ux design, and then a prototype in Figma. Following that I built the Next.js app and deployed it to Vercel. The entire process took 2 days. The front end application features light and dark mode, CSS Transitions, and scroll animations. The app was built with NextJS, Typescript, React, and CSS3.
+						`,
+        imageAlt: "desktop screen of darkly colored floral website design.",
+        imageFile: "moodies.png",
+        skills: allySkills,
+        projectLink: "https://moodys-speakeasy.vercel.app/",
+        githubLink: "https://github.com/ryanAllMad/moodys-speakeasy",
+        projectTitle: `Moody's Speakeasy`
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project four",
@@ -1973,18 +1972,20 @@ const Main = () => {
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project five",
       children: /*#__PURE__*/(0,jsx_runtime.jsx)(components_Group, {
-        id: "ally",
-        title: "A11y Check: WordPress Plugin",
+        id: "dnd",
+        title: "DnD Character sheet NextJS App",
         description: `
-						This WIP, is a plugin developed for Content Creators that use WordPress as a live checklist
-						that alerts the author of common accessibility pitfalls as they write. It's akin to a linter for content creators.
-						`,
-        imageAlt: "plugin sidebar in wordress editor shows images that are missing alt and one click ability to remedy it.",
-        imageFile: "a11ycheckgif.gif",
-        skills: allySkills,
-        projectLink: "",
-        githubLink: "https://github.com/ryanAllMad/a11y-checker",
-        projectTitle: "A11y Check"
+						My DnD Character sheet was built with accessibility in mind and features screen 
+						reader access to all features, keyboard access to all features, skip blocks for 
+						easier screen reader navigation, user prefers reduced motion assist, and passes 
+						color contrast minimums. This project was built with Next JS, Material UI, and published to Vercel.
+					`,
+        imageFile: "yong-cell.png",
+        imageAlt: "mobile view of purple and grey dnd character sheet with female profile pic",
+        skills: dndSkills,
+        projectLink: "https://yong-character-sheet.vercel.app/",
+        githubLink: "https://github.com/ryanAllMad/yong-character-sheet",
+        projectTitle: "DnD Character sheet"
       })
     }), /*#__PURE__*/(0,jsx_runtime.jsx)("section", {
       className: "project six",
